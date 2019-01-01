@@ -5,6 +5,9 @@ fs = 1000.0;
 dt = 1.0/fs;
 t1 = 0.0;
 t2 = 10.0;
+mu = 5.0;
+sigma = 1.0;
+amp = 2.0;
 %plotting parameters
 linew = 0.5;
 startx = 0;
@@ -19,7 +22,7 @@ fontn = 'Courier';
 times = [t1:dt:t2];
 n = length(times);
 window_size = floor(n/scale);
-amplitudes = randn(size(times));
+amplitudes = randn(size(times))+amp*exp(-0.5*((times-mu)/sigma).^2);
 average_amplitudes = zeros(size(times));
 average_amplitudes_mvg_ave = filter(ones(window_size,1)/window_size,1,amplitudes);
 for i=window_size+1:n
@@ -41,8 +44,8 @@ hold on;
 box on;
 h2 = plot(times,average_amplitudes_mvg_ave,'linewidth',linew);
 %h2 = plot(times,average_amplitudes,'linewidth',linew);
-h3 = plot(times,stddev_amplitudes,'linewidth',linew);
-h4 = plot(times,-stddev_amplitudes,'linewidth',linew);
+h3 = plot(times,stddev_amplitudes+average_amplitudes_mvg_ave,'linewidth',linew);
+h4 = plot(times,-stddev_amplitudes+average_amplitudes_mvg_ave,'linewidth',linew);
 xlabel('Time (s)','fontname',fontn,'fontsize',fonts);
 ylabel('Voltage (V)','fontname',fontn,'fontsize',fonts);
 set(gca(),'fontname',fontn,'fontsize',fonts);
@@ -52,4 +55,4 @@ set(h4,'color',[0.2 0.2 0.2]);
 legend();
 axis(axisVector);
 
-print -dpdf meanStdDev.pdf
+print -dpdf meanStdDev_plusGaussian.pdf
