@@ -116,6 +116,18 @@ When we add/subtract complex numbers, we combine the real parts and imaginary pa
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Operations}
+Do these operators distribute?
+\begin{align}
+z_1 &= 3+4j \\
+z_2 &= 5+12j \\
+\operatorname{Re}\lbrace z_1+z_2 \rbrace &= 3+4j+5+12j = \operatorname{Re}\lbrace 8+16j \rbrace \\
+\operatorname{Re}\lbrace z_1+z_2 \rbrace &= 8 = \operatorname{Re}\lbrace z_1 \rbrace + \operatorname{Re}\lbrace z_2 \rbrace \\
+\operatorname{Im}\lbrace z_1+z_2 \rbrace &= 16 = \operatorname{Im}\lbrace z_1 \rbrace + \operatorname{Im}\lbrace z_2 \rbrace
+\end{align}
+They distribute because of the associativity of addition.
+\end{frame}
+
+\begin{frame}{Complex numbers 1: Operations}
 \textit{Add or subtract, then simplify:}
 \begin{enumerate}
 \item $z_1 = 7+7j$, $z_2 = -6+3j$.  $z_1+z_2 = $
@@ -127,6 +139,7 @@ Let $x=-1$ and $y=1$.  \textit{Evaluate the following expressions:}
 \item $z_1 = x+yj$, $z_2 = y+xj$.  $z_1+z_2 = $
 \item $z_1 = x^2+y^2j$, $z_2 = 2y^2+x^2j$.  $z_1-z_2 = $
 \end{enumerate}
+Draw a y-axis for the imaginary part, and an x-axis for the real part, and graph the prior two exercises.  Place points on the graph for $z_1$, $z_2$, and $z_1+z_2$.
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Operations}
@@ -136,17 +149,22 @@ z_1 &= x_1+jy_1 \\
 z_2 &= x_2 + j y_2 \\
 z_1 \times z_2 &= x_1 x_2 - y_1 y_2 + j (x_1 y_2 + x_2 y_1)
 \end{align}
-The cross-terms are straightforward, but remember the minus sign when multiplying the imaginary parts.
+The cross-terms are straightforward, but remember the minus sign when multiplying the imaginary parts. \\ \vspace{0.5cm}
+Examples:
+\begin{enumerate}
+\item $z_1 = 7+7j$, $z_2 = -6+3j$.  $z_1 \times z_2 = -42-21 + j(21-42) = -63-21j$.
+\item $z_1 = 2+2j$, $z_2 = 2-2j$.  $z_1 \times z_2 = 8$.  Why no imaginary part?
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Operations}
 Another similarity with two-dimensional vectors?
 \begin{align}
-z_1 &= 4-1j \\
-z_2 &= 1+4j \\
+z_1 &= 4-1j \label{eq:z1} \\
+z_2 &= 1+4j \label{eq:z2} \\
 z_1 \times z_2 &= 8 + 15j \neq 0
 \end{align}
-What would be the result if we were dealing with regular two-dimensional vectors?
+What would be the result if we were dealing with regular two-dimensional vectors?  Plot Eqs. \ref{eq:z1} and \ref{eq:z2} with the imaginary part as the y-coordinate and the real part as the x-coordinate.  Then draw a vector from the origin to the points.  Do you recall the properties of the \alert{dot-product} of two vectors?
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Operations}
@@ -165,10 +183,39 @@ z_1^* &= 4+1j \\
 z_2 = &= 2x + 1j \\
 z_2^* &= 2x - 1j
 \end{align}
-Is there a significance to $z_1 z_2^*$?  What about $z_1 z_1^*$?  What about $\sqrt{z_1 z_1^*}$?
+Is there a significance to $z_1 z_2^*$?  What about $z_1 z_1^*$?  What about $\sqrt{z_1 z_1^*}$? \\ \vspace{0.5cm}
+What about the taking the complex conjugate of the following expression?
+\begin{equation}
+z = \frac{x_1 + jy_1}{x_2 + j y_2}
+\end{equation}
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Operations}
+Multiply the denominator \textit{by the complex conjugate of the denominator.}
+\begin{equation}
+z = \frac{x_1 + jy_1}{x_2 + j y_2} \times \frac{x_1-j y_2}{x_2-j y_2}
+\end{equation}
+What happens?  The real and imaginary parts \textit{separate.}  Now prove that
+\begin{equation}
+z^* = \frac{x_1 - jy_1}{x_2 - j y_2}
+\end{equation}
+Let $z = (x_1+jy_1)(x_2+jy_2)$.  Prove that
+\begin{equation}
+z^* = (x_1 - jy_1)(x_2-jy_2)
+\end{equation}
+So it seems that complex conjugation boils down to finding all the imaginary units and making them negative...\textit{be careful about assuming this.}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: Operations}
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{figures/cc.png}
+\caption{\label{fig:complex2a} Complex conjugation flips the location of the complex number if you draw the complex number as a coordinate pair.  Stay tuned for \alert{polar notation}.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: Operations}
+\small
 Let $z = x+jy$.  Compute the following:
 \begin{enumerate}
 \item $zz^* = $
@@ -179,6 +226,11 @@ Compute the norm of the following complex numbers:
 \begin{enumerate}
 \item $2+2j$
 \item $3+4j$
+\end{enumerate}
+Compute the norm.  Do either of these simplify?
+\begin{enumerate}
+\item $\sin(x)+j\cos(x)$
+\item $\cos(x)+j\sin(x)$
 \end{enumerate}
 \end{frame}
 
@@ -200,7 +252,9 @@ Evaluate the divisions below:
 \begin{enumerate}
 \item $z_1 = 1+4j$, $z_2 = 2-2j$.  $z_2/z_1 = $
 \item $z_1 = 1+1j$, $z_2 = -3-3j$.  $z_2/z_1 = $
+\item $z_1 = 1+xj$, $z_2 = 1-xj$, and $x = 0.5$.  $z_2/z_1 = $
 \end{enumerate}
+What if $x$ had been imaginary?  Can you see a way to make the division infinity?
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Polar Notation}
@@ -248,11 +302,20 @@ Multiply:
 \end{frame}
 
 \begin{frame}{Complex numbers 1: Polar Notation}
+How do you perform the complex conjugate in polar form? \textit{Change the sign of the phase angle.}
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figures/cc.png}
+\caption{\label{fig:complex3a} Complex conjugation flips the sign of the angle.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: Polar Notation}
 Notice that the procedure for finding the modulus is evident in polar notation:
 \begin{equation}
 \sqrt{z_1 z_1^*} = \sqrt{r_1 r_1} \exp(j(\phi_1 - \phi_1)/2) = r_1
 \end{equation}
-Shouldn't we be saying $\pm r_1$?  How does the square root function work in the complex plane?\footnote{Complex fractional-power functions are outside the scope of the course, as it turns out.}
+Shouldn't we be saying $\pm r_1$?  How does the square root function work in the complex plane?\footnote{Complex fractional-power functions are outside the scope of the course, as it turns out, because it requires knowledge of the topic of \textit{branch cuts.}}
 \end{frame}
 
 \begin{frame}{Complex numbers 1: The complex plane}
@@ -281,7 +344,7 @@ Proof of polar-notation relationship:
 \begin{align}
 \exp(j\phi) &= \sum_{i=0}^{\infty} \frac{(j\phi)^n}{n!} = \sum_{i=0}^{\infty} \frac{j^n\phi^n}{n!} \\
 \exp(j\phi) &= \sum_{even}^{\infty} \frac{j^n\phi^n}{n!} + \sum_{odd}^{\infty} \frac{j^n\phi^n}{n!} \\
-\exp(j\phi) &= \sum_{i=0}^{\infty} (-1)^n \frac{\phi^{2n}}{n!} + j\sum_{i=0}^{\infty} \frac{\phi^{2n+1}}{n!} \\
+\exp(j\phi) &= \sum_{i=0}^{\infty} (-1)^n \frac{\phi^{2n}}{(2n)!} + j\sum_{i=0}^{\infty} \frac{\phi^{2n+1}}{(2n+1)!} \\
 \exp(j\phi) &= \cos\phi + j\sin\phi \\
 |z|\exp(j\phi) &= |z| \cos\phi + j |z| \sin\phi = z
 \end{align}
@@ -330,6 +393,15 @@ V(t) = a_1\exp(x_1) + a_2\exp(x_2)
 \item What is $\phi_V = \tan^{-1}(\operatorname{Im}\lbrace V \rbrace/\operatorname{Re}\lbrace V \rbrace)$ in each case?
 \end{enumerate}
 Why do these results make sense?  Thus, the complex numbers encapsulate the concepts of \textit{constructive} and \textit{destructive} interference.
+\end{frame}
+
+\begin{frame}{Complex numbers 1: The complex plane}
+Treating sinusoids as rotation in the complex plane is a deep subject in physics.  It actually relates to some concepts in introductory physics: \url{https://www.youtube.com/watch?v=jxstE6A_CYQ} \\ \vspace{0.5cm}
+What is the effect of multiplying by a complex number as follows:
+\begin{equation}
+V_i(t) \exp(j\phi') = ?
+\end{equation}
+What does this look like when graphed?
 \end{frame}
 
 \begin{frame}{Complex numbers 1: The complex plane}
@@ -441,6 +513,101 @@ t(1:end)
 ans =
 (should be the whole vector)
 \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+Now you know how to create vectors and plot them in octave.  Let's solve a few programming problems!  First, let's introduce the \alert{help} command.
+\begin{verbatim}
+help <command>
+\end{verbatim}
+Type the following commands
+\begin{enumerate}
+\item help plot
+\item help :
+\end{enumerate}
+What is the purpose of the \textit{clear} and \textit{home} commands? \\ \vspace{0.5cm}
+The key here is that if you are confused, the help command can boost your understanding of the correct usage.  Speaking of the colon command, how do we create matrices?
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+\small
+Create a matrix in octave in one of three ways:
+\begin{enumerate}
+\item \alert{Concatenate row vectors}
+\item Concatenate colomn vectors
+\item Write it straight away
+\end{enumerate}
+First, concatenation of row vectors:
+\begin{verbatim}
+a = [1:10];
+b = [11:20];
+A = [a; b];
+display(A)
+\end{verbatim}
+The semi-colon also tells the $[]$ operators to concatenate vertically.  What is the size of the matrix?
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+\small
+Create a matrix in octave in one of three ways:
+\begin{enumerate}
+\item Concatenate row vectors
+\item \alert{Concatenate colomn vectors}
+\item Write it straight away
+\end{enumerate}
+First, concatenation of row vectors:
+\begin{verbatim}
+a = [1:10]';
+b = [11:20]';
+A = [a b];
+display(A)
+\end{verbatim}
+The lack of the semi-colon tells the $[]$ operators to concatenate horizontally.  What is the size of the matrix?
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+\small
+Create a matrix in octave in one of three ways:
+\begin{enumerate}
+\item Concatenate row vectors
+\item Concatenate colomn vectors
+\item \alert{Write it straight away}
+\end{enumerate}
+First, concatenation of row vectors:
+\begin{verbatim}
+A = [[1 2]; [3 4];];
+display(A)
+\end{verbatim}
+In this case, you can actually omit the internal concatenation operators.  Can you guess how to take the transpose of the matrix?
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+\small
+Create a matrix with complex numbers:
+First, concatenation of row vectors, and take the transpose.  Do you notice something?
+\begin{verbatim}
+A = [[1 2i]; [3i 4];];
+display(A)
+\end{verbatim}
+Try using the \textit{help} command on the transpose operator to sort out the issue.  Now look up the \textit{conj} command, and use it to take \textit{just the transpose} of the matrix, without conjugation.
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+Two additional commands that are helpful for creating square ($N \times N$) matrices:
+\begin{verbatim}
+ones(N,M)
+zeros(N,M)
+\end{verbatim}
+Create a $2 \times 2$ matrix and multiply it with a $2 \times 1$ vector.  \textit{Careful with the order; the matrix has to be on the left.} \\ \vspace{0.5cm}
+You can imagine a matrix as an \textbf{\alert{operator}} that acts on a vector.  Example: two-dimensional rotation matrix (observe on board).
+\begin{gather}
+R(\theta) = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \label{eq:R}
+\end{gather}
+\end{frame}
+
+\begin{frame}[fragile]{Complex numbers 1: programming with Octave}
+Code the rotation matrix (Eq. \ref{eq:R}) for $\theta = \pi/4$, and also create three $2 \times 1$ column vectors.  Multiply them and display the results.  Plot them on the page and observe where they have moved. \\ \vspace{0.5cm}
+\alert{Let's take the opportunity to share code on Moodle.}
 \end{frame}
 
 \section{Conclusion}
