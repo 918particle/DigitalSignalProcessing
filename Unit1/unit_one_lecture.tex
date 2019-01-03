@@ -607,13 +607,110 @@ R(\theta) = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta 
 
 \begin{frame}[fragile]{Complex numbers 1: programming with Octave}
 Code the rotation matrix (Eq. \ref{eq:R}) for $\theta = \pi/4$, and also create three $2 \times 1$ column vectors.  Multiply them and display the results.  Plot them on the page and observe where they have moved. \\ \vspace{0.5cm}
-\alert{Let's take the opportunity to share code on Moodle.}
+\alert{Let's take the opportunity to share code on Moodle.}  \textbf{See the Rotation2D example in Unit1.} \\ \vspace{0.5cm}
+Octave \textit{scripts} can be run within the octave environment.  I prefer octave-cli (\textit{command-line interface}), because it resembles a bash shell in linux systems.  The graphical user interface (octave-gui) can display folders, scripts, and the \textit{workspace.}  The workspace contains persistent variables.
+\end{frame}
+
+\section{Complex numbers 1: application to AC circuits}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+\small
+We touched on complex numbers in two contexts:
+\begin{itemize}
+\item Mathematical formalism
+\item Programming octave
+\end{itemize}
+Now let's apply them to AC circuits.  Consider three circuit elements: the resistor, capacitor, and inductor.  They come with three symbols:
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/AC1.png}
+\caption{\label{fig:AC1}  These three symbols can be combined in AC circuit diagrams to describe the flow of current and power.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+\small
+We also need the concept of Ohm's law in the AC context:
+\begin{equation}
+V(\omega) = i(\omega) Z(\omega)
+\end{equation}
+The symbol $Z$ represents the \textit{complex resistance}, or \textit{impedance} of the circuit element.  Clearly, resistance can't be complex, but we think of the phase shift introduced to the current as being carried by a complex number.
+\begin{align}
+Z_R &= R + 0i \\
+Z_C &= 0 + \frac{1}{j\omega C} \\
+Z_L &= 0 + j \omega L
+\end{align}
+To \textit{prove} these equations, we'll need the \textit{Fourier transform}, and some circuit analysis (future lectures).  For now, think of them as just AC elements with (potentially) complex resistance.
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+\small
+Consider the circuit in Fig. \ref{fig:RLC1}.  If we think of $V_{in}$ as a sinudoidal signal, and $V_{out}$ as another sinusoidal signal, we can use complex numbers to compute what will happen at a given frequency $\omega$.
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figures/RLC1.png}
+\caption{\label{fig:RLC1}  An example of an \textit{RLC} circuit.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figures/RLC1.png}
+\caption{\label{fig:RLC2}  Using $V(\omega) = i(\omega) Z(\omega)$, we can solve for the ratio $V_{out}/V_{in}$.}
+\end{figure}
+Pretend that each AC element is some general element, and use Ohm's law to get the ratio $V_{out}/V_{in}$ (observe on board).
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+We should find something like this:
+\begin{align}
+h(\omega) &= \frac{Z_2 + Z_3}{Z_1+Z_2+Z_3} \\
+\omega_{LC}^{-2} &= LC \\
+\tau &= RC \\
+k^2 &= 1-\left(\frac{\omega}{\omega_{LC}}\right)^2 \\
+h(\omega) &= \frac{k^4}{k^4+(\omega\tau)^2}-j \frac{k^2\omega\tau}{k^4+(\omega\tau)^2}
+\end{align}
+Notice that for $\omega = \omega_{LC}$, $k=0$.  What happens to $h(\omega)$ in that case?  What are the limits for $\omega \ll \omega_{LC}$ and $\omega \gg \omega_{LC}$?
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+\begin{figure}
+\centering
+\includegraphics[width=0.95\textwidth]{figures/RLC2.png}
+\caption{\label{fig:RLC3}  The magnitude and phase of the quantity $V_{out}/V_{in}$ are plotted versus frequerncy $f = \omega/(2\pi)$ for specific values of resistance, capacitance, and inductance.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+Today's octave application: write the script file \textit{RLC.m}, that reproduces Fig. \ref{fig:RLC3} for given values of R, L, and C.
+\begin{itemize}
+\item Write the script in a file entitled RLC.m
+\item To run it, open octave-cli in the directory in which RLC.m is stored.  Type RLC, then hit enter.
+\item We will cover plotting techniques on-the-fly, since plotting and markup could be an entire course.
+\item Tweak the values of the AC elements and observe how your plot changes.  Why is this circuit one example of an \textit{RLC notch filter?}
+\end{itemize}
 \end{frame}
 
 \section{Conclusion}
 
-\begin{frame}{Conclusion}
-Text
+\begin{frame}{Unit 1.1 Outline}
+Unit 1.1 covered:
+\begin{enumerate}
+\item \alert{Complex numbers 1: Arithmetic and some calculus (continuous and discete) ... see Chapter 30 of text}
+\begin{itemize}
+\item Complex number operations
+\item Graphical knowledge of complex numbers
+\item Octave coding
+\item The RLC notch filter.
+\end{itemize}
+\end{enumerate}
+Next lectures will cover:
+\begin{enumerate}
+\item Complex numbers 2: The Fourier series and Fourier transform (continuous and discrete)
+\item \textit{Time-permitting}: The Laplace transform (continuous and discrete)
+\end{enumerate}
 \end{frame}
 
 \end{document}
