@@ -1,0 +1,61 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC390}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Unit 1.2 Outline}
+Previous lectures covered:
+\begin{itemize}
+\item Complex numbers 1: Arithmetic and some calculus (continuous and discete) ... see Chapter 30 of text
+\end{itemize}
+This lecture will cover:
+\begin{itemize}
+\item \alert{Complex numbers 2: The Fourier series and Fourier transform (continuous and discrete)}
+\end{itemize}
+Next lecture will cover:
+\begin{itemize}
+\item \textit{Time-permitting}: The Laplace transform (continuous and discrete)
+\end{itemize}
+\end{frame}
+
+\section{Complex numbers 2: theory and examples}
+
+\begin{frame}{Complex numbers 2: theory and examples}
+Review: Let's work the following examples.
+\begin{enumerate}
+\item Let $z_1 = x_1 + j y_1$, and $z_2 = x_2 + j y_2$.  Simplify $z = \frac{z_1^* z_2}{|z_1|^2 + |z_2|^2}$ into real and imaginary parts.
+\item Express $z$ in polar form and plot it for $x_1 = y_1 = 1.0$, and $x_2 = y_2 = -1.0$.
+\item Express the function $v(t) = v_0 \cos(\omega t + \phi_0)$ as a phasor, and plot it.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Complex numbers 2: theory and examples}
+The \alert{\textbf{Fourier series}} representation of a function $f(x)$ is written:
+\begin{equation}
+S(x) = \frac{A_0}{2}+\sum_{i=1}^{\infty} \left( A_n \cos(nx) + B_n \sin(nx) \right)
+\end{equation}
+with
+\begin{align}
+A_n &= \frac{1}{\pi} \int_0^{2\pi} f(x) \cos(nx) dx \\
+B_n &= \frac{1}{\pi} \int_0^{2\pi} f(x) \sin(nx) dx
+\end{align}
+\end{frame}
+
+\begin{frame}{Complex numbers 2: theory and examples}
+Let's obtain the \alert{\textbf{Fourier series}} coefficients $A_n$ and $B_n$ for a square-wave signal:
+\begin{equation}
+f(x) = 1, ~~ 0 \leq x \leq \pi, ~~ 0,  \pi < x \leq 2\pi 
+\end{equation}
+(Observe on board).  The result: $A_0 = 1.0$, all other $A_n = 0$, odd $B_n$ values follow $2/(n\pi)$, even $B_n = 0$ as well. \\ \vspace{0.5cm}
+Create octave code that plots this (see Moodle for example).
+\end{frame}
+
+\section{Conclusion}
+
+\end{document}
