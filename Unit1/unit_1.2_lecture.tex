@@ -2,6 +2,7 @@
 \usetheme{metropolis}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{tcolorbox}
 \title{Digital Signal Processing: COSC390}
 \author{Jordan Hanson}
 \institute{Whittier College Department of Physics and Astronomy}
@@ -109,8 +110,8 @@ Activity:
 \begin{enumerate}
 \item Create a sawtooth-wave and play it with octave.
 \item Create a distorted sawtooth-wave and play it with octave.
-\item Compare the sounds.  Why do they sound different?
-\item Create a waveform that 
+\item Compare the sounds.  They are different, correct?
+\item Plot the spectral coefficients and discuss how the sound is affected by the distortion.
 \item \alert{Bonus: write code that plays a short tune.}\footnote{This is more of a programming/engineering exercise than mathematics.}  How can you get multiple notes to play at once?  What is an \textbf{octave}, in the sense of musical notes and frequencies?
 \end{enumerate}
 \end{frame}
@@ -345,10 +346,208 @@ For anyone who has taken the physics of waves and oscillations, this equation lo
 
 \section{Coding with Octave, and Application: Low and high pass RC filters}
 
-\begin{frame}{Coding with Octave, and Application: Low and high-pass RC filters}
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+\begin{equation}
+\mathcal{F}(f(t)) = \tilde{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} dt
+\label{eq:eq1}
+\end{equation}
+In Eq. \ref{eq:eq1}, $\omega$ is the angular frequency, measured in radians per unit time.  Let $f(t) = g'(t)$.  Substituting into Eq. \ref{eq:eq1}, and integrating by parts, we have
+\begin{equation}
+\tilde{F}(\omega) = g(t) e^{-j\omega t} |_{-\infty}^{\infty} + j\omega \int_{\infty}^{-\infty} g(t)  e^{-j\omega t} dt
+\label{eq:eq2}
+\end{equation}
+For physical signals that represent finite energy, $\lim_{|t|\rightarrow\infty} g(t) = 0$.  This requirement simplifies Eq. \ref{eq:eq2} by making the first term on the right-hand side vanish.
+\end{frame}
 
-pdf document.
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+\begin{equation}
+\tilde{F}(\omega) = j\omega \int_{\infty}^{-\infty} g(t)  e^{-j\omega t} dt = j\omega\mathcal{F}(g(t))
+\end{equation}
+The result may be summarized:
+\begin{equation}
+\boxed{
+\mathcal{F}(g'(t)) = j\omega\mathcal{F}(g(t))
+}
+\end{equation}
+\end{frame}
 
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+A voltage divider lowers the output voltage ($v_{out}(t)$) relative to the input voltage ($v_{in}(t)$) by some ratio, given by the resistances $R_1$ and $R_2$ in the following circuit:
+\begin{figure}
+\centering
+\includegraphics[width=0.33\textwidth,trim=0cm 1cm 0cm 0cm,clip=true]{figures/VoltageDivider.pdf}
+\caption{\label{fig:fig1} A two-resistor voltage divider.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+The input and output voltages with respect to ground must both follow Ohm's law, where $i(t)$ is the current:
+\begin{equation}
+v_{in} (t) = (R_1 + R_2)i(t)
+\label{eq:eq3}
+\end{equation}
+\begin{equation}
+v_{out} (t) = (R_2)i(t)
+\label{eq:eq4}
+\end{equation}
+The resistances $R_1$ and $R_2$ do not depend on frequency.  Taking the Fourier transform of both sides of Eqs. \ref{eq:eq3} and \ref{eq:eq4}, and dividing Eq. \ref{eq:eq4} by Eq. \ref{eq:eq3}, we have
+\begin{equation}
+\boxed{
+\frac{\tilde{v}_{out}(\omega)}{\tilde{v}_{in}(\omega)} = \frac{R_2}{R_1+R_2} \frac{i(\omega)}{i(\omega)} = \frac{R_2}{R_1+R_2}
+}
+\label{eq:trans1}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+The ratio of output voltage to input voltage is sometimes named the \textit{transfer function.} \\ \vspace{0.5cm}
+\begin{tcolorbox}[colback=white,colframe=red!40!blue,title=Transfer function]
+\alert{A mathematical function relating the output or response of a system to the input or stimulus.}
+\end{tcolorbox}
+In Eq. \ref{eq:trans1}, the transfer function only affects the overall amplitude of the output signal, while not affecting any particular frequency, nor shifting any phases. \\ \vspace{0.5cm}
+\textbf{Activity:} Write octave code definining a \textit{maximum frequency} $\omega_{max}$, and a \textit{frequency resolution} $df$. For a given pair of resistances, plot the transfer function of the voltage divider versus frequency between $0$ and $\omega_{max}$ (it should be a flat line). Label the axes appropriately.
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+A circuit in which the resistor labelled $R_2$ has been replaced with a capacitor labelled $C$ is shown in Fig. \ref{fig:fig2}.
+\begin{figure}
+\centering
+\includegraphics[width=0.33\textwidth,trim=0cm 1cm 0cm 0cm,clip=true]{figures/LowPass.pdf}
+\caption{\label{fig:fig2} A frequency-dependent voltage divider, also known as a single-pole RC low-pass filter.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+The capacitance $C$ is a constant, defined as the ratio of the charge stored on the capacitor, $q$, to the voltage required to place that charge on the capacitor, $V$:
+\begin{align}
+C &= \frac{q}{V} \\
+VC &= q \\
+C \frac{dV}{dt} &= \frac{dq}{dt} = i(t) \\
+\tilde{i}(\omega) &= j\omega C \tilde{V}(\omega) \\
+\frac{\tilde{V}(\omega)}{\tilde{i}(\omega)} &= \frac{1}{j\omega C}
+\end{align}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+Thus, Ohm's law says that the frequency-dependent resistance, or \textit{impedance}, of a capacitor is
+\begin{equation}
+\boxed{
+Z_C = \frac{1}{j\omega C}
+}
+\label{eq:eq5}
+\end{equation}
+The transfer function of the RC circuit in Fig. \ref{fig:fig2} is the same as Eq. \ref{eq:trans1}, with $R_2$ replaced with $Z_C$ (and $R_1 = R$):
+\begin{equation}
+\frac{\tilde{v}_{out}(\omega)}{\tilde{v}_{in}(\omega)} = \frac{\frac{1}{j\omega C}}{R+\frac{1}{j\omega C}} = \frac{1}{j\omega R C + 1}
+\label{eq:trans2}
+\end{equation}
+\textbf{Activity:} Write octave code definining a \textit{maximum frequency} $\omega_{max}$, and a \textit{frequency resolution} $df$. For a given resistance and capacitance, plot the transfer function magnitude versus frequency between $0$ and $\omega_{max}$, as well as for the phase. Label the axes appropriately, indicating that the curves are for a \textit{low-pass filter.}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+Let the \textit{time-constant} be defined as $\tau = RC$, and $\omega_0 = 1/\tau$.  Equation \ref{eq:trans2} may be written:
+\begin{equation}
+\frac{\tilde{v}_{out}(\omega)}{\tilde{v}_{in}(\omega)} = -\frac{j\omega_0}{\omega - j\omega_0}
+\label{eq:eq6}
+\end{equation}
+The magnitude and phase of Eq. \ref{eq:eq6} are
+\begin{equation}
+\boxed{
+M_{LP}(\omega) = \sqrt{\frac{\omega_0^2}{\omega^2+\omega_0^2}}
+}
+\label{eq:eq7}
+\end{equation}
+\begin{equation}
+\boxed{
+\phi_{LP}(\omega) = -\tan^{-1}\left(\frac{\omega}{\omega_0}\right)
+}
+\label{eq:eq8}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+From Eq. \ref{eq:eq7}, we can see that the low-pass transfer function $M_{LP}(\omega)$ attenuates frequencies much larger than $\omega_0$.  From Eq. \ref{eq:eq8}, the circuit introduces a phase-shift that is approximately linear ($-\omega/\omega_0$) for frequencies that are not attenuated.  A final interesting quantity to consider is the \textit{group delay}, defined as the negative derivative of the phase:
+\begin{equation}
+\boxed{
+-\frac{d\phi}{d\omega} = \tau_{LP}(\omega) = \frac{\omega_0}{\omega^2+\omega_0^2}
+}
+\label{eq:eq9}
+\end{equation}
+Equation \ref{eq:eq9} shows that frequency modes below $\omega_0$ are delayed in time by a factor of $\approx \omega_0^{-1}$.
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+A final simple circuit to consider is the same as Fig. \ref{fig:fig2}, with the capacitor and resistor exchanged (Fig. \ref{fig:fig3}).  Following the same arguments as the low-pass case, the complex transfer function is
+\begin{equation}
+\frac{\tilde{v}_{out}(\omega)}{\tilde{v}_{in}(\omega)} = \frac{\omega}{\omega - j\omega_0}
+\label{eq:trans3}
+\end{equation}
+\begin{figure}
+\centering
+\includegraphics[width=0.33\textwidth,trim=0cm 1cm 0cm 0cm,clip=true]{figures/HighPass.pdf}
+\caption{\label{fig:fig3} A frequency-dependent voltage divider, also known as a single-pole RC high-pass filter.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+\textbf{Activity:} Write octave code definining a \textit{maximum frequency} $\omega_{max}$, and a \textit{frequency resolution} $df$. For a given resistance and capacitance, plot the transfer function magnitude versus frequency between $0$ and $\omega_{max}$, as well as for the phase. Label the axes appropriately, indicating that the curves are for a \textit{high-pass filter.}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+The magnitude and phase of Eq. \ref{eq:trans3} are
+\begin{equation}
+\boxed{
+M_{HP}(\omega) = \sqrt{\frac{\omega^2}{\omega^2+\omega_0^2}}
+}
+\label{eq:eq11}
+\end{equation}
+\begin{equation}
+\boxed{
+\phi_{HP}(\omega) = \tan^{-1}\left(\frac{\omega_0}{\omega}\right)
+}
+\label{eq:eq12}
+\end{equation}
+The group-delay turns out to be the same as Eq. \ref{eq:eq9}
+\begin{equation}
+\boxed{
+-\frac{d\phi}{d\omega} = \tau_{HP}(\omega) = \frac{\omega_0}{\omega^2+\omega_0^2}
+}
+\label{eq:eq13}
+\end{equation}
+Unlike the voltage divider in Fig. \ref{fig:fig1}, which has zero group delay, the circuits in Figs. \ref{fig:fig2} and \ref{fig:fig3} have capacitors.  The group delay in these cases is driven by how quickly these capacitors can be charged and discharged, regardless of where they are in the circuit.
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+Notice that Eqs. \ref{eq:trans2} and \ref{eq:trans3} become infinite if the frequency is treated as a complex number, with the value $\omega = j\omega_0$.  Treating the frequency as a complex number is useful for further analysis using \textit{contour integration}, allowing us to perform integrals with singularities.  A complex frequency that makes the transfer functions infinite is called a \textit{pole}, and a frequency that makes the transfer functions zero is called a \textit{zero}.  Both the low-pass and high-pass filter examples above have just one pole each.  The low-pass filter has a zero whenever $|\omega| \rightarrow \infty$, and the high-pass filter has a zero for $\omega = 0$.  This is why these circuits are named \textit{single-pole} low and high-pass filters.
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+\small
+The key results so far may be summarized:
+\begin{itemize}
+\item The \textit{transfer function} of a circuit may be defined as the ratio of the output voltage to the input voltage in the Fourier domain.
+\item The transfer function of a \textit{voltage divider} is given by Eq. \ref{eq:trans1}, a frequency-independent ratio with no phase shift.
+\item The transfer function of a \textit{single-pole low-pass filter} is given by Eq. \ref{eq:trans2}.  Magnitude: Eq. \ref{eq:eq7} Phase: Eq. \ref{eq:eq8}
+\item The transfer function of a \textit{single-pole high-pass filter} is given by Eq. \ref{eq:trans3}.  Magnitude: Eq. \ref{eq:eq11} Phase: Eq. \ref{eq:eq12}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Octave application: Low and high-pass RC filters}
+Notice we had to derive the transfer function first, in each case, and then use octave to create the plots.  How do we use tools like octave to obtain the transfer function?  Or, what if we \textit{cannot} derive the transfer function, but have to simply \textit{measure it}?  (This is usually the case). \\ \vspace{0.5cm}
+To understand the origin of the transfer function for arbitrarily complex systems, we'll begin the topic of \textbf{linear, time-invariant (LTI)} systems.
 \end{frame}
 
 \section{Conclusion}
