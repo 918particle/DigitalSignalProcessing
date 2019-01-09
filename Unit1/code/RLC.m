@@ -3,7 +3,7 @@ home;
 
 R = 50.0;
 C = 470.0e-12;
-L = 54.0e-6;
+L = 2.0*54.0e-6;
 
 omega_LC = 1.0/(sqrt(L*C));
 tau = R*C;
