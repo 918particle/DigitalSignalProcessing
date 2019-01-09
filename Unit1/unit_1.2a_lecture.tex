@@ -1,0 +1,69 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\title{Digital Signal Processing: COSC390}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\section{Fourier Series of a Sawtooth Signal}
+
+\begin{frame}{Fourier Series of a Sawtooth Signal}
+Let the repeating sawtooth signal be defined like
+\begin{equation}
+f(x) = x ~~~ -\pi \leq x \leq \pi \label{eq:saw}
+\end{equation}
+We observe three things:
+\begin{itemize}
+\item This is a strictly-odd function $\rightarrow$ Half of the terms in Fourier series should vanish
+\item The amplitude is $\pi$ $\rightarrow$ Amplitudes of sinusoids should reflect this
+\item It is centered on $y=0$ (it has no constant offset) $A_0$ should be 0.0
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Fourier Series of a Sawtooth Signal}
+We see that the even terms and the constant term should vanish in the Fourier series.  The other terms are like:
+\begin{equation}
+B_n = \frac{1}{\pi}\int_{-\pi}^{\pi} x \sin(nx) dx
+\end{equation}
+We may do this integral a number of ways.  The complex-exponential method turned out to be complicated, so let's try integration by-parts\footnote{Or just go to WolframAlpha and ask the oracle to tell you the answer :-)}:
+\begin{equation}
+\int_a^b u dv = uv|_a^b - \int_a^b v du \label{eq:byparts}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Fourier Series of a Sawtooth Signal}
+\small
+Let $u = x$ (and $du = dx$), and $dv = \sin(nx)dx$.  Now we can solve for $v$:
+\begin{align}
+\frac{dv}{dx} &= \sin(nx) \\
+v &= -\frac{1}{n}\cos(nx)
+\end{align}
+Now we can plug into Eq. \ref{eq:byparts}:
+\begin{equation}
+b_n = -\frac{x\cos(nx)}{n\pi}|_{-\pi}^\pi + \frac{1}{n\pi}\int_{-\pi}^{\pi} \cos(nx)dx
+\end{equation}
+The second term on the right side is zero, because it represents integrating a periodic function over one period\footnote{Think of the area under the curve: one period contains as much negative area as it does positive area.}.
+\end{frame}
+
+\begin{frame}{Fourier Series of a Sawtooth Signal}
+\small
+Finally, we have:
+\begin{equation}
+b_n = -\frac{1}{n\pi}\left(\pi\cos(n\pi)+\pi\cos(n\pi) \right) = -\frac{2}{n\pi}\left(\pi\cos(n\pi)\right)
+\end{equation}
+Cosine alternates between -1 and 1 for integer values of $\pi$.  The even ones are 1.0, and the odd ones are -1.0.  Thus,
+\begin{equation}
+b_n = -\frac{2}{n}(-1)^n
+\end{equation}
+Finally, the Fourier series for the sawtooth in Eq. \ref{eq:saw} is
+\begin{equation}
+s(x) = b_1 \sin(x) + b_2\sin(2x) + ... = -2 \sum_{i=1}^{\infty} \frac{(-1)^n}{n} \sin(nx)
+\end{equation}
+\end{frame}
+
+\end{document}
