@@ -82,10 +82,33 @@ The function \textit{randn(N,M)} draws $N \times M$ numbers from a normal distri
 \small
 For data that is appropriately stationary, we can use histograms to estimate $\mu$ and $\sigma$ faster, since we only have to loop over bins rather than every data sample.  Let $H_i$ represent the counts in a given bin, and $i$ represent the bin sample.  We have:
 \begin{align}
-\mu &= \frac{1}{N}\sum_{i=1}^{M}i H_i \\
-\sigma^{2} &= \frac{1}{N-1}\sum_{i=1}^M \left(i-\mu\right)^2 H_i
+\mu &= \frac{1}{N}\sum_{i=1}^{M}i H_i \label{eq:histmean} \\
+\sigma^{2} &= \frac{1}{N-1}\sum_{i=1}^M \left(i-\mu\right)^2 H_i \label{eq:histvar}
 \end{align}
-(To obtain the mean in signal \textit{amplitude}, you'd have to convert bin number to amplitude - more on that in a moment).
+To obtain the mean in signal \textit{amplitude}, you'll have to convert bin number to amplitude.
+\end{frame}
+
+\begin{frame}[fragile]{Statistics and Probability: The Normal Distribution}
+\small
+\begin{table}
+\begin{tabular}{c}
+3.1 \\
+-0.03 \\
+1.2 \\
+0.2 \\
+-0.7 \\
+-1.45 \\
+2.2 \\
+-0.05 \\
+0.93 \\
+0.21 
+\end{tabular}
+\caption{\label{tab:hist} Using Eq. \ref{eq:histmean} and \ref{eq:histvar}, find estimates of $\mu$ and $\sigma$ for this data.}
+\end{table}
+\begin{verbatim}
+x = [...];
+[b,a] = hist(x,4); %(How many bins?)
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Statistics and Probability: The Normal Distribution}
