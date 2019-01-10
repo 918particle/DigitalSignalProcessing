@@ -206,6 +206,21 @@ p(x) = \sqrt{\frac{1}{2\pi\sigma_x^2}} \exp\left(-\frac{1}{2}\left(\frac{x-\mu}{
 \end{equation}
 \end{frame}
 
+\section{Statistics and Probability: Programming with Octave}
+
+\begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
+More on the \textit{hist} function in octave:
+\begin{verbatim}
+pkg install -forge io
+pkg install -forge statistics
+pkg load statistics
+pkg help histfit
+histfit(randn(1000,1))
+histfit(rand(1000,1))
+\end{verbatim}
+Let's work out the $\sigma$ of a \textit{flat} distribution between $[0,1]$.  What is it for a flat distribution between $[-1,1]$?
+\end{frame}
+
 \section{Statistics and Probability: Other Useful Distributions}
 
 \section{Conclusion}
