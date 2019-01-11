@@ -232,7 +232,7 @@ p(x) = \sqrt{\frac{1}{2\pi\sigma_x^2}} \exp\left(-\frac{1}{2}\left(\frac{x-\mu}{
 \section{Statistics and Probability: Programming with Octave}
 
 \begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
-More on the \textit{hist} function in octave:
+More on the \textit{hist} function in octave\footnote{I hope this works, but if not, it's ok.}
 \begin{verbatim}
 pkg install -forge io
 pkg install -forge statistics
@@ -241,10 +241,80 @@ pkg help histfit
 histfit(randn(1000,1))
 histfit(rand(1000,1))
 \end{verbatim}
-Let's work out the $\sigma$ of a \textit{flat} distribution between $[0,1]$.  What is it for a flat distribution between $[-1,1]$?
+Let's work out the $\sigma$ of a \textit{flat} distribution between $[0,1]$.  What is it for a flat distribution between $[-1,1]$?  (We can derive this by hand as well if we cannot access statistics package).
+\end{frame}
+
+\begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
+Some interesting notation for normal distributions:
+\begin{equation}
+N(\mu,\sigma) = \sqrt{\frac{1}{2\pi\sigma^2}} \exp\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right)
+\end{equation}
+Let's write a function \textbf{NGaus.m} that produces the Gaussian probability given $\mu$ and $\sigma$:
+\begin{verbatim}
+function ret = NGaus(mu,sigma,x)
+    ...
+endfunction
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
+Now let's write a function $NRand$ that sums $N$ uniformly-distributed (flat) random variables $x$:
+\begin{verbatim}
+function ret = NRand(n)
+    ret = sum(rand(n,1));
+endfunction
+\end{verbatim}
+Create a histogram of a few hundred outputs of $NRand$.  What do you notice about the pmf?  Let's plot $NGaus$ on the same axes as the histogram of $NRand$.  How do they compare? \\ \vspace{0.5cm}
+We are on our way to producing $N(0,1)$ distributed numbers, and therefore our first \textbf{\alert{noise}} signals...
+\end{frame}
+
+\begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
+\small
+More vocabulary:
+\begin{itemize}
+\item \textbf{cdf} - Cumulative distribution function: Probability that a continuous random variable $X$ is less than some value $x$.  For a given pdf, the cdf $\Phi(X)$ is the integral of the total probability on $[-\infty,x]$.  The derivative of the pdf is related to the pdf via the fundamental theorem of calculus.
+\end{itemize}
+If the pdf follows $f(x)$, then 
+\begin{equation}
+\Phi(X\leq x) = \int_{-\infty}^{x} f(x) dx
+\end{equation}
+The Box-Muller method for $N(0,1)$ distruted numbers:
+\begin{align}
+X_1 &= \sqrt{-2\ln(U)}\cos(2\pi V) \\
+X_2 &= \sqrt{-2\ln(U)}\sin(2\pi V)
+\end{align}
+\textbf{Try this in octave...}
+\end{frame}
+
+\begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
+The cdf of $N(0,1)$ has an expected shape, but can't be expressed with elementary functions.
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figures/cdfgaus.png}
+\caption{\label{fig:cdfgaus} The cumulative distribution of the normal distribution.  Although we can plot it, it's hard to write.  We will discuss the $erf$ and $erfc$ functions in the near future.}
+\end{figure}
 \end{frame}
 
 \section{Statistics and Probability: Other Useful Distributions}
+
+\begin{frame}[fragile]{Statistics and Probability: Other Useful Distributions}
+\small
+We now know how to obtain random uniform numbers (\textbf{rand}) in octave, and have algorithms (Box-Muller) and functions (\textbf{randn}) in octave for $N(0,1)$\footnote{This can be scaled to any $\mu$ and $\sigma$ values we need.}.  What if we require a \textit{different pdf}?  One technique is to use \textit{inverse transform sampling:}
+\begin{enumerate}
+\item For the pdf $p(x)$, work out the cdf $\Phi(x)$.
+\item Generate a sample of uniform random numbers $u_i \in [0,1]$.
+\item Call $\Phi(u_i)$.
+\end{enumerate}
+\textbf{Write an octave script that generates exponentially-distributed numbers.  Be careful to normalize when comparing to the expected pdf $\propto \exp(-x)$.}
+\end{frame}
+
+\begin{frame}[fragile]{Statistics and Probability: Other Useful Distributions}
+\small
+Octave has many pre-programmed distributions.  Although system noise is usually normally distributed, it's good to know some of these: \\ \vspace{0.5cm}
+\url{https://octave.org/doc/v4.2.0/Distributions.html}
+\end{frame}
+
+\section{Noise: digitization and sampling}
 
 \section{Conclusion}
 
