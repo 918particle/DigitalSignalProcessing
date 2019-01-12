@@ -270,6 +270,12 @@ We are on our way to producing $N(0,1)$ distributed numbers, and therefore our f
 
 \begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
 \small
+The Box-Muller method for $N(0,1)$ distruted numbers:
+\begin{align}
+X_1 &= \sqrt{-2\ln(U)}\cos(2\pi V) \\
+X_2 &= \sqrt{-2\ln(U)}\sin(2\pi V)
+\end{align}
+\textbf{Try this in octave...}
 More vocabulary:
 \begin{itemize}
 \item \textbf{cdf} - Cumulative distribution function: Probability that a continuous random variable $X$ is less than some value $x$.  For a given pdf, the cdf $\Phi(X)$ is the integral of the total probability on $[-\infty,x]$.  The derivative of the pdf is related to the pdf via the fundamental theorem of calculus.
@@ -278,12 +284,6 @@ If the pdf follows $f(x)$, then
 \begin{equation}
 \Phi(X\leq x) = \int_{-\infty}^{x} f(x) dx
 \end{equation}
-The Box-Muller method for $N(0,1)$ distruted numbers:
-\begin{align}
-X_1 &= \sqrt{-2\ln(U)}\cos(2\pi V) \\
-X_2 &= \sqrt{-2\ln(U)}\sin(2\pi V)
-\end{align}
-\textbf{Try this in octave...}
 \end{frame}
 
 \begin{frame}[fragile]{Statistics and Probability: Programming with Octave}
@@ -314,7 +314,134 @@ Octave has many pre-programmed distributions.  Although system noise is usually 
 \url{https://octave.org/doc/v4.2.0/Distributions.html}
 \end{frame}
 
-\section{Noise: digitization and sampling}
+\section{Noise: Digitization and Sampling}
+
+\begin{frame}[fragile]{Noise: Digitization and Sampling}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figures/adc_dac1.png}
+\caption{\label{fig:adc1} An example of analogue data from chapter 2 of the text.  Both the dependent and independent axes are continuous.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Noise: Digitization and Sampling}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figures/adc_dac2.png}
+\caption{\label{fig:adc2} The same signal from Fig. \ref{fig:adc1}, except a \textit{sample-and-hold} action has been applied to the independent variable.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Noise: Digitization and Sampling}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figures/adc_dac3.png}
+\caption{\label{fig:adc3} The same signal from Fig. \ref{fig:adc2}, except a \textit{digitization} action has been applied to the dependent variable.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Noise: Digitization and Sampling}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figures/adc_dac4.png}
+\caption{\label{fig:adc4} The error incurred by the \textit{digitization} action from Fig. \ref{fig:adc3}.  The y-axis is expressed in units of LSB (least significant bit - more in a second). Turns out we know the $\sigma$ of this error: $LSB/sqrt{12}$.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Noise: Digitization and Sampling}
+A model for a particular value in Fig. \ref{fig:adc2}, the sample-and-hold action\footnote{Technically, this is the 0$^{th}$-order hold, and there are other (much) less common choices.} is
+\begin{equation}
+s_n(t) = f(n\Delta t) square(t-n\Delta t)
+\end{equation}
+where $f(n\Delta t)$ is the function or data value, and 
+\begin{equation}
+square(t) = 1, ~~~ |t| \leq T/2
+\end{equation}
+The entire $N$-sample data-set or signal is
+\begin{equation}
+s(t) = \sum_{n=0}^{N-1} f(n\Delta t) square(t-n\Delta t)
+\end{equation}
+\end{frame}
+
+\begin{frame}[fragile]{Noise: Digitization and Sampling}
+\begin{tcolorbox}[colback=white,colframe=red!40!blue,title=Sample/Hold Signal Model]
+\alert{
+\begin{equation}
+s(t) = \sum_{n=0}^{N-1} square(t-n\Delta t)
+\end{equation}
+}
+\end{tcolorbox}
+Several important questions:
+\begin{enumerate}
+\item What is $S(\omega)$?
+\item What are the important relationships between $\Delta t$, $N$, and the frequencies present in the data?
+\item How precisely does $s(t)$ represent the data?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+The Fourier transform of $s(t)$ may be obtained using a combination of properties of the Fourier transform, plus the result obtained for $F\lbrace square(t) \rbrace$.  Let $x = \omega \Delta t/2$.  The result is (observe on board):
+\begin{equation}
+S(\omega) = sync(x) \sum_{n=0}^{N-1} f(n\Delta t) \exp(-j\omega n\Delta t) \Delta t \label{eq:awesome}
+\end{equation}
+The factor at right is a discrete version of the Fourier Transform.  Let the DFT represent the discrete Fourier transform on the right.  Equation \ref{eq:awesome} may be written
+\begin{equation}
+S(\omega) = DFT\lbrace f(t) \rbrace sync(x) 
+\end{equation}
+\alert{The spectrum of a sampled signal is the \textbf{convolution} of the discrete Fourier transform of the signal and the sync function with a period of the time between samples.}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+The convolution of two functions $f(t)$ and $g(t)$ is 
+\begin{equation}
+(f \circ g) (t) = \int_{-\infty}^{\infty} f(\tau) g(t-\tau) d\tau
+\end{equation}
+\textbf{Convolution theorem}:  The Fourier transform of the convolution of two functions $f \circ g$ is
+\begin{equation}
+F\lbrace f \circ g\rbrace = F(\omega) G(\omega)
+\end{equation}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+The DFT can contain only have a finite number of frequencies, since it is discrete.  What are the limits of this?
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figures/sampling.png}
+\caption{\label{fig:sampling} Various degrees of sampling.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+Notice that the sync function has a zero, which occurs at $x = \pi$, for some frequency $f_s$.  This implies that 
+\begin{align}
+\pi &= \frac{\omega \Delta t}{2} \\
+\pi &= \frac{2\pi f_s \Delta t}{2} \\
+f_s &= \frac{1}{\Delta t}
+\end{align}
+The frequency $f_s$ is known as the \textit{sampling frequency.}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+We have finally arrived at the \textit{sampling theorem:}
+\begin{tcolorbox}[colback=white,colframe=red!40!blue,title=Sampling Theorem]
+\alert{A signal containing frequencies less than or equal to $f_{crit} = f_s/2$ can be perfectly reconstructed.}
+\end{tcolorbox}
+Let's go back and think about Fig. \ref{fig:sampling}.
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+The DFT can contain only have a finite number of frequencies, since it is discrete.  What are the limits of this?
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figures/sampling.png}
+\caption{\label{fig:sampling2} What if the sine wave had a frequency of $f_{c}$?. (Professor draw on board).}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+
+\end{frame}
 
 \section{Conclusion}
 
