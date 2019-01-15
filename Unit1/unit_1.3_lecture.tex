@@ -325,7 +325,49 @@ Octave has many pre-programmed distributions.  Although system noise is usually 
 \url{https://octave.org/doc/v4.2.0/Distributions.html}
 \end{frame}
 
-\section{Noise: Digitization and Sampling}
+\section{Supplement: Damped driven harmonic oscillator}
+
+\begin{frame}{Supplement: Damped driven harmonic oscillator}
+Let the defining equation for the signal $x(t)$ be
+\begin{equation}
+x'' + bx' + cx = A\cos(\omega_0 t)
+\end{equation}
+Take the Fourier transform of both sides:
+\begin{equation}
+\left((j\omega)^2 + j\omega b + c\right)X(\omega) = A \int_{-\infty}^{\infty} \cos(\omega_0 t) \exp(-j\omega t) dt
+\end{equation}
+The right-hand side is a pair of delta-functions:
+\begin{equation}
+F\lbrace \cos(\omega_0 t) \rbrace = \frac{1}{2}\left(\delta(\omega-\omega_0) + \delta(\omega+\omega_0)\right)
+\end{equation}
+\end{frame}
+
+\begin{frame}{Supplement: Damped driven harmonic oscillator}
+\small
+Solving for $X(\omega)$ gives
+\begin{equation}
+X(\omega) = -\frac{A}{2}\frac{\delta(\omega-\omega_0) + \delta(\omega+\omega_0)}{\omega^2 + j\omega b + c}
+\end{equation}
+Taking the inverse Fourier transform gives
+\begin{equation}
+x(t) = -\frac{A}{4\pi}\left(\frac{\exp(-j\omega_0 t)}{\omega^2 + j\omega b + c}+\frac{\exp(j\omega_0 t)}{\omega^2 + j\omega b + c}\right)
+\end{equation}
+Let $k^2 = \omega^2-c$.  Rearranging, we have
+\begin{equation}
+x(t) = -\frac{A}{4\pi}\left(\frac{(k^2 - j\omega b)\exp(-j\omega_0 t)}{k^4 + \omega^2 b^2}+\frac{(k^2 + j\omega b)\exp(j\omega_0 t)}{k^4 + \omega^2 b^2}\right)
+\end{equation}
+\end{frame}
+
+\begin{frame}{Supplement: Damped driven harmonic oscillator}
+\small
+Factoring, and using complex number identities:
+\begin{equation}
+x(t) = -\frac{A}{2\pi(k^4 +\omega^2b^2)}\left( k^2 \cos(\omega_0 t) - \omega b (\sin(\omega_0 t)) \right)
+\end{equation}
+(We should check this together).  What happens if the damping term is zero ($b=0$), and $k^2 \approx \omega b$?  Can we plot this in Octave for varying damping and $c$ parameters?
+\end{frame}
+
+\section{Noise: Digitization and Sampling, theory and examples}
 
 \begin{frame}[fragile]{Noise: Digitization and Sampling}
 \begin{figure}
@@ -451,8 +493,67 @@ The DFT can contain only have a finite number of frequencies, since it is discre
 \end{frame}
 
 \begin{frame}{Noise: Digitization and Sampling}
-How do we determine if data has been \textit{properly sampled} or \textit{properly sampled?} \textbf{Aliasing} occurs if data has been improperly sampled.\footnote{This is apart from the trivial case when we know the maximuim frequency and the sampling rate.}
-Octave exercise, and first experience with the discrete Fourier transform!  On Moodle, obtain the Aliasing.m script.
+Equation \ref{eq:awesome} contained a form of the DFT.  Let $h(k\Delta t) = h_k$, with $f_s = 1/\Delta t$ and $N$ time samples. The discrete Fourier transform is defined as
+\begin{equation}
+H_n \approx \Delta t \sum_{k=0}^{N-1} h_k \exp\left( -2\pi j k \frac{n}{N} \right) \label{eq:fft1}
+\end{equation}
+The integral is approximated at frequencies $f_n = \frac{n}{n\Delta t}$. The inverse DFT is
+\begin{equation}
+h_k \approx \frac{\Delta f}{N}\sum_{n=0}^{N-1} H_n \exp\left( 2\pi j k \frac{n}{N} \right) \label{eq:fft2}
+\end{equation}
+What is $\Delta f$? There are $N/2$ \textit{independent frequencies} for real data, so $\Delta f = f_c/(N/2) = T^{-1}$.
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth,trim=21cm 25cm 18cm 12cm,clip=true]{figures/fft.jpg}
+\caption{\label{fig:fft3} The FFT must conserve degrees of freedom.  The data are organized to optimize speed and efficiency.  (Left) Time samples. (Right) Frequency samples.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+Therefore in some implementations (\textbf{not} including octave) transforming forward and then backward incurs a factor of $N$. \\ \vspace{0.5cm}
+Looking at Fig. \ref{fig:fft3}, let's do a few things:
+\begin{enumerate}
+\item Convince ourselves that $\Delta f = 1/T$.
+\item Convince ourselves that degrees of freedom are conserved.
+\item Convince ourselves that the data $\pm 1/2\Delta t$ should be the same.
+\item Ensure we understand the order of the negative frequencies.
+\end{enumerate}
+Parseval's theorem works like this for the discrete quantities:
+\begin{equation}
+\sum_{k=0}^{N-1} |h_k|^2 = \frac{1}{N}\sum_{n=0}^{N-1} |H_n|^2
+\end{equation}
+\end{frame}
+
+\section{Noise: Digitization and Sampling, Octave coding example}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+How do we determine if data has been \textit{properly sampled} or \textit{properly sampled?} \textbf{Aliasing}.\footnote{This is apart from the trivial case when we know $f_s$ and $f_{max}$.} On Moodle, obtain the Aliasing.m script.
+\begin{enumerate}
+\item Activity: run for the first time, and take a few moments to understand the output. What are the units of the axes? What is the lower panel showing? 
+\item Add noise by boosting the standard deviation of the pdf of the noise distribution by increasing the parameter \textbf{noise\_sigma}.
+\item What happens to the amplitude when you increase the number of modes in the Fourier series?
+\item Push the Fourier modes way above the sampling rate.  What happens to the amplitude?\footnote{Do you see the Gibb's phenomenon disappear?  Why?} \textit{Probably best to minimize noise.}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+\textbf{Aliasing.} Building off of the Aliasing.m script, do the following:
+\begin{enumerate}
+\item \textit{Filter the data} according to the transfer function of the single-pole low-pass filter.
+\item Use this technique to get rid of any aliasing, and explore the effect on the Fourier modes and noise.
+\item Limit the Fourier series to $\approx 25$ terms, and use $f_0 \approx 1$ Hz.  Plot the signal while varying $f_{s}$.  What do you notice?
+\end{enumerate}
+Looks like adding noise in frequency-space where there is no signal just distorts the signal.  Does this make sense?
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+Digitization noise...
 \end{frame}
 
 \section{Conclusion}
