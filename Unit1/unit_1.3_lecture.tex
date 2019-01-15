@@ -321,8 +321,9 @@ We now know how to obtain random uniform numbers (\textbf{rand}) in octave, and 
 
 \begin{frame}[fragile]{Statistics and Probability: Other Useful Distributions}
 \small
-Octave has many pre-programmed distributions.  Although system noise is usually normally distributed, it's good to know some of these: \\ \vspace{0.5cm}
-\url{https://octave.org/doc/v4.2.0/Distributions.html}
+Octave has many pre-programmed distributions.  Although system noise is usually normally distributed, it's good to know these:
+\url{https://octave.org/doc/v4.2.0/Distributions.html} \\ \vspace{0.5cm}
+Useful video on inverse transform sampling: \url{https://www.youtube.com/watch?v=rnBbYsysPaU&t=373s}
 \end{frame}
 
 \section{Supplement: Damped driven harmonic oscillator}
@@ -350,21 +351,10 @@ X(\omega) = -\frac{A}{2}\frac{\delta(\omega-\omega_0) + \delta(\omega+\omega_0)}
 \end{equation}
 Taking the inverse Fourier transform gives
 \begin{equation}
-x(t) = -\frac{A}{4\pi}\left(\frac{\exp(-j\omega_0 t)}{\omega^2 + j\omega b + c}+\frac{\exp(j\omega_0 t)}{\omega^2 + j\omega b + c}\right)
+x(t) = -\frac{A}{4\pi}\left(\frac{\exp(-j\omega_0 t)}{\omega_0^2 + j\omega_0 b + c}+\frac{\exp(j\omega_0 t)}{\omega_0^2 + j\omega_0 b + c}\right)
 \end{equation}
-Let $k^2 = \omega^2-c$.  Rearranging, we have
-\begin{equation}
-x(t) = -\frac{A}{4\pi}\left(\frac{(k^2 - j\omega b)\exp(-j\omega_0 t)}{k^4 + \omega^2 b^2}+\frac{(k^2 + j\omega b)\exp(j\omega_0 t)}{k^4 + \omega^2 b^2}\right)
-\end{equation}
-\end{frame}
+Let $k^2 = \omega_0^2-c$.  (Finish on board). Are there any special conditions you see (resonance, total damping)?  Can we plot this in Octave for varying damping and $c$ parameters?
 
-\begin{frame}{Supplement: Damped driven harmonic oscillator}
-\small
-Factoring, and using complex number identities:
-\begin{equation}
-x(t) = -\frac{A}{2\pi(k^4 +\omega^2b^2)}\left( k^2 \cos(\omega_0 t) - \omega b (\sin(\omega_0 t)) \right)
-\end{equation}
-(We should check this together).  What happens if the damping term is zero ($b=0$), and $k^2 \approx \omega b$?  Can we plot this in Octave for varying damping and $c$ parameters?
 \end{frame}
 
 \section{Noise: Digitization and Sampling, theory and examples}
