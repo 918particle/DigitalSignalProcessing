@@ -1,0 +1,26 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC390}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Homework 1.1.4 - Question 1}
+\small
+Modify one of Octave scripts from the Unit 1 code folder on Moodle to obtain a \textit{filtered} square-wave.  \footnote{The Fourier series of a square wave can be reviewed here: \url{https://en.wikipedia.org/wiki/Square\_wave\#Fourier_analysis}. This happens to be the \textit{odd} version of the square wave.}
+\begin{enumerate}
+\item The Fourier coefficient $b_n$ corresponds to the $\sin(nt)$ term.  Let $n = 2\pi f$, so $f = n/(2\pi)$.  Evaluate the transfer function $|h(f)|$ for the single-pole high-pass RC filter at the frequency $f$.  Call the result $h_n$.
+\item Multiply each $b_n$ by the corresponding $h_n$ before building the whole series, then build the series and plot the signal.
+\item How has the signal shape changed?  What happens if you change the $\tau$ parameter (the value of RC) in the single-pole high-pass filter?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Homework 1.1.4 - Question 2}
+Please talk to me about your final presentation for this course in the next few days.  We will discuss the basic idea and where you will obtain the data.  This should be done no later than Friday.  Thanks! ~JCH
+\end{frame}
+
+\end{document}

@@ -303,9 +303,9 @@ We now know how to obtain random uniform numbers (\textbf{rand}) in octave, and 
 \begin{enumerate}
 \item For the pdf $p(x)$, work out the cdf $\Phi(x)$.
 \item Generate a sample of uniform random numbers $u_i \in [0,1]$.
-\item Call $\Phi(u_i)$.
+\item Call $\Phi^{-1}(u_i)$, that is, invert the cdf and plug in the list $u_i$ to the dependent variable.
 \end{enumerate}
-\textbf{Write an octave script that generates exponentially-distributed numbers.  Be careful to normalize when comparing to the expected pdf $\propto \exp(-x)$.}
+\textbf{Write an octave script that generates exponentially-distributed numbers, e.g. pdf $\propto \exp(-x)$.}
 \end{frame}
 
 \begin{frame}[fragile]{Statistics and Probability: Other Useful Distributions}
@@ -543,7 +543,84 @@ Looks like adding noise in frequency-space where there is no signal just distort
 \end{frame}
 
 \begin{frame}{Noise: Digitization and Sampling}
-Digitization noise...
+Now we return to the problem of precision due to \textit{digitization} in the \textit{dependent variable}, as opposed to \textit{sampling} in the independent variable. \\ \vspace{0.5cm}
+Recall how the \textbf{\alert{standard deviation}} in the digitized dependent variable is $LSB/\sqrt{12}$.  Let's begin calling the least-significant bit (LSB) the quantum (Q).  Now imagine we are digitizing analog sinusoids between $-V/2$ and $V/2$ with $N$ quanta.  The standard deviation of data distributed like a sinusoid is $V/(2\sqrt{2})$.  Taking the ratio of the two standard deviations will give us the signal to noise ratio.
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+Written in equation form, these ideas translate as follows:
+\begin{align}
+\sigma_{S} &= \frac{V}{2\sqrt{2}} = \frac{2^N Q}{2\sqrt{2}} \\
+\sigma_{Q} &= \frac{Q}{\sqrt{12}} \\
+\frac{\sigma_S}{\sigma_Q} &= \frac{\frac{2^N Q}{2\sqrt{2}}}{\frac{Q}{\sqrt{12}}} \\
+\frac{\sigma_S}{\sigma_Q} &= \frac{2^N \sqrt{12}}{2\sqrt{2}} \label{eq:SNR1} \\
+\end{align}
+Often SNR is quoted in decibels.  The formula for decibel is 
+\begin{equation}
+P_{dB} = 10\log(P_2/P_1)
+\end{equation}
+Since $P \propto V^2$, 
+\begin{equation}
+P_{dB} = 20\log(V_2/V_1)
+\end{equation}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+Applying the definition of decibel to Eq. \ref{eq:SNR1}:
+\begin{align}
+SNR_{dB} &= 20\log\left(\frac{2^N \sqrt{12}}{2\sqrt{2}} \right) \\
+SNR_{dB} &= 20 N \log(2) + 20\log(\sqrt{6}/2) \\
+SNR_{dB} &= 6.02 N + 1.76
+\end{align}
+Example: in the presence of \textit{just} quantization noise, if we digitize with 8 bits, we expect an SNR $\approx 50$ dB.  What if we drop to 4 bits? Answer: $\approx 26$ dB.  What if there is \textit{analogue} noise in addition to the \textit{quantization} noise?  Suppose it has standard deviation of $\sigma_N$.
+\begin{equation}
+\frac{\sigma_S}{\sigma_Q+\sigma_N} = \frac{\frac{2^N Q}{2\sqrt{2}}}{\frac{Q}{\sqrt{12}} + \sigma_N}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+\begin{equation}
+SNR_{dB} = 6.02 N + 1.76 - 20\log\left( 1 + \sqrt{12} \frac{\sigma_N}{Q}\right)
+\end{equation}
+Recalling that $\sigma_Q = Q/\sqrt{12}$, we have
+\begin{equation}
+SNR_{dB} = 6.02 N + 1.76 - 20\log\left( 1 + \frac{\sigma_N}{\sigma_Q}\right)
+\end{equation}
+\textbf{Example:} suppose we have $\sigma_N = 20$ mV, and we have $N=8$ bits over a 2.56 V range.  This means $\sigma_Q = 2.56/256/\sqrt{12} = 1/(100\sqrt{12}) \approx 2.89$ mV.  Thus, $\sigma_N/\sigma_Q = 20/2.89 \approx 6.92$.  The final answer is then $SNR_{dB} = 32$.  This is the maximum achievable SNR (in decibels) in this system.\footnote{More realistically, the noises add in quadrature, but in practice the system is designed so that $\sigma_N$ dominates over $\sigma_Q$.}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+What are the maximum SNR values in dB acheivable on the following systems?
+\begin{enumerate}
+\item 16 bits, 6.55V, with $50$ mV of analogue noise.
+\item 12 bits, 4.096V, with $50$ mV of analogue noise.
+\item 12 bits, 4.096V, with $5$ mV of analogue noise.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/recon.png}
+\caption{\label{fig:fulladc} The complete (basic) system for sampling and digitization, reconstruction.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Noise: Digitization and Sampling}
+\small
+We already know what the reconstruction filter should be: the inverse of the sync function encountered in the derivation of the sampling theorem ideas. \\ \vspace{0.5cm}
+What type of anti-aliasing filter should be chosen?  Chapter 3 of the text covers three:
+\begin{enumerate}
+\item Butterworth
+\item Bessel
+\item Chebyshev
+\end{enumerate}
+But this begs the question.  How do filters work in general?  Besides the single-pole examples we've already seen, what other types are there? \\
+We have now reached \textbf{Unit 2!}
 \end{frame}
 
 \section{Conclusion}
@@ -558,7 +635,7 @@ This lecture will cover: (Reading: \textbf{Chapter 2})
 \begin{itemize}
 \item \alert{Statistics and probability: the normal distribution and other useful distributions}
 \item \alert{Noise: digitization and sampling}
-\item Noise: Spectral properties of noise, ADC and DAC
+\item \alert{Noise: Spectral properties of noise, ADC and DAC}
 \end{itemize}
 \end{frame}
 

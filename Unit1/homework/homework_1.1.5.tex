@@ -1,0 +1,31 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC390}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Homework 1.1.5 - Question 1}
+\small
+The differential equation for a damped, driven harmonic oscillator is 
+\begin{equation}
+\boxed{
+x''(t) +bx'(t) + c x(t) = A\cos(\omega_0 t)
+}
+\end{equation}
+Solve this equation as we did in class by taking the Fourier transform of both sides, solving for $X(\omega)$, and then taking the inverse Fourier transform.
+\begin{enumerate}
+\item Let $c = \omega_R^2$, and $k^2 = \omega_0^2 - \omega_R^2$. Plot the amplitude of $x(t)$ for varying values of $\omega_0$ and $k$.
+\item Do you see \textit{resonance} anywhere?  That is, amplitude that seems to increase without bound? \textit{Hint: examine the equation for $x(t)$, to see if the denominator approaches zero.}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Homework 1.1.5 - Question 2}
+Please talk to me about your final presentation for this course in the next few days.  We will discuss the basic idea and where you will obtain the data.  This should be done no later than Friday.  Thanks! ~JCH
+\end{frame}
+
+\end{document}
