@@ -318,6 +318,21 @@ size(x_2)
 Convolve a sine-wave of a given frequency with the response of a first-order low-pass butterworth filter, and plot the result.  Does the amplitude make sense? \textit{Hint: don't forget factors of $\Delta t$!}
 \end{frame}
 
+\section{LTI Systems Application: RF filters and Johnson-Nyquist Noise}
+
+\begin{frame}[fragile]{LTI Systems Application: RF filters and Johnson-Nyquist Noise}
+\small
+\textbf{Johnson-Nyquist noise} is the presence of random voltages across a circuit due to electron thermal fluctuations. Let $k_B$ be Boltzmann's constant\footnote{$k_B = 1.38 \times 10^{-23}$ m$^2$ kg s$^{-2}$ K$^{-1}$.}, $\Delta f$ be some bandwidth $f_{max} - f_{min}$ in frequency, $R$ be the resistance in Ohms at a temperature $T$ in Kelvin. The variance of the noise is
+\begin{equation}
+v^2_{rms} = 4 k_B T R \Delta f
+\end{equation}
+Let's write an Octave script to generate normally distributed noise with this \textit{variance.}  Make sure to define $\Delta f = f_{max} - f_{min}$.  Next, define a cosine or sine with frequency that is inside this bandwidth, and add it to the noise.  $SNR \approx 10$.
+\begin{enumerate}
+\item What happens to the SNR when you begin to filter the total signal, such that we keep the sinusoid intact?
+\item Plot the SNR vs. cutoff frequency in your filter as you vary it.
+\end{enumerate}
+\end{frame}
+
 \section{Special Topic: Impulse response of RF antennas}
 
 \begin{frame}{Special Topic: Impulse response of RF antennas}
