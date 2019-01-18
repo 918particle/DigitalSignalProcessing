@@ -1,0 +1,17 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC390}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Homework 1.1.6 - Question 1}
+\small
+On slide 38 of the Unit 2.1 lecture notes, there is a project outlined involving SNR.  Please work with the script FFT.m in the code folder on Moodle to explore this effect.  You can tune the frequencies, times, and number of samples on lines 7-14.  You can tune the amplitude of the signal and variance of the noise on lines 16-18, and the signal and noise are combined on line 19.  Lines 22-25 define and apply a low-pass and high-pass filter to the signal plus noise.  The rest of the script is similar to Aliasing.m, in which the spectrum is plotted.  The point of the exercise is that the variance of the noise \textit{depends} on the bandwidth $\Delta t = f_{max}-f_{min}$\footnote{In this particular example, $f_{max} = f_{crit}$ and $f_{min} = 0$.}.  Therefore the SNR should depend on the filters.  For the assignment, you may characterize how the SNR depends on the filters in your own words, qualitatively, if you wish.
+\end{frame}
+
+\end{document}
