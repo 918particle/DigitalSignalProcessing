@@ -241,7 +241,8 @@ Suppose \textbf{A(x)}, \textbf{B(x)}, \textbf{C(x)}, \textbf{D(x)}, and \textbf{
 \end{frame}
 
 \begin{frame}[fragile]{LTI systems}
-The \textbf{convolution} operator has all of the necessary properties of the LTI system operator.  The convolution of data streams $x_1$ and $x_2$ can be implemented with the following basic algorithm:
+\small
+The \textbf{convolution} operator has all of the necessary properties of the LTI system operator.  The convolution of data streams $x_1$ and $x_2$:
 \begin{verbatim}
 x_1 = (...); %data1
 x_2 = (...); %data2
@@ -254,48 +255,17 @@ Or, in one line:
 \begin{verbatim}
 result = real(ifft(fft(x_1).*fft(x_2)));
 \end{verbatim}
+Or,
+\begin{verbatim}
+result = conv(x_1,x_2); %Pay attention to size
+\end{verbatim}
 \end{frame}
 
 \section{LTI Systems: Programming with Octave}
 
 \begin{frame}[fragile]{LTI Systems: Programming with Octave}
 \small
-Obtain the \textbf{\alert{impulse response}} of the first-order low-pass butterworth filter.  The impulse response is given by the identity:
-\begin{equation}
-x[n] \circ \delta[n] = x[n] \label{eq:impulse}
-\end{equation}
-Recall the transfer function $h(\omega)$ for the first-order butterworth filter.  Take the inverse Fourier transform of this function, to obtain the impulse response $h(t)$.  What are the units of $h(t)$?
-\begin{enumerate}
-\item Plot this as a function of time in Octave.
-\item Now define the delta function vector (impulse vector):
-\begin{verbatim}
-d = zeros(size(t));
-d(1) = 1;
-\end{verbatim}
-\item Convolve $d$ with $h(t)$.  What do you see?
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile]{LTI Systems: Programming with Octave}
-\small
-The impulse response of a filter is the function with which the signal is convolved:
-\begin{equation}
-x[n] \circ f[n] = y[n] \label{eq:impulse2}
-\end{equation}
-\begin{enumerate}
-\item Plot this as a function of time in Octave.
-\item Now define the delta function vector (impulse vector):
-\begin{verbatim}
-d = zeros(size(t));
-d(1) = 1;
-\end{verbatim}
-\item Convolve $d$ with $h(t)$.  What do you see?
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile]{LTI Systems: Programming with Octave}
-\small
-You can also use the built-in Octave function \textbf{conv} for convolution, but pay attention to sizes:
+The built-in Octave function \textbf{conv} for convolution produces two sizes, the full and the half-size.
 \begin{verbatim}
 x_1 = (...); %data
 x_2 = (...); %data
@@ -315,7 +285,114 @@ size(x_2)
 
 \begin{frame}[fragile]{LTI Systems: Programming with Octave}
 \small
-Convolve a sine-wave of a given frequency with the response of a first-order low-pass butterworth filter, and plot the result.  Does the amplitude make sense? \textit{Hint: don't forget factors of $\Delta t$!}
+The \alert{unit-impulse} function $\delta$ is given by the identity:
+\begin{equation}
+x[n] \circ \delta[n] = x[n] \label{eq:impulse}
+\end{equation}
+Try the following in Octave:
+\begin{verbatim}
+clear; home; close;
+function out = gauspulse(t,amp,mu,sigma)
+    out = amp*exp(-0.5*((t-mu)/sigma).^2);
+endfunction
+t = linspace(0,10,10000);
+r = zeros(size(t));
+r(1000) = 1/sqrt(2); r(2500) = -1/sqrt(2);
+x = gauspulse(t,1.0,5.0,0.2);
+y = conv(r,x,"same");
+plot(t,x,'color','black'); hold on;
+plot(t,y,'color','blue');
+sum(x.^2)/sum(y.^2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}	
+\small
+\begin{enumerate}
+\item Does the output make sense? Why?
+\item \textbf{Exercise}: Write Octave code that produces a sine wave.  Now write a transfer function that causes total destructive interferance.  When the sine wave is convolved with the transfer function, the output should be a DC level.
+\item \textbf{Exercise}: Write a transfer function that doubles the amplitude.
+\item \textbf{Thought experiment}: Could you write a transfer function that would double the frequency?  Why or why not?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Normal distribution}
+\begin{tcolorbox}[colback=white,colframe=red!40!blue,title=Transfer Function]
+\alert{The convolution of a \textbf{transfer function} with an input signal to an LTI system produces the output signal.  Mathematically, if $h(t)$ is the transfer function, $i(t)$ is the input signal, and $o(t)$ is the output:
+\begin{equation}
+o(t) = h(t) \circ i(t) = \int_{-\infty}^{\infty} h(\tau) i(t-\tau) d\tau
+\end{equation}
+The \textit{convolution theorem} also states that
+\begin{equation}
+o(t) = F^{-1} \lbrace H(\omega) I(\omega) \rbrace
+\end{equation}
+}
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}
+\small
+Consider the following function:
+\begin{align}
+h(t) &= \omega_0 \exp(-\omega_0 t) ~~~ t\geq 0 \\
+h(t) &= 0 ~~~ t<0
+\end{align}
+\begin{enumerate}
+\item What is the Fourier transform of $h(t)$?
+\item Do you recognize this transfer function?
+\item Write an Octave function that digitizes the time-dependent version of this transfer function.
+\item Convolve with a sine wave of frequency $2\omega_0$.  What happens?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}
+\small
+Let's repeat the exercise, but for \textit{high-pass} filtering.  Without knowing the time-domain equation for the response, how can we do this with transfer functions?
+\begin{enumerate}
+\item Consider taking signal \textit{minus} the low-pass component.  How do you add two transfer functions to get this to happen?
+\item Convolve with a sine wave of a frequency less than the cutoff of the high-pass filter.  Do you see attenuation?
+\end{enumerate}
+\textbf{Normalization} of filters: (1) high-pass filters should have no gain at DC ($f=0$ Hz), and (2) Filters should conserve energy (amplitude squared) in the pass-band.  Let's ensure this by requiring
+\begin{verbatim}
+sum(h) = 1.0; %High-pass case
+sym(h.^2) = 1.0; %Think about this one more...
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/kernel1.png}
+\caption{\label{fig:kernel1} Chapter 7: low-pass transfer functions, digitized.  Notice that they are wide, and positive.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/kernel2.png}
+\caption{\label{fig:kernel2} Chapter 7: high-pass transfer functions, digitized.  Notice that they resemble the unit impluse minus a low-pass filter transfer function.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/kernel3.png}
+\caption{\label{fig:kernel3} Chapter 7: causal filters do not \textit{anticipate} the signal.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{LTI Systems: Programming with Octave}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/kernel4.png}
+\caption{\label{fig:kernel4} Chapter 7: the phase of the transfer function can be related to the group delay.  What is meant by \textit{linear} phase, versus zero phase, in terms of group delay?}
+\end{figure}
 \end{frame}
 
 \section{LTI Systems Application: RF filters and Johnson-Nyquist Noise}
