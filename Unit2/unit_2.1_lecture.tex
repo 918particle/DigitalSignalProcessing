@@ -349,7 +349,7 @@ h(t) &= 0 ~~~ t<0
 \small
 Let's repeat the exercise, but for \textit{high-pass} filtering.  Without knowing the time-domain equation for the response, how can we do this with transfer functions?
 \begin{enumerate}
-\item Consider taking signal \textit{minus} the low-pass component.  How do you add two transfer functions to get this to happen?
+\item Consider taking the unit impulse signal \textit{minus} the low-pass component.  How do you add two transfer functions to get this to happen?
 \item Convolve with a sine wave of a frequency less than the cutoff of the high-pass filter.  Do you see attenuation?
 \end{enumerate}
 \textbf{Normalization} of filters: (1) high-pass filters should have no gain at DC ($f=0$ Hz), and (2) Filters should conserve energy (amplitude squared) in the pass-band.  Let's ensure this by requiring
