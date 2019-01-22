@@ -210,6 +210,18 @@ K = \frac{1-2R\cos(2\pi f)+R^2}{2-2\cos(2\pi f)}
 So now we start to see how simple it is to clean the data of unwanted noise and signals, using only recursive relationships between input and output data!  However, we must eventually make a distinction between \textbf{FIR and IIR.}
 \end{frame}
 
+\begin{frame}[fragile]{FIR and IIR}
+FIR - Finite Impulse Response:
+\begin{equation}
+y[n] = \sum_{k=0}^{N-1} a_k x[n-k]
+\end{equation}
+IIR - Infinite Impulse Response:
+\begin{equation}
+y[n] = \sum_{k=0}^{N-1} a_k x[n-k] + \sum_{k=0}^{N-1} b_k y[n-k]
+\end{equation}
+In the second case, the output power never really drops to zero.
+\end{frame}
+
 \section{Theory and Examples: Phase Response}
 
 \begin{frame}{Phase Response}

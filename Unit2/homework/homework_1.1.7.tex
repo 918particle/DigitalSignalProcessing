@@ -1,0 +1,27 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC390}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Homework 1.1.6 - Question 1}
+\small
+Implement a high-pass filter recursively.  For the signal, add gaussian white noise to a sine-wave (or other well-defined signal of your choosing), and filter the noise so that it is visible.  Recall the recursion filter formula:
+\begin{equation}
+y[n] = \sum_{k=0}^{N-1} a_k x[n-k] + \sum_{k=0}^{N-1} b_k y[n-k]
+\end{equation}
+\textbf{Single-pole HP filter recursion:}
+\begin{enumerate}
+\item $a_0 = (1+x)/2$
+\item $a_1 = -(1+x)/2)$
+\item $b_1 = x$
+\end{enumerate}
+The variable $x$ varies from $[0,1]$.  \textbf{Turn in:} a) A plot of the un-filtered time-domain and frequency domain output, b) a plot of the filtered time-domain and frequency domain output, and c) the code.
+\end{frame}
+
+\end{document}
