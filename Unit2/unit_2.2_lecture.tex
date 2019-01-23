@@ -234,12 +234,59 @@ In the second case, the output power never really drops to zero.
 \end{frame}
 
 \begin{frame}{Phase Response}
-\begin{enumerate}
-\item Review \textbf{group delay:} $\tau_g = - \frac{d\phi}{d\omega}$.
-\item Discuss \textit{unwrapping} if necessary.
-\item Changing zero group delay to linear (time-shift, causality).
-\item Taking $t \rightarrow -t$? What phase shift does this cause?  What is the total group delay?
-\end{enumerate}
+\textbf{Group delay:} reveals dispersion in signals
+\begin{equation}
+\tau_g = -\frac{d\phi}{d\omega}
+\end{equation}
+\begin{itemize}
+\item What is the Fourier transform of a Gaussian pulse?
+\item What is the complex phase of a Gaussian pulse?
+\item What is the group delay of the Gaussian pulse?
+\end{itemize}
+(Observe on board). What if the signal was asymmetric? \textit{Code this in Octave?}
+\end{frame}
+
+\begin{frame}{Phase Response}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{figures/phase2.png}
+\caption{\label{fig:phase2} The effect of the IIR single-pole LP creates a non-linear phase effect.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Phase Response}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.33\textwidth]{figures/phase3.png}
+\caption{\label{fig:phase3} Reversing the data direction and filtering produces the same power, but a \textit{negative} phase function.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Phase Response}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figures/phase4.png}
+\caption{\label{fig:phase4} \textbf{Bi-directional} filtering sets the phase to zero (or linear if there is a time offset).  Group delay should be zero or constant.}
+\end{figure}
+\end{frame}
+
+\section{Octave Programming Example: Phase Response}
+
+\begin{frame}[fragile]{Octave Programming Example: Phase Response}
+Modify either movingAverage.m or FFT.m on Moodle to plot a signal amplitude versus time alongside the phase versus frequency.  Set the noise to zero, and make the signal a Gaussian pulse.
+\begin{verbatim}
+y = amplitude*exp(-0.5((t-mu).^2/sigma_t^2);
+Y = sqrt(conj(fft(y)).*fft(y));
+Y_phase = arg(fft(y)); %Phase unwrapping, or...
+tan_Y_phase = imag(fft(y))./real(fft(y));
+\end{verbatim}
+\begin{itemize}
+\item Filter twice, flipping the data backwards once, then undo (bi-directional filtering).
+\item Now change the data to a square pulse, and repeat.
+\end{itemize}
 \end{frame}
 
 \end{document}
