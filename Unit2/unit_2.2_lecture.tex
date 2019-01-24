@@ -246,6 +246,15 @@ In the second case, the output power never really drops to zero.
 (Observe on board). What if the signal was asymmetric? \textit{Code this in Octave?}
 \end{frame}
 
+\section{Aside: Gaussian Fourier Transform}
+
+\begin{frame}{Aside: Gaussian Fourier Transform}
+\begin{tcolorbox}[colback=white,colframe=red!40!blue,title=Uncertainty principle for bandwidth]
+\alert{The product of the width of a signal in the time domain with the corresponding width in the frequency domain is a constant.
+}
+\end{tcolorbox}
+\end{frame}
+
 \begin{frame}{Phase Response}
 \small
 \begin{figure}
@@ -287,6 +296,54 @@ tan_Y_phase = imag(fft(y))./real(fft(y));
 \item Filter twice, flipping the data backwards once, then undo (bi-directional filtering).
 \item Now change the data to a square pulse, and repeat.
 \end{itemize}
+\end{frame}
+
+\section{Correlation}
+
+\begin{frame}{Correlation}
+\small
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figures/corr.png}
+\caption{\label{fig:corr} Correlation slides a test signal along the data and multiplies them.  The output is summed and is large and positive when the signals align.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Correlation}
+Correlation between two functions $f$ and $g$:
+\begin{equation}
+(f * g)(\tau) = \int_{-\infty}^{\infty} f(t)^* g(t+\tau) dt
+\end{equation}
+Also,
+\begin{equation}
+F\lbrace f * g \rbrace = F^*(\omega) G(\omega)
+\end{equation}
+Let's try this in octave by correlating noise+square pulse.
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Unit 2.2 Outline}
+\begin{enumerate}
+\item Types of filters (reading: ch. 3, ch. 5)
+\begin{itemize}
+\item Butterworth
+\item Bessel
+\item Chebyshev
+\end{itemize}
+\item LTI systems and their properties (reading: ch. 5)
+\item Convolution (reading: ch. 7)
+\begin{itemize}
+\item Implementation with FFT
+\item Impulse and step response
+\end{itemize}
+\end{enumerate}
+\textbf{These lectures will cover:} (Reading: chapter 19)
+\begin{enumerate}
+\item \textbf{Common filter kernels: Moving Average}
+\item \textbf{General Recursive Filters: HP, LP, and Notch Examples}
+\item \textbf{FIR and IIR definitions}
+\end{enumerate}
 \end{frame}
 
 \end{document}
