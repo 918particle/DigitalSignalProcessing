@@ -46,8 +46,8 @@ Y_L = Y(length(f)-1:end)*dt;
 figure(1, 'position',[0,0,1000,1000]);
 subplot(2,1,1);
 plot(t,y,'color','black','linewidth',2.0);
-xlabel('Time (seconds)','fontname','Courier','fontsize',20);
-ylabel('Signal (Volts)','fontname','Courier','fontsize',20);
+xlabel('Time (seconds)','fontname','Courier','fontsize',16);
+ylabel('Signal (Volts)','fontname','Courier','fontsize',16);
 set(gca(),'fontname','Courier','fontsize',20);
 axis([0-dt*50 T+dt*50 -amplitude*1.1 amplitude*1.1]);
 subplot(2,1,2);
@@ -56,8 +56,12 @@ plot(f,log10(Y_R),'color','black','linewidth',2.0);
 plot(f,log10(flipud(Y_L)),'o','color','blue','linewidth',2.0);
 axis([0-df*50 fs/2+df*50 -2 2]);
 plot(f,log10(2.0*pi./(f/f_0)),'color','red','linewidth',2.0);
-xlabel('Frequency (Hz)','fontname','Courier','fontsize',20);
-ylabel('log_{10}(Signal (V/Hz))','fontname','Courier','fontsize',20);
-set(gca(),'fontname','Courier','fontsize',20);
-legend('Signal+Noise (Positive frequencies)','Signal+Noise (Negative frequencies)','2pi/(f/f_0)','location','north');
+xlabel('Frequency (Hz)','fontname','Courier','fontsize',16);
+ylabel('log_{10}(Signal (V/Hz))','fontname','Courier','fontsize',16);
+set(gca(),'fontname','Courier','fontsize',16);
+%hl = legend('Signal+Noise (Positive frequencies)','Signal+Noise (Negative frequencies)','2pi/(f/f_0)','location','north');
+%set(hl,'fontname','Courier','fontsize',10,'box','off');
 box on;
+
+%Printint to PDF
+print -dpdf "octave1.pdf"
