@@ -17,16 +17,10 @@ function retval = fourier_square(n,x)
 	endfor
 endfunction
 
-x = 0.0:0.0001:(2.0*pi)*10;
+x = 0.0:0.001:(2.0*pi)*10; %Octave is awesome!!
 
 S = 0.5 + sinn_An(1,x) + sinn_An(3,x)+sinn_An(5,x) + sinn_An(7,x);
-S1 = fourier_square(10,x);
-
-%b1 = 2.0/pi;
-%b3 = 2.0/(3.0*pi);
-%b5 = 2.0/(5.0*pi);
-%b7 = 2.0/(7.0*pi);
-%S = 0.5 + b1*sin(1.0*x) + b3*sin(3.0*x) + b5*sin(5.0*x) + b7*sin(7.0*x);
+S1 = fourier_square(2,x);
 
 plot(x/(2.0*pi),S1,'color','black');
 hold on;
