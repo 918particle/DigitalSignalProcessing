@@ -20,12 +20,12 @@ endfunction
 x = 0.0:0.001:(2.0*pi)*10; %Octave is awesome!!
 
 S = 0.5 + sinn_An(1,x) + sinn_An(3,x)+sinn_An(5,x) + sinn_An(7,x);
-S1 = fourier_square(2,x);
+S1 = fourier_square(20,x);
 
-plot(x/(2.0*pi),S1,'color','black');
+plot(x,S1,'color','black','linewidth',3);
 hold on;
 grid on;
 axis([-1 11 -0.5 1.5]);
-xlabel("x/(2pi)");
+xlabel("x");
 ylabel("Amplitude");
-plot(x/(2.0*pi),square(x)*0.5+0.5,'color','red');
+plot(x,square(x)*0.5+0.5,'color','red','linewidth',3);
