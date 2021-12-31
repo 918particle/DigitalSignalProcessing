@@ -1,4 +1,4 @@
-\title{Syllabus for Digital Signal Processing: COSC390}
+\title{Syllabus for Digital Signal Processing: COSC360}
 \author{Dr. Jordan Hanson - Whittier College Dept. of Physics and Astronomy}
 \date{\today}
 \documentclass[10pt]{article}
@@ -10,45 +10,57 @@
 \maketitle
 
 \begin{abstract}
-A broad presentation of the subject of digital signal processing (DSP) will be offered.  The course will begin with a review of relevant statistics, complex numbers, and types of noise in digital systems.  Next the concept of a linear DSP system and the corresponding mathematical techniques will be introdued.  From there, a broad overview of the topic of digital filters and data processing will be given, proceeding to DSP applications to scientific data analysis.  Among the application topics are audio systems and data compression, electrical circuits, digital imaging, and applied neural networks.  Time permitting, advanced topics in DSP with complex numbers will be covered, including the Fourier and Laplace transforms and their digital counterparts, the FFT and z-transforms.  The text for this course will be open source and therefore free for students.
+A broad overview of digital signal processing (DSP) is offered, beginning by reviewing relevant statistics and complex numbers. The linear DSP system is then introduced, followed by the topic of filtering data digitally. The Fourier, Laplace, FFT, and z transforms are presented and applied to digital filtering. The second half of the course involves DSP applications for scientific data. Among the application topics are audio systems and music, human hearing, digital imaging, electrical circuits, and applied neural networks. Free and open-source software packages in the \verb+octave+ programming language are used in this course.  The textbook is also an open educational resource and is freely available to students.
 \end{abstract}
 \noindent
-\textit{\textbf{Pre-requisites}: Calculus I and Introduction to Computer Science.} \\
+\textit{\textbf{Pre-requisites}: MATH142} \\
 \textit{\textbf{Course credits, Liberal Arts Categorization}: 3 Credits, None} \\
-\textit{\textbf{Regular course hours}: Monday through Friday from 9:00 am - 11:50 pm in SLC 232} \\
-\textit{\textbf{Instructor contact information}: jhanson2@whittier.edu, tel. 562.907.5130} \\
+\textit{\textbf{Regular course hours}: Monday through Thursday from 9:00 am - 11:50 pm in SLC 232.  Asynchronous course content will be presented each Friday.} \\
+\textit{\textbf{Instructor contact information}: jhanson2@whittier.edu, tel. 562.351.0047} \\
 \textit{\textbf{Office hours}: January term office hours by appointment (open-door policy)} \\
-\textit{\textbf{Attendance/Absence}: There are 16 3-hour class periods in this January-term course.  Attendance is mandatory for all of them, but attendance and class participation grading will be at the discretion of the professor.} \\
-\textit{\textbf{Late work policy}: Late work will not be accepted.} \\
-\textit{\textbf{Technology policy}: The use of mobile, tablet, or laptop devices during class is not allowed, with the exception of note-taking.} \\
-\textit{\textbf{Text}: The Scientist and Engineer's Guide to Digital Signal Processing (www.dspguide.com) - Steven Smith} \\
-\textit{\textbf{Grading}: There will be three tests worth 10\% each, given on Fridays.  Short, daily homework assignments will be worth 30\% of the final grade.  In-class reading quizzes and class-participation will be worth 10\%.  A final project and presentation given towards the end of the course will be worth 20\% of the final grade.  A final exam will be given in-class on January 28th, 2019, and it will be worth 10\% of the final grade.  As this is a fast-paced technical course, partial credit will be awarded, and bonus points will be awarded to those who push themselves to cover extra problems and topics independently.} \\
+\textit{\textbf{Attendance/Absence}: There are 13 3-hour class periods in this January-term course, plus 3 days of asynchronous work.  Attendance is mandatory at all lectures, however there is no penalty if a student must miss a class due to illness or family emergency.} \\
+\textit{\textbf{Late work policy}: Late work accepted at the discretion of the professor.} \\
+\textit{\textbf{Text}: The Scientist and Engineer's Guide to Digital Signal Processing (www.dspguide.com) - Steven Smith.  This textbook is open-access, free of charge.} \\
+\textit{\textbf{Grading}:  See Table \ref{tab:grading} for a listing of graded assignments and the relative weighting.}
+\begin{table}
+\centering
+\begin{tabular}{| c | c | c |}
+\hline
+Item & Fraction of Grade & Note \\ \hline
+Friday quiz 1 & 10\% & Take-home style, open-book, January 7th \\ \hline
+Friday quiz 2 & 15\% & Take-home style, open-book, January 14th \\ \hline
+Friday quiz 3 & 15\% & Take-home style, open-book, January 21st \\ \hline
+Homework sets & 30\% & 2-3 exercises per day \\ \hline
+Final Project and Presentation & 20\% & Live or digital (see \textbf{Final Projects} above). \\ \hline
+Attendance and participation & 10\% & Example: in-class activities \\ \hline
+\end{tabular}
+\caption{\label{tab:grading} Grading percentages for DSP.  The take-home quizzes will cover the reading and exercises of the current week, and will include analytic and coding exercises.  Homeworks will usually be due one day after they are assigned, with exceptions.  Students must complete a final project proposal, approved by the professor, before focusing on the research.  As part of the COVID-19 protocols for Whittier College, daily attendance will be taken.}
+\end{table} \\
 \textit{\textbf{Grade Settings}: 59\% or less: F, 60-69\%: D, 70-79\%: C, 80-89\%: B, 90-100\%: A.  Pluses and minuses: 0-3\% minus, 3\%-5\% straight, 6\%-10\% plus (e.g. 79\% = C+, 91\% = A-)} \\
-\textit{\textbf{Homework sets}: The daily homework will typically be 2-3 excercises covering the course material of the same day, and due the Friday of the week the are assigned.} \\
-\textit{\textbf{Final project and presentation}: The final project will involve data brought to the class by the individual students.  The data must be digitized or digital in nature, and be analyzed to establish a result to be presented to the class.  The final presentation should be longer, approximately 20 minutes.  Students should begin gathering and/or sharing data early on in the course to facilitate creation of the final presentation.} \\
-\textit{\textbf{ADA Statement on Disability Services}: Whittier College is committed to make learning experiences as accessible as possible. If you experience physical or academic barriers due to a disability, you are encouraged to contact Student Disability Services (SDS) to discuss options. To learn more about academic accommodations, email disabilityservices@whittier.edu, call (562) 907-4825, or go to SDS which is located on the ground floor of Wardman Library.} \\
+\textit{\textbf{Homework sets}: The daily homework will typically be 2-3 excercises covering the course material of the same day, and due the following day.  If additional time is required to complete an assignment, please contact the instructor.  The goal is to be flexible while staying on pace.} \\
+\textit{\textbf{Final projects}: The final project will involve data brought to the class by the individual students.  The data must be digitized or digital in nature, and be analyzed to establish a result to be presented to the class.  Examples include lab-bench ADC data from a variety of sensors, audio and music, digital images, stock and financial time-series, and weather data.  The final presentation should be longer, approximately 20 minutes.  Students should begin gathering and/or sharing data early on in the course to facilitate creation of the final presentation.  The presentation can be in traditional format or as a digital storytelling project.  For digital storytelling projects, Whittier College has a site license for the online video editing package WeVideo.  A short WeVideo tutorial will be given as part of the course.} \\
+\textit{\textbf{ADA Statement on Disability Services}: Whittier College is committed to make learning experiences as accessible as possible.  If you experience physical or academic barriers due to a disability, you are encouraged to contact Student Disability Services (SDS) to discuss options.  To learn more about academic accommodations, email disabilityservices@whittier.edu, call 562.907.4825, or go to SDS which is located on the ground floor of Wardman Library.} \\
 \textit{\textbf{Academic Honesty Policy}: \url{http://www.whittier.edu/academics/academichonesty}} \\
+\clearpage
 \textit{\textbf{Course Objectives}:}
 \begin{itemize}
 \item Gain understanding of the origin of digital data and how to use it
 \item Practice analytic and numerical calculations in digital contexts
 \item Write computer code that processes digital data
-\item Write and speak comfortably about digital concepts
+\item Write and speak comfortably about technical course content
 \end{itemize}
-\clearpage
 \textit{\textbf{Course Outline}:}
 \begin{outline}[enumerate]
 \1 Unit 1: Statistics and Probability, Complex Numbers, Noise in Digital Systems
 \2 Complex numbers, level 1: arithmetic and some calculus
 \2 Complex numbers, level 2: The Fourier series and Fourier transform
-\2 Complex numbers, level 3: (time permitting) The Laplace transform and z-transform \footnote{We will return to these topics if time allows.}
+\2 Complex numbers, level 3: (time permitting) The Laplace transform and z-transform
 \2 Statistics and probability: The normal distribution, other useful distributions
 \2 Noise: Digitization and sampling
 \2 Noise: Spectral properties of noise, ADC and DAC
-\2 \textit{Special topic:} computer numbers\footnote{We will return to this topic if time allows.}
 \1 Unit 2: Linear time-invariant (LTI) systems and filtering
 \2 LTI: Definition of LTI systems,convolution and correlation, examples of non-LTI systems
-\2 LTI: \textit{Special topic:} Radio-frequency antennas\footnote{This is an area of expertise relevant to the research of the professor; we may cover it in detail if the class desires.}
+\2 LTI: \textit{Special topic:} Radio-frequency antennas
 \2 Filtering: Signals and filtered signals
 \2 Filtering: Examples of filters, moving average and window-sync filters
 \2 Filtering: Recursive filters
@@ -60,6 +72,14 @@ A broad presentation of the subject of digital signal processing (DSP) will be o
 \2 Electrical circuits
 \2 Applied neural networks (time permitting)
 \2 Return to applications of Fourier transform (FFT) and Laplace transform (z-transform) (time permitting)
-\1 Final presentations - During the last few days of this course, we will discuss and share projects designed by the professor/student which will use concepts from the course to solve a particular scientific problem using data found/collected by the student.
+\1 Final presentations - During the last few days of the course, final projects designed by each student will be shared.
+\end{outline}
+\textit{\textbf{Important Due Dates}:}
+\begin{outline}[enumerate]
+\1 Friday take-home quiz 1: January 7th, 2022.  Due Monday, January 10th.  Submitted to instructor via Moodle.
+\1 Friday take-home quiz 2: January 14th, 2022.  Due Monday, January 17th.  Submitted to instructor via Moodle.
+\1 Friday take-home quiz 3: January 21st, 2022.  Due Monday, January 24th.  Submitted to instructor via Moodle.
+\1 Final project proposal: January 17th, 2022.  Given in standard format, speaking in front of class, or as a digital storytelling project.  The final project proposal shouuld be a one-page executive summary of the research to be performed, the hypothesis being tested, data to be collected, and research methods from the course content to be used to achieve the results.
+\1 Final project presentations: January 25th and January 26th.  Students should aim to give 20-minute presentations in either live or digital storytelling format.  Presentations will be evaluated on both attention to detail in the analysis, and the overall clarity of the explanation of the results.
 \end{outline}
 \end{document}
