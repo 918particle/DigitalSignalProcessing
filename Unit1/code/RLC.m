@@ -18,5 +18,3 @@ plot(omega/2/pi/1e6,20*log10(abs(h)),'linewidth',3.0,'color','black')
 set(gca(),'fontname','Courier','fontsize',18)
 xlabel('Frequency [MHz]')
 ylabel('Transfer [dB]')
-
-%omega/2/pi/1e6,20*log10(h)
