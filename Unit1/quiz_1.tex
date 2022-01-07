@@ -1,0 +1,66 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC360}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\section{Complex numbers 1: theory and examples}
+
+\begin{frame}{Complex numbers 1}
+Convert each of these complex numbers to polar form:
+\begin{enumerate}
+\item $z = 4 + 4j$
+\item $z = 1$, $z = j$, $z = -1$, $z = -j$
+\item In the previous problem, describe in words what is happening to the \textit{phase angle} of each number.
+\end{enumerate}
+Convert each of these complex numbers to rectangular form ($z = x + jy$).
+\begin{enumerate}
+\item $z = 2 \exp(j \pi/4)$
+\item $z = 5 \exp(j \pi)$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Complex numbers 1}
+Suppose that $x_i = 2\pi ft+\phi_i$.  The sum of two sinusoids \textit{in the complex plane} with amplitudes $a_1$ and $a_2$ can then be written
+\begin{equation}
+V(t) = a_1\exp(j x_1) + a_2\exp(j x_2)
+\end{equation}
+It is assumed that we would take the real part of $V(t)$ to be physical.
+\begin{enumerate}
+\item Compute $|V|^2 = V^*V$, and $\phi_2 - \phi_1 = \pi$, $\phi_2 - \phi_1 = 0$.
+\item What is $\phi_V = \tan^{-1}(\operatorname{Im}\lbrace V \rbrace/\operatorname{Re}\lbrace V \rbrace)$ in each case?
+\end{enumerate}
+Why do these results make sense?  Thus, the complex numbers encapsulate the concepts of \textit{constructive} and \textit{destructive} interference.
+\end{frame}
+
+\section{Complex numbers 3: Application to AC cicuits}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+\small
+Recall the RLC circuit transfer function looks like
+\begin{align}
+h(\omega) &= \frac{Z_2 + Z_3}{Z_1+Z_2+Z_3} \\
+\omega_{LC}^{-2} &= LC \\
+\tau &= RC \\
+k^2 &= 1-\left(\frac{\omega}{\omega_{LC}}\right)^2 \\
+h(\omega) &= \frac{k^4}{k^4+(\omega\tau)^2}-j \frac{k^2\omega\tau}{k^4+(\omega\tau)^2}
+\end{align}
+and
+\begin{align}
+Z_R &= R + 0i \\
+Z_C &= 0 + \frac{1}{j\omega C} \\
+Z_L &= 0 + j \omega L
+\end{align}
+\end{frame}
+
+\begin{frame}{Complex numbers 1: application to AC circuits}
+Recompute $h(\omega)$, but start with $L = 0$ ($Z_2 = 0$).  This reduces the circuit to an RC circuit.  It is still useful to have $\tau = RC$.  Draw a graph of $|h(\omega)|$.
+\end{frame}
+
+
+\end{document}
