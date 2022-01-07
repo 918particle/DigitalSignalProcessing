@@ -1,0 +1,41 @@
+\title{Asynchronous Activity 1: Radio Waves and Radar}
+\author{
+Prof. Jordan C. Hanson
+}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This activity contains exercises related to DSP, radio waves, and radar as part of our COSC360 course.  Please watch Course Videos 1.1 and 1.2 before completing the exercises below.
+\end{abstract}
+
+\section{Radio Waves and Octave Syntax}
+
+\begin{enumerate}
+\item Write a script entitled radioWave.m for Octave that performs the following tasks:
+\begin{itemize}
+\item Defines a sample time $\Delta t$ in seconds
+\item Defines a maximum time $T_{max}$ in seconds
+\item Defines a frequency $f$ in Hz
+\item Defines a signal amplitude $A$ in Volts
+\item Creates a vector of times running from  0 to $T_{max}$, with each time $\Delta t$ seconds after the previous time.  For example: \verb+t = [0:dt:Tmax]+.
+\item Creates a graph of $y1 = A\cos(2\pi f .* t)$, with labeled axes
+\end{itemize}
+\item Suppose this signal represents an observation of a radio wave on an antenna.  Given what you know about radio waves, what is the wavelength $\lambda$?
+\item In Octave, type \verb+help circshift+.  Once you understand how the \verb+circshift+ function works, use it to make a copy of your $y1$ data above, but shifted in time, and add it to the graph. (Remember that the command \verb+hold on+ will allow you to keep adding to the graph without losing anything).
+\item If the earlier wave represents the original signal, and the later wave represents a \textit{radar echo}, how far away is the object that created the echo?
+\item Finally, make a copy of $y2$ in a variable called $y3$, but change the amplitude to something lower by a factor of 100:
+\begin{equation}
+y3 = y2/100;
+\end{equation}
+What is the ratio of the power of signal $y3$ to $y2$ in dB? (Refer to Video 1.2 for a demonstration).
+\end{enumerate}
+
+\end{document}
