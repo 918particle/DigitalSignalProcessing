@@ -194,7 +194,7 @@ F(\omega) = \int_{-\infty}^{\infty} f(t) \exp(-j\omega t) dt}
 It turns out the inverse operation looks like:
 \begin{equation}
 \boxed{
-F(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) \exp(j\omega t) d\omega)}
+F(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) \exp(j\omega t d\omega)}
 \end{equation}
 Let's do some \textit{easy} examples together.  Let's obtain $F(\omega)$ for the following functions:
 \begin{enumerate}
@@ -239,7 +239,7 @@ F(\omega) = \int_{-\infty}^{\infty} a\delta(t-t_0) \exp(-j\omega t) dt
 \small
 Sines and cosines in the \textit{frequnecy domain?}  Why not!
 \begin{equation}
-F(\omega) = a \cos(\omega t_0) - j\sin(\omega t_0)
+F(\omega) = a \cos(\omega t_0) - a j\sin(\omega t_0)
 \end{equation}
 Now let's work out the following:
 \begin{enumerate}
@@ -250,7 +250,7 @@ Suppose we have the ``modulus'' of a time-domain function, like this:
 \begin{equation}
 |f(t)|^2 = \int_{-\infty}^{\infty} f^*(t) f(t) dt
 \end{equation}
-What is it for $f(t) = a\delta(t-t_0)$?\footnote{Don't think too hard, remember how the $\delta$-function works.}
+(This does not really work for the $\delta$-function).  What should the power be for $f(t) = a\delta(t-t_0)$, if power is proportional to the square of $f$?
 \end{frame}
 
 \begin{frame}[fragile]{Complex numbers 2: theory and examples}
@@ -259,9 +259,12 @@ Did you notice something interesting?
 \begin{equation}
 |F(\omega)|^2 = |f(t)|^2 = a^2
 \end{equation}
-It turns out that all the functions for which the Fourier-transform is well-behaved have this property, called \textit{Parseval's theorem}. \\ \vspace{0.5cm}
+It turns out that all the functions for which the Fourier-transform is well-behaved have this property, called \textit{Parseval's theorem}. For the time-domain:
+\begin{equation}
+|f(t)|^2 = \int_{-\infty}^{\infty} f^*(t) f(t) dt
+\end{equation}
 This is a useful check of energy/power conservation when dealing with multiple signals in the time and frequency domains. \\ \vspace{0.5cm}
-\textit{We'll return to this in a moment, when we think about the discrete cases.  How would you show this to be true of the \textbf{Fourier series} we computed earlier?}
+\textit{We'll return to this in a moment, when we think about the discrete cases.}
 \end{frame}
 
 \begin{frame}[fragile]{Complex numbers 2: theory and examples}
