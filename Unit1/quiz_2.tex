@@ -1,0 +1,50 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\title{Digital Signal Processing: COSC360}
+\author{Jordan Hanson}
+\institute{Whittier College Department of Physics and Astronomy}
+
+\begin{document}
+\maketitle
+
+\section{Review Material}
+
+\begin{frame}{Review Material}
+Solve each problem involving complex numbers below.
+\begin{enumerate}
+\item Find the phase angle: (a) $z = -2 + 2j$ (b) $z = -2 - 2j$ (c) $z = 2 - 2j$
+\item What phasor best represents the following sinusoids at $t = 0$? (a) $v(t) = 4 \cos(2\pi (10.0) t + 30^{\circ})$. (b) $v(t) = 2 \sin(2\pi (10.0) t -60^{\circ})$.
+\end{enumerate}
+\end{frame}
+
+\section{Fourier Analysis}
+
+\begin{frame}{Fourier Analysis}
+As we have done in class, compute the Fourier transform of the square wave:
+\begin{equation}
+f(x) = \begin{cases}
+1, ~~ 0 \leq x < \pi \\
+0, ~~ \pi < x \leq 2\pi
+\end{cases}
+\end{equation}
+Answer the following questions:
+\begin{enumerate}
+\item What is the phases versus frequency?
+\item When does the magnitude of the Fourier transform equal zero?
+\end{enumerate}
+\end{frame}
+
+\section{Probability and Statistics}
+
+\begin{frame}{Probability and Statistics}
+Consider the \textit{uniform distribution}, in which a random variable is measured in the range $[0,1]$, and is equally probable to be found anywhere in that range.
+\begin{enumerate}
+\item Write an equation $p(x)$ for the uniform distribution, and make sure that it is normalized.  That is, if you integrate over $[0,1]$, that the result is a probability of 1.0.
+\item What is the statistical mean of this distribution?
+\item What is the standard deviation of this distribution?
+\end{enumerate}
+\end{frame}
+
+\end{document}
