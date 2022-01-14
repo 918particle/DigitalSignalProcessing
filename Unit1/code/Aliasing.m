@@ -2,8 +2,6 @@ clear;
 close;
 home;
 
-mystery_factor = 2
-
 %functions
 %n is a constant
 function retval = sinn_An(n,x)
@@ -22,7 +20,7 @@ endfunction
 %dsp parameters for x-axis:
 fs = 1000.0; %Hz
 f_0 = 4; %Hz
-T = 10.0; %Total time (1 sec)
+T = 10.0; %Total time (10 sec)
 dt = 1/fs;
 df = 1/T;
 f = transpose([0:df:fs/2-df]);
@@ -30,8 +28,8 @@ t = transpose([0.0:dt:T-dt]);
 N = length(t)/2;
 %dsp parameters for y-axis:
 amplitude = 1;
-n_modes = 20;
-noise_sigma = 0.02;
+n_modes = 100;
+noise_sigma = 0.05;
 noise = randn(size(t))*noise_sigma;
 y = amplitude*fourier_square(n_modes,t*f_0)+noise;
 %y = y-mean(y);

@@ -19,10 +19,10 @@ noise = randn(size(t))*noise_sigma;
 y = amplitude*sin(2.0*pi*f_sig.*t)+noise;
 
 %filtering
-[b1,a1] = butter(8,0.3);
-[b2,a2] = butter(8,0.01,"high");
-y = filter(b1,a1,y); %low-pass
-y = filter(b2,a2,y); %high-pass
+%[b1,a1] = butter(8,0.16);
+%[b2,a2] = butter(8,0.15,"high");
+%y = filter(b1,a1,y); %low-pass
+%y = filter(b2,a2,y); %high-pass
 
 %Computing the spectrum
 Y = sqrt(conj(fft(y)).*fft(y));
@@ -36,7 +36,7 @@ plot(t,y,'color','black','linewidth',2.0);
 xlabel('Time (seconds)','fontname','Courier','fontsize',20);
 ylabel('Signal (Volts)','fontname','Courier','fontsize',20);
 set(gca(),'fontname','Courier','fontsize',20);
-axis([0-dt*50 T+dt*50 -amplitude*10 amplitude*10]);
+axis([0-dt*10 T+dt*10 -amplitude*10 amplitude*10]);
 subplot(2,1,2);
 hold on;
 plot(f,20*log10(Y_R),'color','black','linewidth',2.0);

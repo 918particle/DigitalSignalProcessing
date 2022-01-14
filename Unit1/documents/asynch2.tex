@@ -1,0 +1,39 @@
+\title{Asynchronous Activity 2: Identifying Noise Distributions}
+\author{
+Prof. Jordan C. Hanson
+}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This activity contains exercises related to DSP, statistics, and probability as part of our COSC360 course.  Please watch Course Videos 5.1-3 for a review of recent material.  Course video 5.3 pertains directly to the asynchronous activity below.  Course videos 4.1, 4.2, etc. review many Octave techniques used so far in the course.
+\end{abstract}
+
+\section{Probability Distribution Functions (PDFs) and Cumulative Distribution Functions (CDFs)}
+
+\begin{enumerate}
+\item Create a graph of the \textit{uniform distribution} by using the \verb+rand+ in Octave.  The graph should be a histogram containing $10^6$ data values and split into 100 bins.
+\item Suppose we have an exponential function $p(x) = b \exp(-b x)$ describing the PDF of a random variable $x$ that can be measured on $[0,\infty]$.  Show that this function is normalized if you integrate it from $0$ to $\infty$.
+\item Following the procedure in Course Video 5.3, work out the CDF of $p(x)$.  THis involves integrating it up to a constant value.
+\item Show that, if the CDF $\phi(x)$ is inverted (solve for x), one obtains $x = -b^{-1} \ln(1-\phi)$.
+Modify your code used above to plot the histogram, to first insert the uniform random numbers from \verb+rand+ into the inverted CDF $x(\phi)$.  Make a histogram of the outputs $x$.  The histogram should no longer follow a uniform distribution, but \textit{an exponential distribution}.
+\end{enumerate}
+
+\section{Fourier Transforms and Random Noise}
+
+Locate the script \verb+FFT.m+ on Moodle under the Unit 1 code folder.  Alter the script to do the following:
+
+\begin{enumerate}
+\item Change the sine wave frequency to 200 Hz, rather than 75 Hz.  Re-run to see the effect on the plot.
+\item Turn off the noise hy setting the parameter \verb+noise_sigma+ to zero.  Re-run to see the effect on the plot.
+\item In the line defining the data to be transformed, $y$, multiply the original sinusoid with a second sinusoid of similar but not identical frequency.  Re-run to see the effect on the plot.
+\end{enumerate}
+
+\end{document}
