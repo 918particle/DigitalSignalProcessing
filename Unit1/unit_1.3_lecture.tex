@@ -410,7 +410,7 @@ s(t) = \sum_{n=0}^{N-1} f(n\Delta t) square(t-n\Delta t)
 \begin{tcolorbox}[colback=white,colframe=red!40!blue,title=Sample/Hold Signal Model]
 \alert{
 \begin{equation}
-s(t) = \sum_{n=0}^{N-1} square(t-n\Delta t)
+s(t) = \sum_{n=0}^{N-1} f(n\Delta t) square(t-n\Delta t)
 \end{equation}
 }
 \end{tcolorbox}
@@ -487,7 +487,7 @@ Equation \ref{eq:awesome} contained a form of the DFT.  Let $h(k\Delta t) = h_k$
 \begin{equation}
 H_n \approx \Delta t \sum_{k=0}^{N-1} h_k \exp\left( -2\pi j k \frac{n}{N} \right) \label{eq:fft1}
 \end{equation}
-The integral is approximated at frequencies $f_n = \frac{n}{n\Delta t}$. The inverse DFT is
+The integral is approximated at frequencies $f_n = \frac{n}{N\Delta t}$. The inverse DFT is
 \begin{equation}
 h_k \approx \frac{\Delta f}{N}\sum_{n=0}^{N-1} H_n \exp\left( 2\pi j k \frac{n}{N} \right) \label{eq:fft2}
 \end{equation}

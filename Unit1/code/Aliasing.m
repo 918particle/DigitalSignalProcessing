@@ -6,7 +6,7 @@ home;
 %n is a constant
 function retval = sinn_An(n,x)
 	An = 2.0/pi/n;
-	retval = An*sin(2.0*pi*n.*x);
+	retval = An*sin(n.*x);
 endfunction
 
 %The full series
@@ -19,7 +19,7 @@ endfunction
 
 %dsp parameters for x-axis:
 fs = 1000.0; %Hz
-f_0 = 4; %Hz
+f_0 = 1; %Hz
 T = 10.0; %Total time (10 sec)
 dt = 1/fs;
 df = 1/T;
@@ -28,10 +28,10 @@ t = transpose([0.0:dt:T-dt]);
 N = length(t)/2;
 %dsp parameters for y-axis:
 amplitude = 1;
-n_modes = 100;
-noise_sigma = 0.05;
+n_modes = 20;
+noise_sigma = 0.01;
 noise = randn(size(t))*noise_sigma;
-y = amplitude*fourier_square(n_modes,t*f_0)+noise;
+y = amplitude*fourier_square(n_modes,2*pi*f_0*t)+noise;
 %y = y-mean(y);
 Y = sqrt(conj(fft(y)).*fft(y));
 
@@ -45,7 +45,7 @@ Y_L = Y(length(f)+1:end)*dt;
 spectrum = 20*log10(Y_R);
 prediction = 20*log10((N/fs)*2./(pi*(f/f_0)));
 spectrum = spectrum - max(spectrum);
-prediction = prediction - 20*log10((N/fs)*2./(pi*(f_0/1.5/f_0)));
+prediction = prediction - 13.0;
 
 %Plotting section
 figure(1, 'position',[0,0,1000,1000]);
