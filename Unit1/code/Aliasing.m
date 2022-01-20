@@ -19,7 +19,7 @@ endfunction
 
 %dsp parameters for x-axis:
 fs = 1000.0; %Hz
-f_0 = 40; %Hz
+f_0 = 4; %Hz
 T = 10.0; %Total time (10 sec)
 dt = 1/fs;
 df = 1/T;
@@ -28,8 +28,8 @@ t = transpose([0.0:dt:T-dt]);
 N = length(t)/2;
 %dsp parameters for y-axis:
 amplitude = 1;
-n_modes = 10;
-noise_sigma = 0.01;
+n_modes = 50;
+noise_sigma = 0.001;
 noise = randn(size(t))*noise_sigma;
 y = amplitude*fourier_square(n_modes,2*pi*f_0*t)+noise;
 %y = y-mean(y);

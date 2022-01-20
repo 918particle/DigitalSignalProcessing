@@ -3,7 +3,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{tcolorbox}
-\title{Digital Signal Processing: COSC390}
+\title{Digital Signal Processing: COSC360}
 \author{Jordan Hanson}
 \institute{Whittier College Department of Physics and Astronomy}
 
@@ -169,7 +169,7 @@ Use \textbf{help} function on these for more information.  The \textbf{filter} f
 If you have the \textbf{signal} package, you can specify a n-th order butterworth filter with \textbf{butter} as above.  Otherwise, you can write a small function using Eq. \ref{eq:butter} for the digital response.
 \begin{enumerate}
 \item Create a white-noise sample (\textbf{randn}) of $10^4$ samples.  You can also specify a time vector of the same size.
-\item Plot the spectrum of this noise using \textbf{fft}\footnote{See the \textbf{Aliasing.m} script in Unit 1}.).
+\item Plot the spectrum of this noise using \textbf{fft}\footnote{See the \textbf{Aliasing.m} script in Unit 1}.
 \item \textbf{\alert{Filter}} the noise with a 2nd-order low-pass butterworth filter, at a cutoff frequency of 0.2 $f_s$. Either use the \textbf{filter} function and fft, or multiply in the Fourier domain.
 \item \textbf{\alert{Filter}} the noise with a 2nd-order high-pass butterworth filter, at a cutoff frequency of 0.4 $f_s$.
 \item Now do (3) then (4), and plot the spectrum.  Repeat for (4) then (3).  Do you see the same spectrum?
