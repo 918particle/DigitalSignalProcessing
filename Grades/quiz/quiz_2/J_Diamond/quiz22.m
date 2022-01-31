@@ -33,10 +33,10 @@ CalcPhasor(4,10.0,(pi/6))  % v(t) = 4 cos(2π(10.0)t + 30◦)
 newAngle = (-(pi/3)+(pi/2));
 CalcPhasor(2,10.0,newAngle) % v(t) = 2 sin(2π(10.0)t − 60◦)
 
-% Fouier Analysis 
+% Fouier Analysis
 disp("Fouier Analysis")
 function retval = SinSqu(n,x)
-	retval =  ((sin((2.0*pi*x).*(2.0*n - 1)))/(2.0*n -1)); %sine repsentation of square wave 
+	retval =  ((sin((2.0*pi*x).*(2.0*n - 1)))/(2.0*n -1)); %sine repsentation of square wave
 endfunction
 
 function retval = expSqu(n,x) % This is the correct exopentital form of it but still no imagnary numbers
@@ -50,12 +50,12 @@ function retval = fourier_square(n,x)
 	endfor
   retval = retval*(4/pi);
 endfunction
-x = 0.0:0.001:(2.0*pi); 
+x = 0.0:0.001:(2.0*pi);
 S1 = fourier_square(1000,x);
 plot(x,S1);
 axis([0 8 -1.5 1.5]);
-% Q1  
-phasesV = atan(imag(S1)/real(S1)); % Couldn't figure out how to get the phase directly from the function
+% Q1
+phasesV = atan(imag(S1)/real(S1)); % Could not figure out how to get the phase directly from the function
 figure(2);
 plot(x,2*pi*x); %frequency vs phases?
 xlabel('Frequency');
@@ -82,4 +82,3 @@ st = mean(P)
 % Q3
 disp("The standard deviation of the function is : ")
 sd = std(P)
-  
