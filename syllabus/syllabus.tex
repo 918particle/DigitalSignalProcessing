@@ -1,0 +1,145 @@
+\title{Syllabus for Digital Signal Processing: COSC360}
+\author{Dr. Jordan Hanson - Whittier College Dept. of Physics and Astronomy}
+\date{\today}
+\documentclass[10pt]{article}
+\usepackage[a4paper, total={18cm, 27cm}]{geometry}
+\usepackage{outlines}
+\usepackage{hyperref}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This course in modern DSP unfolds in three phases.  First, an overview of digital signal processing (DSP) is offered, beginning by reviewing statistics and complex numbers. The linear DSP system is then introduced, followed by digital filters. The Fourier, Laplace, FFT, and z transforms are presented and applied to digital filtering. Second, DSP applications to scientific data are introduced. Topics include audio systems and music, human hearing, digital imaging, electrical circuits, and applied neural networks. Third, the course evolves into a project-based learning (PBL) environment in which students will work together to build a DSP music synthesis system.  Free and open-source software (FOSS) packages from the GNU \verb+octave+ programming language are used in this course.  The textbook is also an open educational resource (OER) and is therefore free to students.
+\end{abstract}
+\noindent
+\textit{\textbf{Pre-requisites}: MATH142.  Pre-requisites may be waived at instructor discretion.} \\
+\textit{\textbf{Course credits, Liberal Arts Categorization}: 3 Credits, None} \\
+\textit{\textbf{Regular course hours}: Tuesdays and Thursdays from 15:00 - 16:20 in SLC 232.} \\
+\textit{\textbf{Instructor contact information}: Discord: 918particle, Email: jhanson2@whittier.edu, Office: SLC 212, Book appointments: \url{https://fgucmvjkylvmgqfsco.10to8.com}.} \\
+\textit{\textbf{Office hours}: Use booking service link above to schedule meetings.} \\
+\textit{\textbf{Attendance/Absence}: Students needing to reschedule midterms must notify the professor a few days in advance.} \\ 
+\textit{\textbf{Late work policy}: Late work is generally not accepted, but is left to the discretion of the instructor.} \\
+\textit{\textbf{Text}: The Scientist and Engineer's Guide to Digital Signal Processing (\url{https://dspguide.com}).  This is an open educational resource (OER) book, so it is freely accessible online.} \\
+\textit{\textbf{Code}: The GNU Octave programming language will be used in this course, and it is free and open-source (FOSS).} \\
+\textit{\textbf{Grading}: The course grade will be a weighted average of assignment scores, and the weights are listed in Tab. \ref{tab:grading}.}
+\begin{table}[hb]
+\centering
+\begin{tabular}{| c | c | c |}
+\hline
+\textbf{Assignment} & \textbf{Weight} & \textbf{Date} \\ \hline
+Problem Sets & 25\% & Due every other week (seven assignments) \\ \hline
+Quiz 1 & 15\% & February 28th, 2024 (take-home) \\ \hline
+Quiz 2 & 15\% & April 4th, 2024 (take-home) \\ \hline
+Quiz 3 & 15\% & May 9th, 2024 (take-home) \\ \hline
+PBL Individual & 20\% & April 28th - May 2nd, 2024 (in-class) \\ \hline
+PBL Team & 10\% & April 28th - May 2nd, 2024 (in-class) \\ \hline
+\end{tabular}
+\caption{\label{tab:grading} A list of major assignments and grade weights.  The midterm with the higher score will be weighted 30\%, and the midterm with the lower score will be weighted 25\%.}
+\end{table} \\
+\textit{\textbf{Grade Settings}: $<60\%$ = F, $>60\%,\leq 70\%$ = D, $>70\%,\leq80\%$ = C, $>80\%,\leq 90\%$ = B, $<90\%,\leq 100\%$ = A.  Pluses and minuses: 0-3\% minus, 3\%-6\% straight, 6\%-10\% plus (e.g. 79\% = C+, 91\% = A-)} \\
+\textit{\textbf{Homework Sets}: Due biweekly, including written exercises based on the course text, coding exercises from the course text and classroom activities, and design and analysis problems.} \\
+\textit{\textbf{ADA Statement on Disability Services}: Whittier College is committed to make learning experiences as accessible as possible. If you experience physical or academic barriers due to a disability, you are encouraged to contact Student Disability Services (SDS) to discuss options. To learn more about academic accommodations, email disabilityservices@whittier.edu, call (562) 907-4825, or go to SDS which is located on the ground floor of Wardman Library.} \\
+\textit{\textbf{Academic Honesty Policy}: \url{http://www.whittier.edu/academics/academichonesty}} \\
+\textit{\textbf{Course Objectives}:}
+\begin{itemize}
+\item Mastery of signal sampling and digitization, noise sources, and signal properties
+\item Mastery of the Fourier and Laplace transforms, and the discrete versions (DFT/FFT and z-transforms).
+\item Mastery of the properties of linear, time-invariant (LTI) systems, digital filter classification and design
+\item Practice writing DSP code with GNU Octave, including array and matrix computations, and spectral calculations
+\item Practice applying DSP concepts to electrical circuits, audio, music, and image data
+\item Work within a PBL environment to build electronic circuits for music synthesis
+\item Work as a team within a PBL environment to produce tracks of electronic music
+\end{itemize}
+\clearpage
+\twocolumn
+\textit{\textbf{Course Outline}:}
+\begin{outline}[enumerate]
+\1 Unit 0: Foundations and Fundamentals
+\2 Breadth and Depth of DSP - \textbf{Chapter 1}
+\3 Review of COSC330/PHYS306 - Computer Logic and Digital Circuit Design.  Digital circuits, gates and logic functions, ADC/DAC
+\3 Voltage, current, and circuit properties
+\2 Probability and statistics, noise - \textbf{Chapter 2}
+\3 Signal and graph terminology
+\3 Graphs and histograms, PDFs, PMFs, and random numbers
+\3 Probability distributions, the normal distribution
+\3 Complex numbers and signals, Fourier series
+\2 Analog-to-Digital and Digital-to-Analog conversion (ADC and DAC) - \textbf{Chapter 3}
+\3 Sampling and digitization
+\3 The sampling theorem
+\2 Linear systems - \textbf{Chapter 5}
+\3 Properties of linear, time-invariant (LTI) systems, and examples from physics and engineering
+\3 Superposition principle
+\3 Static linearity and sinusoidal fidelity
+\2 Convolution - \textbf{Chapter 6}
+\3 Impulse response
+\3 Algorithms for convolution
+\2 Properties of convolution - \textbf{Chapter 7}
+\3 Various properties
+\3 Correlation
+\2 The discrete Fourier transform (DFT) - \textbf{Chapter 8}
+\3 The general definition
+\4 Basis functions
+\4 Relationship to Fourier series
+\3 Forwards and backwards transformation
+\2 DFT properties, applications - \textbf{Chapters 9-11}
+\3 Spectral analysis of signals
+\3 System frequency response
+\3 Convolution via DFT
+\3 DFT properies
+\4 Linearity, phase and group delay
+\4 Amplitude modulation
+\4 Parseval's theorem
+\3 \textit{Bonus topics: DFT pairs}
+\4 Delta functions
+\4 Sinc functions and square pulses
+\4 Gaussian pulses
+\4 Gibbs effect
+\4 Harmonics
+\4 Chirps and frequency down-conversion \\
+\1 Unit 1: Digital Filters
+\2 Introduction to digital filters - \textbf{Chapter 14}
+\3 Filter basics, parameters in the time and frequency domains
+\3 Low and high-pass, band-pass filters
+\3 Classifications
+\2 Moving average filters - \textbf{Chapter 15}
+\3 Implementation by convolution
+\3 Noise reduction, step and frequency responses
+\2 Windowed-Sinc filters - \textbf{Chapter 16}
+\3 Design strategy of windowed-sinc filters
+\3 Examples of windowed-sinc solutions
+\2 Custom filters - \textbf{Chapter 17}
+\3 Arbitrary frequency response
+\3 Optimal filters and deconvolution filters
+\2 FFT convolution - \textbf{Chapter 18}
+\2 Recursive filters - \textbf{Chapter 19}
+\3 The general definition of a recursive filter
+\3 Single-pole examples
+\3 Narrow-band filters
+\3 Phase response of recursive filters
+\1 Unit 2: Applications
+\2 Audio processing - \textbf{Chapter 22}
+\3 Our sense of hearing
+\3 Properties of audio data
+\3 Compression and companding
+\2 Image formation and display - \textbf{Chapter 23}
+\3 Properties of digital images
+\3 Optics and our sense of sight
+\3 Grayscale transforms
+\2 Linear image processing - \textbf{Chapter 24}
+\3 Convolution and FFT techniques
+\3 Point-spread functions (PSFs)
+\3 Fourier image analysis
+\2 \textit{Bonus topic: Neural networks} - \textbf{Chapter 26}
+\3 Target detection, motivation for NN design
+\3 Training and evaluation
+\3 Recursive filter design
+\1 \textbf{Unit 3: PBL Environment} - \textit{In this project-based learning environment, students will build small circuit modules capable of producing audio signals.  We will integrate these modules into a DIY modular synthesis system.  Finally, we will use course concepts to understand how sounds produced by the modular synthesis system can be sampled, modified with effects, and mixed into electronic music tracks.}
+\2 Building audio circuits: from breadboards to soldering PCBs
+\2 Technical manuals, chips, and circuit design
+\2 Testing audio output with lab equipment
+\2 Sampling audio outputs, adding digital effects
+\2 Importing to digital audio workstations
+\2 \textbf{Final track production}
+\end{outline}
+\end{document}
