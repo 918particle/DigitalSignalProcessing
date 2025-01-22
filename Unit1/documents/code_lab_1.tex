@@ -1,0 +1,60 @@
+\title{Code Lab 1: Audio Signals and Complex Numbers}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, we begin to draw a connection between complex numbers and sinusoidal signals.  This connection will be further developed as the course proceeds.  First, we will create a sinusoidal signal at a single frequency, use it to generate audio data, and play the sound.  Second, we will create complex digital data and show that it produces equivalent sounds.
+\end{abstract}
+
+\section{Generate Signals at a \\ Single Frequency}
+
+Use the following code to create digitized sinusoidal data in Octave:
+
+\begin{verbatim}
+clear;
+close;
+home;
+
+fs = 44000.0;
+dt = 1/fs;
+f = 440.0;
+
+t = 0.0:dt:0.1;
+S1 = sin(2.0*pi*f.*t);
+S2 = sin(2.0*pi*f*2.*t);
+\end{verbatim}
+
+The first three lines are standard housekeeping in Octave.  We delete any persistent data or variables with \verb+clear+, and we close any open figures.  We also send the cursor to the top with \verb+home+ if we are working in an interactive Octave environment.  Next, we define a \textit{sampling frequency}, set to 44 kHz.  A Hz is equivalent to one oscillation per second, and 1 Hz is s$^{-1}$.  The variable \verb+dt+ or $\Delta t$ is the time of each sample, 1/fs.  \textbf{Show that $\Delta t$ is about 23 $\mu$s.}  Next, we define an audio frequency, set to 440 Hz.  We then create sampled times between 0 s and 0.1 s, in intervals of $\Delta t$.
+
+The variables \verb+S1+ and \verb+S2+ contain sampled, digitized sine waves with frequencies of $f$ and $2f$, or 440 Hz and 880 Hz.  The following code \textit{concatenates} four copies of each signal, in an alternating sense, using the \verb+mod+ function to check if $i$ is even or odd:
+
+\begin{verbatim}
+S_all = [];
+for i=1:8
+    if(mod(i,2)==0)
+        S_all = [S_all S1];
+    else
+        S_all = [S_all S2];
+    endif
+endfor
+\end{verbatim}
+Play the audio using the following code:
+\begin{verbatim}
+player = audioplayer(S_all,fs,8);
+play(player)
+\end{verbatim}
+
+\section{Using Complex Exponentials}
+
+Replace the code that creates the signals \verb+S1+ and \verb+S2+ with complex exponentials like $\exp(j \phi(t))$.  Play the \textit{real part} of the signal, then play the \textit{imaginary part}.  What results do you hear?
+
+\end{document}

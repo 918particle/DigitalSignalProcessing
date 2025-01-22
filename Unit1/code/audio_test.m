@@ -2,9 +2,9 @@ clear;
 close;
 home;
 
-fs = 44000.0
+fs = 44000.0;
 dt = 1/fs;
-f = 3000.0;
+f = 440.0;
 
 %n is a constant
 function retval = sinn_An(n,t)
@@ -20,13 +20,9 @@ function retval = fourier_square(n,t)
 	endfor
 endfunction
 
-t = 0.0:dt:1.0; %Octave is awesome!!
+t = 0.0:dt:0.1; %Octave is awesome!!
 S1 = fourier_square(100,2.0*pi*f.*t);
 S2 = sin(2.0*pi*f.*t);
-
-player1 = audioplayer(S1,fs,8);
-player2 = audioplayer(S2,fs,8);
-
-play(player1)
-pause(1.0)
-play(player2)
+S3 = sin(2.0*pi*f*2.*t);
+player = audioplayer([S2 S3 S2 S3 S2 S3 S2 S3],fs,8);
+play(player)

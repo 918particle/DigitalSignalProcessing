@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Tuesday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+
+\maketitle
+
+\section{Memory Bank}
+
+\begin{itemize}
+\item $\sqrt{-1} = j$ ... The fundamental imaginary unit.
+\item $z = x + jy$ ... A complex number.
+\item $\Re \lbrace z \rbrace = x$, $\Im \lbrace z \rbrace = y$ ... Real and imaginary parts.
+\item $z^{*} = x - j y$ ... The complex conjugate of $z$.
+\item $|z| = \sqrt{z z^{*}} = \sqrt{x^2 + y^2}$ ... The magnitude of $z$.
+\item $\tan\phi = y/x$ ... The phase angle of $z$.
+\item $|z| = r$, so $x = r\cos\phi$, and $y = r\sin\phi$.
+\item \textbf{Taylor Series:} Let $f(t)$ be a continuous, differentiable function.  Let $f^n(t)$ be the $n$-th derivative of $f(t)$, with $f^0(t) = f(t)$. The Taylor series is an infinite series, equivalent to $f(t)$, given by
+\begin{equation}
+f(t) = \sum_{n=0}^{\infty} \frac{f^n(t_0)}{n!} (t-t_0)^n
+\end{equation}
+\item \textbf{Euler's Identity:} $e^{j\phi} = cos\phi + j\sin\phi$
+\end{itemize}
+\normalsize
+
+\section{Complex Numbers and Signals}
+
+\begin{enumerate}
+\item Let $z_1 = 2 - 2j$, and $z_2 = -2 + 2j$.  Evaluate: (a) $z_1 + z_2$ (b) $z_1 - z_2$ (c) $z_1 * z_2$ (d) $|z_1|$ (e) $|z_2|$. \\ \vspace{4cm}
+\item Let $z_1 = 2 - 2j$, and $z_2 = -2 + 2j$.  Evaluate: (a) $\tan\phi_1$ (b) $\tan\phi_2$. \\ \vspace{2cm}
+\item Using the Taylor series with $t_0 = 0$, show that
+\begin{equation}
+\cos(t) \approx 1 - \frac{t^2}{2} + \frac{t^4}{24} - ...
+\end{equation}
+and
+\begin{equation}
+\sin(t) \approx t - \frac{t^3}{6} + \frac{t^5}{120} - ...
+\end{equation}
+\vspace{3cm}
+\item Using the Taylor series with $t_0 = 0$, show that
+\begin{equation}
+e^t = \sum_{n=0}^{\infty} \frac{t^n}{n!}
+\end{equation}
+\item Using the results of the previous two exercises, show that 
+\begin{equation}
+e^{j\phi} = \cos\phi +  j\sin\phi
+\end{equation}
+\vspace{2cm}
+\end{enumerate}
+
+\section{Application: AC Waveforms and Circuits}
+
+\begin{enumerate}
+\item Suppose we have a voltage signal as a function of time: $v(t) = 2.5 \cos(2\pi ft - \pi/4)$.  The siganl has an amplitude of 2.5 Volts, a frequency $f = 1 kHz$, and a phase shift of $\pi/4$ (45 degrees).  Let $\phi = 2\pi ft - \pi/4$.  (a) Show that 
+\begin{equation}
+v(t) = \Re \lbrace 2.5 e^{j\phi} \rbrace
+\end{equation}
+(b) Show that 
+\begin{equation}
+v(t) = \Im \lbrace 2.5 e^{j(\phi-\pi/2)} \rbrace
+\end{equation}
+\end{enumerate}
+
+\end{document}
