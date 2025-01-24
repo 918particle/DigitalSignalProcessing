@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Homework 1, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+
+\maketitle
+
+\section{Memory Bank}
+
+\begin{itemize}
+\item $\sqrt{-1} = j$ ... The fundamental imaginary unit.
+\item $z = x + jy$ ... A complex number.
+\item $\Re \lbrace z \rbrace = x$, $\Im \lbrace z \rbrace = y$ ... Real and imaginary parts.
+\item $z^{*} = x - j y$ ... The complex conjugate of $z$.
+\item $|z| = \sqrt{z z^{*}} = \sqrt{x^2 + y^2}$ ... The magnitude of $z$.
+\item $\tan\phi = y/x$ ... The phase angle of $z$.
+\item $|z| = r$, so $x = r\cos\phi$, and $y = r\sin\phi$.
+\item \textbf{Taylor Series:} Let $f(t)$ be a continuous, differentiable function.  Let $f^n(t)$ be the $n$-th derivative of $f(t)$, with $f^0(t) = f(t)$. The Taylor series is an infinite series, equivalent to $f(t)$, given by
+\begin{equation}
+f(t) = \sum_{n=0}^{\infty} \frac{f^n(t_0)}{n!} (t-t_0)^n
+\end{equation}
+\item \textbf{Euler's Identity:} $e^{j\phi} = \cos\phi + j\sin\phi$
+\end{itemize}
+\normalsize
+
+\section{Complex Numbers and Signals}
+
+\begin{enumerate}
+\item Let $z_1 = 3 + 4j$, and $z_2 = -3 + 4j$.  Evaluate: 
+\begin{enumerate}
+\item Graph $z_1$ and $z_2$ in the complex plane.
+\item $z_1 + z_2$
+\item $z_1 - z_2$
+\item $z_1 * z_2$
+\item $z_1 / z_2$
+\item $|z_1|$
+\item $|z_2|$
+\item $\phi_1$
+\item $\phi_2$
+\item Write $z_1$ and $z_2$ in polar form.
+\end{enumerate}
+\vspace{4.5cm}
+\item Use Euler's Identity to show that
+\begin{align}
+\cos(2\pi ft) &= \frac{e^{2\pi j ft} + e^{-2\pi j ft}}{2} \\
+\sin(2\pi ft) &= \frac{e^{2\pi j ft} - e^{-2\pi j ft}}{2j}
+\end{align} \\ \vspace{3.0cm}
+\item Let $v_1(t) = 4\cos(2\pi f_1 t)$, $v_2(t) = 4\cos(2\pi f_2 t -\phi)$.  Use the results of the previous exercise in the following questions.  (a) Show that $P = v_1(t) v_2(t)$ is a pair of sinusoids with frequencies $f_{+} = f_1 + f_2$ and $f_{-} = f_1 - f_2$, offset by a total phase shift of $2\phi$. (b) Show that $P_{\rm max} = 16$, if $\phi = 0$ and $f_1 = f_2$.  Why is 16 the correct number?\footnote{The product of two mixed signal voltages, divided by the resistance, is the power (in Watts).  The formula is $P = v^2/R$.}. \\ \vspace{3.5cm}
+\item Suppose that 
+\begin{align}
+v_1(t) &= \Im \left\lbrace\exp(j(2\pi ft-\phi))\right\rbrace \\
+v_2(t) &= \Im \left\lbrace\exp(2\pi jft)\right\rbrace
+\end{align}
+Drop the portion of the complex phase containing the frequency $f$, and represent the signals with just $\exp(-j\phi)$ and $1$. (a) Graph these signals by treating the $1$ and $\exp(-j\phi)$ as complex numbers in polar form. (b) Add the complex numbers, and obtain formulas for the new magnitude and phase angle. (c) Test your formulas for $\phi = 45$ degrees.  When you add two signals of the same frequency offset by a phase, you should obtain a new signal at the same frequency with a new phase and amplitude.  What happens when the signals are in phase ($\phi = 0$ degrees) and out of phase ($\phi = 180$ degrees)? \\ \vspace{4cm}
+\end{enumerate}
+
+\section{Probability and Statistics, Noise}
+
+\begin{enumerate}
+\item Consider the following octave code:
+\begin{verbatim}
+clear;
+close;
+home;
+
+x = randn(10000,1);
+figure(1)
+hist(x,30);
+figure(2);
+plot(x)
+axis([-1 10001 -10 10]);
+\end{verbatim}
+The octave workspace is cleared, and a vector of data \verb+x+ is created.  This vector contains pseudo-random numbers drawn from \textit{the Gaussian distribution}, with mean $\mu$ and standard deviation $\sigma$:
+\begin{equation}
+p(x) dx = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\left(\frac{x-\mu}{\sigma}\right)^2} dx \label{eq:g}
+\end{equation}
+(a) Graph Eq. \ref{eq:g}, and compare to Figure 1 created by the code.  This figure contains a \textit{histogram}, that counts how often the pseudo-random numbers fall into each of 30 bins.  Does the histogram resemble Eq. \ref{eq:g}? (b) Examine Figure 2 created by the code.  If the numbers represent digitized, sampled noise voltages, they appear to be pure noise. (c) Write code that adds gaussian noise to a sine wave. (d) Notice that, as the amplitude of the sine wave decreases, the signal appears to be lost in the noise.  The ratio of sine wave amplitude divided by $\sigma$ in Eq. \ref{eq:g} is called the signal-to-noise ratio (SNR). \\ \vspace{4cm}
+\item The octave function \verb+rand+ gives pseudo-random numbers drawn from a \textit{uniform distribution}:
+\begin{equation}
+p(x) dx = \frac{dx}{b-a}, ~~ a\leq x \leq b
+\end{equation}
+This PDF is flat between $a$ and $b$, where any number between these is equally likely to occur.  The \verb+rand+ function has default settings of $b=1$ and $a=0$. Write an octave code that demonstrates that the sum of a large set of numbers drawn from \verb+rand+ is distributed according to Eq. \ref{eq:g}.  That is, we get gaussian noise from the repeated addition of many uniform random numbers. \\ \vspace{4cm}
+\end{enumerate}
+
+\section{ADC and DAC}
+
+\begin{enumerate}
+\item Create an octave code that graphs a sine wave of frequency \verb+f+ and sampling frequency \verb+fs+ (see Code Lab 1 on Moodle for examples).  Now tune the sampling frequency to with a factor of 2 of the signal frequency.  Qualitatively, what happens to the signal graph?
+\end{enumerate}
+
+\end{document}

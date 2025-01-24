@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Thursday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{The Breadth and Depth of DSP}
+
+\begin{enumerate}
+\item \textbf{Echo control}: Suppose a sinusoidal signal with frequency $f$ is sent through a communication channel, and causes and echo.  Let $v(t)$ be the original signal, and $w(t)$ be the echo:
+\begin{align}
+v(t) &= v_0 \sin(2\pi ft) \\
+w(t) &= a v_0 \sin(2\pi ft - \phi)
+\end{align}
+The echo signal $w(t)$ has a phase shift $\phi=\pi/4$, or 45 degrees. (a) As accurately as you can, graph $v(t)$ and $w(t)$ on the same plot, with $a = 0.1$.  (b)  Graph the total signal: $v(t) + w(t)$.  (c) Add one final signal that \textit{cancels} $w(t)$, but \textit{does not cancel} $v(t)$.\footnote{Now imagine doing this for all frequencies, simultaneously.} \\ \vspace{4cm}
+\item \textbf{Sampling a sine wave}: Let a set of sample times be $0$, $\Delta t$, $2\Delta t$, ... $n\Delta t$.  The period of $v(t)$ in the previous exercise is $T = 1/f$.  That is, if $f = 4$ kHz, then $T = 1/4$ kHz$^{-1}$. (a) Show that kHz$^{-1}$ is 1 millisecond.  (b) Show that if $f = 10$ kHz, then $T = 0.1$ ms. (c) If we want to sample $v(t)$ and transmit it digitally, then we should probably have $\Delta \ll T$.  Let $f = 5$ kHz for $v(t)$, and $\Delta = 0.02$ ms.  How many samples per period? (d) If instead $\Delta t = 0.002$ ms, how many samples per period? (e) If $\Delta t = 0.002$ ms, what is $1/\Delta t = f_s$, the \textit{sampling frequency}? \\ \vspace{4cm}
+\item \textbf{Signal envelopes}: Suppose we send a \textit{gaussian pulse} through a DSP system, with signal shape 
+\begin{equation}
+p(t) = A e^{-\frac{1}{2}(t-t_0)^2/\sigma^2} \sin(2\pi ft)
+\end{equation}
+This is a signal with sinusoidal behavior and a gaussian \textit{envelope}.  The envelope is the part of the function multiplying the sine wave.  At $t=t_0$ the envelope has a maximum amplitude of $A\sin(2\pi ft_0)$. (a) Graph the \textit{envelope} of the signal.  (b) Add the sinusoidal oscillation to your graph. (c) If we are going to sample this signal envelope, which of the following should be true:
+\begin{itemize}
+\item A: $\Delta t = \sigma$
+\item B: $\Delta t > \sigma$
+\item C: $\Delta t < \sigma$
+\item D: $\Delta t \ll \sigma$
+\end{itemize} \vspace{4cm}
+\item \textbf{Digitizing voltages}: Suppose we are dealing with an AC circuit that produces waveforms for audio systems.  The output runs from -2.5 to 2.5 Volts.  (a) What is the range if we add an offset of +2.5 V to the output signals?  (b) If we can \textit{digitize} the new voltage range into 256 steps, what is the voltage range between steps?
+\end{enumerate}
+
+\end{document}
