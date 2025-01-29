@@ -1,0 +1,72 @@
+\title{Code Lab 2: Signal Combinations and Noise}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, we compare sums of sinusoidal signals and other types of signals and noise.  This connection will be further developed as the course proceeds.  First, we will create a sum of sinusoidal signals at increasing frequencies.  Second, we will plot that sum and compare it to a known type of signal: square pulses.  Finally, we will add gaussian white noise to our signals.
+\end{abstract}
+
+\section{Installing Packages \\ in Octave}
+
+Use the following code to clear your workspace:
+
+\begin{verbatim}
+clear;
+home;
+close;
+\end{verbatim}
+
+Run the following code to check if you have the \verb+signal+ package for octave:
+
+\begin{verbatim}
+pkg load signal;
+\end{verbatim}
+
+If you do, the package will be loaded.  If not, download the \verb+control+ and \verb+signal+ packages\footnote{\url{https://gnu-octave.github.io/packages/}}.  Use the \verb+pkg install+ command to install the files:
+
+\begin{verbatim}
+pkg install control-4.1.0.tar.gz
+pkg install signal-1.4.6.tar.gz
+\end{verbatim}
+
+These commands must be run in the folder into which the files downloaded.
+
+\section{Functions in Octave}
+
+Functions are written in octave like the following:
+
+\begin{verbatim}
+function retval = sinn_An(n,x)
+    An = 2/pi/n;
+    retval = An*sin(n.*x);
+endfunction
+\end{verbatim}
+
+The \verb+function+ keyword starts the function, and the return value(s) are are stored in a variable before an equals sign.  In this case, they are called \verb+retval+.  This function computes a constant, $2/(n\pi)$ then multiplies it by a sine function with argument $nx$.  In this case, $x$ is a vector of sampled times.  Define this code in octave.  Next, define the following in octave:
+
+\begin{verbatim}
+function retval = fourier_square(n,x)
+    retval = 0.5;
+    for i=[0:n]
+        retval = retval+sinn_An(2*i+1,x);
+    endfor
+endfunction
+\end{verbatim}
+
+Notice this new function calls the previous function \textit{for odd integers n}.
+
+\section{The Full Code}
+
+For the full code, download the Code Lab 2 file from the course Moodle page.  The title of the code is \verb+Fourier_Series_Square.m+.  Run this code to create a graph of a \textit{square wave}, compared to our sum of sine waves.  Using the \verb+randn+ function, add noise to both the square wave and our sum of sine waves.
+
+\end{document}

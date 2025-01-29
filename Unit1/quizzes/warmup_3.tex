@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Tuesday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+
+\begin{itemize}
+\item $\sqrt{-1} = j$ ... The fundamental imaginary unit.
+\item $z = x + jy$ ... A complex number.
+\item $\Re \lbrace z \rbrace = x$, $\Im \lbrace z \rbrace = y$ ... Real and imaginary parts.
+\item $z^{*} = x - j y$ ... The complex conjugate of $z$.
+\item $|z| = \sqrt{z z^{*}} = \sqrt{x^2 + y^2}$ ... The magnitude of $z$.
+\item $\tan\phi = y/x$ ... The phase angle of $z$.
+\item $|z| = r$, so $x = r\cos\phi$, and $y = r\sin\phi$.
+\item \textbf{Euler's Identity:} $e^{j\phi} = \cos\phi + j\sin\phi$
+\item $\cos\phi = (\exp(j\phi) + \exp(-j\phi))/2$
+\item $\sin\phi = (\exp(j\phi) - \exp(-j\phi))/(2j)$
+\end{itemize}
+
+\section{Complex Numbers}
+
+\begin{enumerate}
+\item Recall Euler's Identity: $\exp(j\phi) = \cos\phi + j\sin\phi$.  Let $z$ be a complex number, so that $z = x +  y$, with $x = |z|\cos\phi$ and $y=|z|\sin\phi$ in the complex plane.  Writing a complex number or signal like $z = |z|\exp(j\phi)$ is called putting the number or signal in \textit{polar form.} (a) Put the following numbers or signals in polar form:
+\begin{itemize}
+\item $z = 2 + 2j$
+\item $z = 2 - 2j$
+\item $z = -2 + 2j$
+\item $z(t) = \cos(2\pi f t) + j\sin(2\pi f t)$
+\item $z(t) = \cos(2\pi f t - \phi_0)$.
+\end{itemize} \vspace{4cm}
+\end{enumerate}
+
+\section{Statistics, Probability, and Noise}
+
+\begin{enumerate}
+\item \textbf{Digitizing voltages}: Suppose we are dealing with an AC circuit that produces waveforms for audio systems.  The output runs from -2.5 to 2.5 Volts.  (a) What is the range if we add an offset of +2.5 V to the output signals?  (b) If we can \textit{digitize} the new voltage range into 256 steps, what is the voltage range between steps? (c) What power of 2 gives 256? \\ \vspace{4cm}
+\item Consider the signal in the previous problem, with the signal of 2.5 V amplitude, and a DC offset of 2.5 V: $s(t) = 2.5\sin(2\pi f t) + 2.5$.  (a) Write a short code in \verb+octave+ that produces and plots this signal, with $f = 100$ Hz, and $\Delta t = 1$ ms. (b) Use the \verb+randn+ function to create a noise vector of the same size as $s(t)$, but with a mean of 0 and a standard deviation of 1.0.  Enter \verb+help randn+ for more information on the \verb+randn+ function. (c) Plot the signal and the signal plus noise on the same graph.  To plot more than one curve on the same figure, use the \verb+hold on+ command.  This will make the graph persist instead of disappearing when something new is plotted. (d) What is the signal-to-noise ratio (SNR) of the sine wave plus noise? (e) Use the \verb+hist+ command to create a histogram of your noise values, and signal plus noise values.
+\end{enumerate}
+
+\end{document}

@@ -17,16 +17,18 @@ function retval = fourier_square(n,x)
 	endfor
 endfunction
 
-x = 0.0:0.001:(2.0*pi)*10; %Octave is awesome!!
+f = 10.0; %Hz
+t = 0.0:0.001:2;
+x = 2.0*pi*f*t;
 
 S = 0.5 + sinn_An(1,x) + sinn_An(3,x)+sinn_An(5,x) + sinn_An(7,x);
 S1 = fourier_square(100,x);
 
-plot(x/pi,S1,'-','color','black','linewidth',3);
+plot(t,S,'-','color','black','linewidth',3);
 hold on;
 grid on;
 xlabel("x");
 ylabel("Amplitude");
-plot(x/pi,square(x)*0.5+0.5,'o','color','red','linewidth',3);
+plot(t,square(x)*0.5+0.5,'o','color','red','linewidth',3);
 set(gca(),'fontsize',30)
-axis([0 15 -2 2])
+axis([-0.1 2.1 -2 2])
