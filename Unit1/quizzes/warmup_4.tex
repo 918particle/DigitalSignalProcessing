@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Thursday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+
+\begin{itemize}
+\item $\sqrt{-1} = j$ ... The fundamental imaginary unit.
+\item $z = x + jy$ ... A complex number.
+\item $\Re \lbrace z \rbrace = x$, $\Im \lbrace z \rbrace = y$ ... Real and imaginary parts.
+\item $z^{*} = x - j y$ ... The complex conjugate of $z$.
+\item $|z| = \sqrt{z z^{*}} = \sqrt{x^2 + y^2}$ ... The magnitude of $z$.
+\item $\tan\phi = y/x$ ... The phase angle of $z$.
+\item $|z| = r$, so $x = r\cos\phi$, and $y = r\sin\phi$.
+\item \textbf{Complex response of a low-pass filter with resistance R and capacitance C:} $R(f) = 1/(1+j\omega \tau)$, where $\omega = 2\pi f$, and $\tau = RC$.
+\end{itemize}
+
+\section{Application of Complex Numbers: AC Circuit Filters}
+
+\begin{enumerate}
+\item Recall that the response of a simple low-pass RC filter is
+\begin{equation}
+R(f) = \frac{1}{1+j\omega \tau} \label{eq:1}
+\end{equation}
+(See memory bank).  (a) Find the magnitude of Eq. \ref{eq:1}.\footnote{Hint: multiply the top and bottom by the complex conjugate of the denominator.}  (b) Find the phase angle of Eq. \ref{eq:1}. (c) Graph the magnitude and phase angle versus frequency, by hand.  (d) Suppose a signal has a an amplitude of $A$ at a frequency $f$: $A(f)$.  The filtered amplitude is $R(f) A(f)$.  If $A=1$ at $f = 1$ kHz, $R = 1$ k$\Omega$, and $C = 1$ $\mu$F, what is the filtered amplitude $A(f) R(f)$?\footnote{This filtered amplitude is a result of the \textit{convolution theorem}, which we will encounter in a later chapter.} \\ \vspace{4cm}
+\end{enumerate}
+
+\section{Statistics, Probability, and Noise}
+
+\begin{enumerate}
+\item Consider a signal with 2.5 V amplitude, and a DC offset of 2.5 V: $s(t) = 2.5\sin(2\pi f t) + 2.5$.  (a) Write a short code in \verb+octave+ that produces and plots this signal, with $f = 10$ Hz, and $\Delta t = 1$ ms. (b) Use the \verb+randn+ function to create a noise vector of the same size as $s(t)$, but with a mean of 0 and a standard deviation of 1.0: \verb+n = randn(size(t))+.  (c) Plot the signal plus noise on the same graph: \verb+plot(t,z)+, where $z = s+n$.  (d) What is the signal-to-noise ratio (SNR) of the sine wave plus noise? (e) Use the \verb+hist+ command to create a histogram of your noise values, and signal plus noise values.
+\end{enumerate}
+
+\end{document}
