@@ -1,0 +1,43 @@
+\title{Code Lab 3: Signals, Noise, and Aliasing}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, we compare sums of sinusoidal signals and other types of signals and noise.  This connection will be further developed as the course proceeds.  First, we will create a sum of sinusoidal signals at increasing frequencies.  Second, we will plot that sum and compare it to a known type of signal: square pulses.  Third, we will add gaussian white noise to our signals.  Finally, we will plot the \textit{spectrum} of the total signal, and examine how changing the sampling frequency changes the results.
+\end{abstract}
+
+\section{The Full Code}
+
+For the full code, download the Code Lab 3 file from the course Moodle page.  The title of the code is \verb+Aliasing.m+.  Run this code to create a graph of a \textit{square wave} in the time and frequency domains, generated from a sum of sinusoids.  The signal has a finite number of modes, or sinusoids at specific frequencies.  The signal has noise present, as well.
+
+\section{Fine Tuning Parameters}
+
+Do not worry if you do not understand every aspect of the code.  Our job here is to locate the following parameters in the code, and tune them to different values:
+
+\begin{enumerate}
+\item \verb+fs+, the sampling frequency.
+\item \verb+f_0+, the square wave frequency.
+\item \verb+n_modes+, the number of modes in the signal spectrum.
+\item \verb+noise_sigma+, the standard deviation of our gaussian thermal noise.
+\end{enumerate}
+
+\section{Exercises}
+
+\begin{enumerate}
+\item Decrease the sampling frequency such that the highest mode in the signal is above the Nyquist frequency (one half of the sampling frequency).  What happens to the signal?
+\item Reset your parameters, and tune the square wave frequency higher until the highest mode in the spectrum exceeds the Nyquist frequency.  What happens to the signal?
+\item Reset your parameters, and tune the noise level such that it buries some of the high-frequency modes.  What happens to the signal?
+\item Reset your parameters, and increase/decrease the number of modes in the signal.  What happens to the signal?
+\end{enumerate}
+
+\end{document}
