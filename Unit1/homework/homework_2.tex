@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Homework 2, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+
+\maketitle
+
+\section{Memory Bank}
+\small
+\begin{itemize}
+\item $\bar{x} = \frac{1}{N}\sum_{i=0}^{N-1} x_i$ ... Sample mean.
+\item $\overline{x^2} = \frac{1}{N}\sum_{i=0}^{N-1} x_i^2$ ... Sample mean of the square.
+\item $s = \frac{1}{N-1}\sum_{i=0}^{N-1} (x_i - \bar{x})^2$ ... Sample std. deviation.
+\item $s^2 = \overline{x^2} - \overline{x}^2$ ... Formula for the variance.
+\item Let a \textbf{histogram} be defined by $M$ bins $i$, with the data organized into $M$ \textit{frequencies} $H_i$.
+\item Total number of data points in a histogram: $N = \sum_{i=0}^{M-1} H_i$
+\item (1) Sample mean and (2) variance from histograms: 
+\begin{enumerate}
+\item $\bar{x} = \frac{1}{N}\sum_{i=0}^{M-1} i H_i$
+\item $s = \frac{1}{N-1}\sum_{i=0}^{M-1} (i-\bar{x})^2 H_i$
+\end{enumerate}
+\item For the following two formulas: $\omega = 2\pi f$, $\tau = RC$.
+\item \textbf{Low-pass filter response}, as a function of frequency:
+\begin{equation}
+R(f) = \frac{1}{1+j\omega \tau}
+\end{equation}
+\item \textbf{High-pass filter response}, as a function of frequency:
+\begin{equation}
+R(f) = \frac{j\omega\tau}{1+j\omega \tau}
+\end{equation}
+\end{itemize}
+\normalsize
+
+\section{Probability and Statistics, Noise}
+
+\begin{enumerate}
+\item Consult Fig. 2-6 in Ch. 2 of the course text. (a) Write three functions in \verb+octave+ that produce the following: a square wave, a triangle wave, and gaussian noise.  (b) Write code that creates histograms of the outputs of the three functions.  (c) \textbf{Normalize} the histograms by dividing the frequencies by the total number of data samples, $N$. (d) Graph the histograms to demonstrate that each process matches the PDFs in Fig. 2-6. (e) Compute the mean and standard deviation of each PDF.\vspace{4cm}\footnote{\textit{Hint: (1) square waves with amplitudes of 0 and 1 should have a mean of 0.5, (2) this is also true of flat PDFs, which also have a standard deviation of $1/\sqrt{12}$, and (3) Eq. 2-6 in the course text gives the Gaussian PDF, which has a std. dev. of $\sigma$.}}
+\end{enumerate}
+
+\section{ADC and DAC}
+
+\begin{enumerate}
+\item Complete the following exercises about the precision of ADC and DAC components:
+\begin{itemize}
+\item ADC:
+\begin{enumerate}
+\item What is the $\Delta V$ (voltage per level) of an ADC with signals in the [0,2.55] V range with 255 levels, plus zero (8-bit precision)? \\ \\
+\item What is the $\Delta V$ (voltage per level) of an ADC with signals in the [0,4.095] V range with 4095 levels, plus zero (12-bit precision)? \\ \\
+\item How many bits of precision, or how many voltage levels, are required for $\Delta V < 1$ mV, if signals are in the [0,12] V range? \\ \\
+\item What is the digital amplitude (in counts) of a 2.52 V signal, if signals are in the [0,5] V range, and there are 2048 levels? \\ \\
+\end{enumerate}
+\item DAC:
+\begin{enumerate}
+\item If the digital amplitude of a signal is 256 counts, and signals are in the [0,5] V range with 9.8 mV per level, what is the signal amplitude in volts? \\ \\
+\item If the digital amplitude of a signal is 2048 counts, and signals are in the [0,5] V range with max counts 4095, what is the signal amplitude in volts? \\ \\
+\item If the digital amplitude of a signal is 128 counts, the max counts is 511, and the analog output is 0.25 V, what is the maximum voltage? \\ \\ \\ \\
+\end{enumerate}
+\end{itemize}
+\item For the following exercises, refer to Fig. 3-4 in Ch. 3 of the course text.
+\begin{enumerate}
+\item If the sampling rate is 500 kHz, and the analog signal frequency is 50 kHz, what is the digital signal frequency? \\ \\
+\item If the sampling rate is 500 kHz, and the analog signal frequency is 250 kHz, what is the digital signal frequency? \\ \\
+\item If the sampling rate is 500 kHz, and the analog signal frequency is 750 kHz, what is the digital signal frequency? \\ \\
+\item If the sampling rate is 500 kHz, and the analog signal frequency is 1000 kHz, what is the digital signal frequency? \\ \\
+\end{enumerate}
+\item Consider Fig. 3-10 in the course text.  The single-pole, low-pass RC filter is depicted in the top middle section of Fig. 3-10. (a) Suppose a signal has an amplitude of 3.3 V and a frequency of 25 MHz, while $R=10$ k$\Omega$.  What value of $C$ is necessary to filter the signal to 0.33 V? \\ \vspace{4cm}
+\item Consider again Fig. 3-10.  The single-pole, high-pass RC filter is similar to the depiction in the top middle section of Fig. 3-10, but with the $C$ and $R$ switched. (a) Suppose a signal has an amplitude of 3.3 V and a frequency of 10 MHz, while $R=10$ k$\Omega$.  What value of $C$ is necessary to filter the signal to 0.33 V? \\ \vspace{4cm}
+\item \textbf{Bonus Point:} What is the phase shift introduced by the filters in the previous two exercises?
+\end{enumerate}
+
+\end{document}
