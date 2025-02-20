@@ -6,7 +6,7 @@ pkg load signal;
 %dsp parameters for x-axis:
 fs = 1000.0; %Hz
 f_sig = 75; %Hz
-T = 20.0; %Total time (1 sec)
+T = 20.0; %Total time
 dt = 1/fs;
 df = 1/T;
 f = transpose([0:df:fs/2]);
@@ -16,13 +16,13 @@ N = length(t)/2;
 amplitude = 1.0;
 noise_sigma = 1.0;
 noise = randn(size(t))*noise_sigma;
-y = amplitude*sin(2.0*pi*f_sig.*t)+noise;
+y = amplitude*sin(2.0*pi*f_sig.*t)*amplitude.*sin(2.0*pi*f_sig.*t)+noise;
 
 %filtering
-%[b1,a1] = butter(8,0.16);
-%[b2,a2] = butter(8,0.15,"high");
-%y = filter(b1,a1,y); %low-pass
-%y = filter(b2,a2,y); %high-pass
+[b1,a1] = butter(4,0.155,"low");
+[b2,a2] = butter(4,0.155,"high");
+y = filter(b1,a1,y); %low-pass
+y = filter(b2,a2,y); %high-pass
 
 %Computing the spectrum
 Y = sqrt(conj(fft(y)).*fft(y));

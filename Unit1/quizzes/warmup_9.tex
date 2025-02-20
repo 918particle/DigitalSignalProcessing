@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Tuesday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+\small
+\begin{itemize}
+\item \textbf{Homogeneous system:} Let $k$ be a constant, and let $s_{\rm in}(t)$ and $s_{\rm out}(t)$ be the input and output signals to a system $S$, respectively.  $S$ is \textit{homogeneous} if:
+\begin{align}
+s_{\rm out}(t) &= S[s_{\rm in}(t)] \\
+k s_{\rm out}(t) &= S[k s_{\rm in}(t)]
+\end{align}
+\item \textbf{Additive system:} Let $s_{\rm 1}(t)$ and $s_{\rm 2}(t)$ be two input signals to a system $S$, with outputs $s'_{\rm 1}(t)$ and $s'_{\rm 2}(t)$.  $S$ is \textit{additive} if:
+\begin{align}
+s'_{\rm 1}(t) &= S[s_{\rm 1}(t)] \\
+s'_{\rm 2}(t) &= S[s_{\rm 2}(t)] \\
+s'_{\rm 1}(t)+s'_{\rm 2}(t) &= S[s_{\rm 1}(t)+s_{\rm 2}(t)]
+\end{align}
+\item \textbf{Shift-invariant system:} Let $s_{\rm in}(t)$ and $s_{\rm out}(t)$ be input and output signals to a system $S$, and let $t_0$ be a constant.  $S$ is \textit{shift invariant} if:
+\begin{align}
+s_{\rm out}(t) &= S[s_{\rm in}(t)] \\
+s_{\rm out}(t-t_0) &= S[s_{\rm in}(t-t_0)]
+\end{align}
+\item \textbf{Synthesis:} combining input signal components together linearly to form an output signal.
+\item \textbf{Decomposition:} producing the output signal components linearly from an input signal.
+\item \textbf{Fundamental Concept of DSP:} Decomposing an input signal into components, passing them trough a linear system, and synthesizing the results produces the same output as passing the original signal through the system.
+\item \textbf{Impulse signal:} a single nonzero point in a string of zeros.
+\item \textbf{Impulse decomposition:} decomposing a digitized, sampled signal into a linear combination of impulse signals.
+\item \textbf{Even/Odd decomposition:} decomposing a digitized, sampled signal into even and odd signal components.
+\item $f(-t) = f(t)$ ... Even function.  Even signals: $x_{\rm E}[n] = (x[n] + X[N-n])/2$
+\item $f(-t) = -f(t)$ ... Odd function.  Odd signals: $x_{\rm O}[n] = (x[n] - X[N-n])/2$
+\item $F(f) = \mathcal{F}\left\lbrace f(t)\right\rbrace =\int_{-\infty}^{\infty} f(t) e^{-2\pi jft} dt$ ... The Fourier Transform.
+\item $\mathcal{F}^{-1}\left\lbrace F(f)\right\rbrace =\int_{-\infty}^{\infty} F(f) e^{2\pi jft} df$ ... The Inverse Fourier Transform.
+\end{itemize}
+\vspace{3cm}
+
+\section{Linear System: the Fourier \\ Transform}
+
+\begin{enumerate}
+\item Using the properties of integrals and complex numbers, show that the Fourier transform operator is: (a) homogeneous, (b) additive, (c) and shift-invariant (up to a complex constant). \\ \vspace{2.5cm}
+\item The \textbf{Dirac $\delta$-function} is a distribution defined by the following property:
+\begin{equation}
+f(t_0) = \int_{-\infty}^{\infty} f(t) \delta(t-t_0) dt
+\end{equation}
+In words, the integral of a $\delta$-function times a function $f$ is the value of the function at $t_0$.(a) What is the Fourier transform of $a\delta(t-t_0)$? (b) What is the magnitude of the result? (c) What is the phase angle? \\ \vspace{2.5cm}
+\item (a) Suppose we have a signal in the \textit{frequency domain}: $F(f) = (a/2)(\delta(f-f_0) + a\delta(f+f_0))$.  What is this signal in the \textit{time domain}?  Take the \textbf{inverse Fourier transform} of $F(f)$. (b) Suppose we have a signal in the \textit{frequency domain}: $F(f) = (a/2j)(\delta(f-f_0) - a\delta(f+f_0))$.  What is this signal in the \textit{time domain}?  Take the \textbf{inverse Fourier transform} of $F(f)$. \\ \vspace{2.5cm}
+\item Consider the results of the previous exercise.  (a) Is the sine function odd or even? (b) Is the cosine function odd or even? (c) Is the Fourier transform of the sine function odd or even? (d) Is the Fourier transform of the cosine function odd or even?
+\end{enumerate}
+
+\end{document}

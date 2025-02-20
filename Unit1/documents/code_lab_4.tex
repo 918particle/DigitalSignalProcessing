@@ -1,0 +1,46 @@
+\title{Code Lab 4: Fourier Transforms, Spectra, and the FFT}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[10.5pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, we create a digitized, sampled sinusoidal signal, plus noise, and compute its Fourier transform using the \verb+fft+ algorithm in \verb+octave+.  The signal should be visible above the \textit{noise floor.}  We will tune the various DSP parameters, and eliminate noise with low and high-pass filter algorithms.
+\end{abstract}
+
+\section{The Full Code}
+
+For the full code, download the Code Lab 4 file from the course Moodle page.  The title of the code is \verb+FFT.m+.  Run this code to create a graph of a \textit{noisy sine wave} in the time and frequency domains.  The Fourier transform magnitude is plotted in the lower graph.  The \verb+fft+ algorithm produces positive and negative frequencies.  Both are plotted, and the data should be similar.
+
+\section{Fine Tuning Parameters}
+
+Do not worry if you do not understand every aspect of the code.  Our job here is to locate the following parameters in the code, and tune them to different values:
+
+\begin{enumerate}
+\item \verb+fs+, the sampling frequency.
+\item \verb+f_sig+, the sine wave frequency.
+\item \verb+amplitude+, the number of modes in the signal spectrum.
+\item \verb+noise_sigma+, the standard deviation of our gaussian thermal noise.
+\end{enumerate}
+
+\section{Exercises}
+
+\begin{enumerate}
+\item Change the sine wave frequency, and observe how the single frequency-mode moves around the spectrum.
+\item Reset your parameters, and increase the noise so that the sine wave is not visible in the \textit{time domain}, but remains visible in the \textit{frequency domain.}
+\item Reset your parameters, and copy the code from line 19 for the sine wave.  Past it back in line 19 so that the signal \verb+y+ is equal to a sine-squared plus noise.  Where is the frequency mode?  Use trigonometric identities to show that the frequency of the sine-squared is the sum of the frequencies of the individual sine waves.
+\item Reset your parameters, and activate the low and high-pass filters by uncommenting lines 22-25.  Look up how the \verb+butter+ function works by running the \verb+help butter+ command in octave.
+\item The arguments to the filters are how many ``poles'' the low and high-pass filters have, and where the cutoff frequency is located.  The cutoff frequency is expressed as a fraction of the Nyquist frequency.
+\item \textbf{Tuning the filters:} Tune the filter parameters to eliminate noise, except for the spectral region around the sine wave signal.
+\item \textbf{Draw a graph} of your filtered signal output from \verb+octave+ below, including both the \textit{time domain} and \textit{frequency domain} data:
+\end{enumerate}
+
+\end{document}
