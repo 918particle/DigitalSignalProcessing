@@ -1,0 +1,46 @@
+\title{Code Lab 5: Impulse Response of Low-Pass and High-Pass Filters}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[10.5pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, 
+\end{abstract}
+
+\section{The Full Code}
+
+For the full code, download the Code Lab 5 file from the course Moodle page: \verb+impulse_response.m+.  Run this code to create a graph of an \textit{impulse, plus noise,} in the time and frequency domains.  The Fourier transform magnitude is plotted in the lower graph.  The \verb+fft+ algorithm produces positive and negative frequencies.  Both are plotted, and the data should be similar.
+
+\section{Fine Tuning Parameters}
+
+Do not worry if you do not understand every aspect of the code.  Our job here is to locate the following parameters in the code, and tune them to different values:
+
+\begin{enumerate}
+\item \verb+amplitude+, the time-domain signal amplitude.
+\item \verb+noise_sigma+, the standard deviation of our gaussian thermal noise.
+\item \verb+[b1,a1] = butter(8,0.5,"low");+, the filter coefficients for the low-pass filter.
+\item \verb+[b2,a2] = butter(8,0.5,"high");+, the filter coefficients for the high-pass filter.
+\item \verb+y = filter(b1,a1,y); %low-pass+, low-pass filtering the signal.
+\item \verb+y = filter(b2,a2,y); %high-pass+, high-pass filtering the signal.
+\end{enumerate}
+
+\section{Exercises}
+
+\begin{enumerate}
+\item Tune the noise level down so that the impulse amplitude dominates the time-domain and frequency-domain signals.  Increase the signal amplitude as necessary.  What shape is the spectrum?
+\item Gradually increase the noise level until you can no longer see the impulse in the time domain.  What shape is the spectrum?  How is this different from results of the previous exercise?
+\item Activate the \textbf{low-pass filter} code, and tune down the noise.  Run the code, and sketch the time-domain signal below: \\ \vspace{5cm}
+\item Deactivate the low-pass filter code, and activate the \textbf{high-pass filter} code.  Tune down the noise.  Run the code, and sketch the time-domain signal below: \\ \vspace{5cm}
+\item What is the key difference between the low-pass impulse response, and the high-pass impulse response?  Examine your figures to spot the difference.
+\end{enumerate}
+
+\end{document}
