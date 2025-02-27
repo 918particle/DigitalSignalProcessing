@@ -1,0 +1,58 @@
+\title{Code Lab 6: Convolution, and Impulse Response of Filters}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[10.5pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, we will observe how convolving an audio waveform with the impulse response of a low-pass (LP) filter affects the sound.
+\end{abstract}
+
+\section{The Full Code}
+
+For the full code, download the Code Lab 6 file from the course Moodle page: \verb+convolution_filter.m+.  Run this code to play a noisy sawtooth wave, and a filtered version of the same waveform.  Note that we are reusing code from prior code labs, so if you do not understand how it works, you can always refer to prior code lab documentation.
+
+\section{Fine Tuning Parameters}
+
+Do not worry if you do not understand every aspect of the code.  Our job here is to locate the following parameters in the code, and make adjustments to them:
+
+\begin{enumerate}
+\item \verb+f+, the fundamental frequency.
+\item \verb+f0+, the cutoff frequency of the LP filter.
+\item \verb+noise_sigma+, the strength of the noise.
+\item \verb+s+, the audio signal.
+\item \verb+s_filt+, the audio signal convolved by Eq. \ref{eq:1}.
+\end{enumerate}
+
+\section{The Filter Kernel}
+
+The audio signal is a Fourier Series convolved with the following filter kernel:
+
+\begin{equation}
+h(t) = 2\pi f_0 e^{-2\pi f_0 t} \label{eq:1}
+\end{equation}
+
+In class, we showed that the Fourier transform of Eq. \ref{eq:1} gives the recognizable spectrum of an LP filter.  How would you produce the equivalent of Eq. \ref{eq:1} for a high-pass filter?
+
+\section{Exercises}
+
+\begin{enumerate}
+\item Tune the fundamental frequency of the note as you run the note to hear how the noisy sawtooth sounds.
+\item Swap \verb+s_filt+ for \verb+s+ in the \verb+play+ command.  Do you hear the difference?
+\item Why does convolving with Eq. \ref{eq:1} have the effect of a low-pass filter?\footnote{\textit{Answer: we are convolving with the impulse response of a low-pass filter, which must be equivalent to filtering.}}
+\item Tune the number of modes in the sawtooth wave, and the noise level, such that you get as clean a sawtooth sound as possible, without reverting to just a sinusoid at low frequencies.
+\item \textbf{Mega Bonus Points:} Based on \verb+convolution_filter.m+, can you produce a script that acts as a high-pass filter in the same way?
+\item Sketch the filtered and unfiltered waves below:
+\item \textbf{Unfiltered wave:} \\ \vspace{4cm}
+\item \textbf{Filtered wave:} \\ \vspace{4cm}
+\end{enumerate}
+
+\end{document}
