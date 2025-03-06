@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Tuesday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+\small
+\begin{itemize}
+\item \textbf{Convolution}: this is an operation that characterizes the response $h[n]$ of a linear system.
+\begin{equation}
+y[i] = h[n] * x[n] = \sum_{j=0}^{M-1}h[j]x[i-j] \label{eq:conv}
+\end{equation}
+In words, the output at sample $i$ is equal to the produce of the system response $h$ and the input signal $x$, summed over the proceeding $M$ samples (from $j=0$ to $j=M-1$).
+\item \textbf{Discrete Delta Function}, $\delta[n]$: A standard impulse response that contains one non-zero sample.  It has the following property:
+\begin{equation}
+x[n] = \delta[n] * x[n] \label{eq:conv2}
+\end{equation}
+\item \textbf{Discrete Fourier Transform}, for a sampled, digitized signal $x_n$:
+\begin{equation}
+X_{\rm k} = \sum_{n=0}^{N-1} x_n e^{-2\pi j (k/N) n}
+\end{equation}
+\item In DFT analysis, we often need to know the $\Delta t$, time duration for samples, and the sampling rate, $f_{\rm s}$.  Note that $1/f_{\rm s} = \Delta t$.
+\item For a sinusoid of frequency $f$ (Hz), the period is $T = 1/f$ (seconds).
+\end{itemize}
+
+\section{Unit Conversions for Frequency, Period, and Sampling Rate}
+
+\begin{enumerate}
+\item Convert the following:
+\begin{itemize}
+\item 0.0005 seconds to ms
+\item $2.5\times 10^{-8}$ seconds to ns
+\item $6.25\times 10^{-7}$ seconds to $\mu$s
+\item 0.0000125 seconds to ms
+\end{itemize}
+\item Convert the following:
+\begin{itemize}
+\item $12500$ Hz to kHz
+\item $2.5\times 10^{8}$ Hz to GHz
+\item $6.25\times 10^{7}$ Hz to MHz
+\item $2500$ Hz to kHz
+\end{itemize}
+\item Given the following \textit{sampling rates,} give the time duration of samples:
+\begin{itemize}
+\item 128 kHz
+\item 64 kHz
+\item 500 MHz
+\item 50 MHz
+\end{itemize}
+\item Given the following \textit{time duration of samples,} give the sampling rates:
+\begin{itemize}
+\item 0.1 ms
+\item 0.01 ms
+\item 0.1 $\mu$s
+\item 0.01 $\mu$s
+\end{itemize}
+\end{enumerate}
+
+\section{The Discrete Fourier Transform}
+
+\begin{enumerate}
+\item Type \verb+help fft+ in an \verb+octave+ command window.  Read about the various ways to input data into this function that computes the ``fast Fourier transform'' of the data.
+\item Write a brief \verb+octave+ script that defines a sampling rate, time samples, and a vector of data representing a unit impulse, $\delta[n]$.
+\item Pass the data into the \verb+fft()+ function, and store the output in a variable, \verb+X+.
+\item Keep only the first half of the data output, \verb+X = X(1:end/2)+.
+\item Let $f_{\rm s}$ be the sampling rate.  Define frequencies as \\ \verb+f = linspace(0,fs/2,N)+, where $N$ is the current length of \verb+X+.
+\item Multiply the vector \verb+X+ by $1/f_{\rm s} = \Delta t$, then plot the absolute value of \verb+X+ versus the frequencies \verb+f+. What result do you observe?
+\item Repeat this process with a sine wave input.
+\end{enumerate}
+
+\end{document}

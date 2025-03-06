@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Thursday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+\small
+\begin{itemize}
+\item \textbf{Convolution}: this is an operation that characterizes the response $h[n]$ of a linear system.
+\begin{equation}
+y[i] = h[n] * x[n] = \sum_{j=0}^{M-1}h[j]x[i-j] \label{eq:conv}
+\end{equation}
+In words, the output at sample $i$ is equal to the produce of the system response $h$ and the input signal $x$, summed over the proceeding $M$ samples (from $j=0$ to $j=M-1$).
+\item \textbf{Discrete Delta Function}, $\delta[n]$: A standard impulse response that contains one non-zero sample.  It has the following property:
+\begin{equation}
+x[n] = \delta[n] * x[n] \label{eq:conv2}
+\end{equation}
+\end{itemize}
+
+\section{Convolution, Properties of Convolution, and Impulse Response}
+
+\begin{enumerate}
+\item Let's design a DSP system that replicates \textit{echo} in audio signals.  Let the sampling frequency be 20 kHz.  (a) Start with an delta function, $\delta[n]$, that is 2 seconds long.  How many samples should it contain, given the sampling rate? (b) Modify the $\delta[n]$ to create an echo every 0.25 seconds. Give the locations of the non-zero samples only (instead of writing a huge list of numbers).\footnote{\textit{Hint: recall that we can break a complex response function into signal components, give them the right properties, then synthesize them into the correct response.}} (c) Further modify the response function to make each echo have half the amplitude as the instance before it. \\ \vspace{5cm}
+\item Let an impulse response be given by $h[0] = 1$, $h[1] = -1$, and zero for all other samples. (a) Write a quick bit of \verb+octave+ code that creates a $N = 10$ sample version of $h$.  (b) Create a vector of data that increases linearly, with the same $N$.  (c) Convolve the two, and show that (at least part) of the output corresponds to the slope of the linearly increasing data.  (d) Why is this the case? \\ \vspace{5cm}
+\item Suppose we have a response function $h[n]$ that is 1, if $n\geq 0$, and 0 otherwise.  (a) Using Eq. \ref{eq:conv}, show that $h[n] * x[n]$ produces a cumulative sum of $x[n]$.  (b) Suppose $x[n]$ was a square pulse with a width of $N = 10$ samples, and an amplitude of 1.0.  What is the output of $h[n] * x[n]$? (c) Verify your calculations with a bit of \verb+octave+ code.  \\ \vspace{4cm}
+\item Our our reading, we encounter impulse responses corresponding to low-pass filters.  Next, we encounter impulse responses corresponding to high-pass filters.  The high-pass versions are equal to the low-pass versions subtracted from a $\delta [n]$.  Use Eq. \ref{eq:conv2} to justify this design strategy.  Why is a high-pass response simply ``1'' minus a low-pass response?
+\end{enumerate}
+
+\end{document}

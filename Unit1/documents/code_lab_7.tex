@@ -1,0 +1,53 @@
+\title{Code Lab 7: The Discrete Fourier Transform and Audio Recording}
+\author{Prof. Jordan C. Hanson}
+\date{\today}
+
+\documentclass[10.5pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\begin{abstract}
+In this activity, we will learn how to record sound with GNU Octave, play the sound, and graph the audio spectrum.
+\end{abstract}
+
+\section{The Full Code}
+
+For the full code, download the Code Lab 7 file from the course Moodle page: \verb+audio_spectrum.m+.  Use elements of this code to record an audio waveform for several seconds, play it, and graph the spectrum.
+
+\section{Fine Tuning Parameters}
+
+Do not worry if you do not understand every aspect of the code.  Our job here is to learn to change aspects of it so we learn how it works.  Locate the following elements:
+
+\begin{enumerate}
+\item \verb+fs+, the sampling rate.
+\item \verb+dt+, the time duration of samples.
+\item \verb+record_time+, the time duration of the audio recording.
+\end{enumerate}
+
+\section{Phase 0: Record an audio file}
+
+Run the code and make a whistling sound at one note.  The code will record you for a default time of two seconds.  Uncomment the section of code that creates an audioplayer, and plays the player.  Copy and past this code into the Command Window to play back the sound.
+
+\section{Phase 1: Graph the spectrum}
+
+Uncomment the code that runs \verb+fft()+, and creates a graph of the spectrum.  Make sure you understand the frequency axis.  What is the highest frequency in the spectrum?  What is the lowest?  Make sure you understand the logarithmic nature of the dependent axis.
+
+\section{Phase 2: Exercises}
+
+\begin{enumerate}
+\item Repeat this process, but at lower and higher notes.  Do you see the main spectral peaks move?
+\item Repeat this process, but change the sampling rate.  What is different about the independent axis?
+\item Repeat this process, but at different \textit{volumes} (softer and louder notes).  What changes about the spectrum?
+\end{enumerate}
+
+\section{Phase 3: Graph}
+
+\textbf{Create a graph} of one of your whistles below.  Label the horizontal axis with the correct units.  The vertical axis does not need physical units, but simply numbers.
+
+\end{document}

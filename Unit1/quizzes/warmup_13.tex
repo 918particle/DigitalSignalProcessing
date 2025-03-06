@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Thursday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+\small
+\begin{itemize}
+\item \textbf{Convolution}: this is an operation that characterizes the response $h[n]$ of a linear system.
+\begin{equation}
+y[i] = h[n] * x[n] = \sum_{j=0}^{M-1}h[j]x[i-j] \label{eq:conv}
+\end{equation}
+In words, the output at sample $i$ is equal to the produce of the system response $h$ and the input signal $x$, summed over the proceeding $M$ samples (from $j=0$ to $j=M-1$).
+\item \textbf{Discrete Delta Function}, $\delta[n]$: A standard impulse response that contains one non-zero sample.  It has the following property:
+\begin{equation}
+x[n] = \delta[n] * x[n] \label{eq:conv2}
+\end{equation}
+\item \textbf{Discrete Fourier Transform}, for a sampled, digitized signal $x_n$:
+\begin{equation}
+X_{\rm k} = \sum_{n=0}^{N-1} x_n e^{-2\pi j (k/N) n}
+\end{equation}
+\item In DFT analysis, we often need to know the $\Delta t$, time duration for samples, and the sampling rate, $f_{\rm s}$.  Note that $1/f_{\rm s} = \Delta t$.
+\item For a sinusoid of frequency $f$ (Hz), the period is $T = 1/f$ (seconds).
+\end{itemize}
+
+\section{Unit Conversions for Frequency, Period, and Sampling Rate}
+
+\begin{enumerate}
+\item Given the following \textit{sampling rates,} give the time duration of samples:
+\begin{itemize}
+\item 200 MHz
+\item 20 MHz
+\item 1.25 GHz
+\item 0.750 MHz
+\end{itemize}
+\item Given the following \textit{time duration of samples,} give the sampling rates:
+\begin{itemize}
+\item 1 ns
+\item 0.25 ns
+\item 0.67 $\mu$s
+\item 0.33 $\mu$s
+\end{itemize}
+\end{enumerate}
+
+\section{The Discrete Fourier Transform}
+
+\begin{enumerate}
+\item Type \verb+help fft+ in an \verb+octave+ command window.  Read about the various ways to input data into this function that computes the ``fast Fourier transform'' of the data.
+\item Write a brief \verb+octave+ script that defines a sampling rate, time samples, and a vector of data representing the product of two sinusoids, one with $f_1 = 1$ MHz, and the other with $f_2 = 1$ kHz.  To this product, add the sinusoid with $f_1$, times an amplitude larger than 1.  The maximum value in the time vector should be at least a hundred milliseconds.  The sampling rate should be more than 2 MHz.
+\item Pass the data into the \verb+fft()+ function, and store the output in a variable, \verb+X+.
+\item Keep only the first half of the data output, \verb+X = X(1:end/2)+.
+\item Let $f_{\rm s}$ be the sampling rate.  Define frequencies as \\ \verb+f = linspace(0,fs/2,N)+, where $N$ is the length of \verb+X+.
+\item Multiply the vector \verb+X+ by $1/f_{\rm s} = \Delta t$, then plot the following quantity: 20 times the base-10 logarithm of the absolute value of \verb+X+, versus the frequencies \verb+f+. What do you see?
+\item The vertical axis has units of \textbf{decibels} (dB), and the horizontal axis units are Hz.  How can you modify the horizontal axis units to MHz?
+\item Why does the spectrum have the structure that it does?
+\item Repeat this exercise with gaussian noise added.  The spectrum we are creating is called an \textit{amplitude modulated} (AM) spectrum.
+\end{enumerate}
+
+\end{document}

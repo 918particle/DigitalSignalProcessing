@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Quiz 1: Digital Signal Processing}
+\author{Prof. Jordan C. Hanson}
+
+\maketitle
+\small
+
+\begin{enumerate}
+\item For the following exercise, recall that the real part of a complex number is $\Re\lbrace z\rbrace$ and the imaginary part is $\Im\lbrace z\rbrace$.  Suppose we have a voltage signal as a function of time: $v(t) = 2.5 \cos(2\pi ft - \pi/4)$.  The signal has an amplitude of 2.5 Volts, a frequency $f = 1$ kHz, and a phase shift of $\pi/4$ (45 degrees).  Let $\phi = 2\pi ft - \pi/4$.  (a) Show that 
+\begin{equation}
+v(t) = \Re \lbrace 2.5 e^{j\phi} \rbrace
+\end{equation}
+(b) Show that 
+\begin{equation}
+v(t) = \Im \lbrace 2.5 e^{j(\phi-\pi/2)} \rbrace
+\end{equation} \vspace{2cm}
+\item \textbf{Sampling a sine wave}: Let a set of sample times be $0$, $\Delta t$, $2\Delta t$, ... $n\Delta t$.  Let the frequency and period of a sinusoidal signal be $f$, and $T = 1/f$.  (a) Show that kHz$^{-1}$ is 1 millisecond.  (b) If the period is 5 ns, what is the frequency? (c) Suppose we are sampling a sinusoidal signal with $f = 5$ kHz.  If our sampling frequency, $f_{\rm s}$ is 50 kHz, how many samples per period? (d) If our $\Delta t = 1/f_{\rm s} = 0.002$ ms, how many samples per period? \\ \vspace{4cm}
+\item \textbf{Digitizing voltages}: Suppose we are dealing with an AC circuit that produces waveforms for audio systems.  The output runs from 0 to 2.56 Volts.  (a) If we can \textit{digitize} the new voltage range into 256 steps, what is the voltage range between steps, $\Delta V$? (b) What power of 2 gives 256? (c) If we double the number of \textbf{bits}, what is the new $\Delta V$? \\ \vspace{4cm}
+\item Consider a signal with 2.5 V amplitude, and a DC offset of 2.5 V: $s(t) = 2.5\sin(2\pi f t) + 2.5$.  (a) Write a short code in \verb+octave+ that produces and plots this signal, with $f = 10$ Hz, and $\Delta t = 1$ ms. (b) Use the \verb+randn+ function to create a noise vector of the same size as $s(t)$, but with a mean of 0 and a standard deviation of 1.0: \verb+n = randn(size(t))+.  (c) Plot the signal plus noise on the same graph: \verb+plot(t,z)+, where $z = s+n$.  (d) What is the signal-to-noise ratio (SNR) of the sine wave plus noise? (e) Use the \verb+hist+ command to create a histogram of the values of $z$. \\ \vspace{4cm}
+\item The response of a simple high-pass RC filter is
+\begin{equation}
+R(f) = j\omega\tau/(1+j\omega \tau) \label{eq:1}
+\end{equation}
+(See memory bank).  (a) Find the magnitude\footnote{Hint: multiply the top and bottom by the complex conjugate of the denominator.} of Eq. \ref{eq:1}.  (b) Find the phase angle of Eq. \ref{eq:1}. (c) Graph the magnitude and phase angle versus frequency, by hand.  (d) Suppose a signal has a an amplitude of $A$ at a frequency $f$: $A(f)$.  The filtered amplitude is $R(f) A(f)$.  If $A=1$ at $f = 0.5$ kHz, $R = 1$ k$\Omega$, and $C = 1$ $\mu$F, what is the filtered amplitude $A(f) R(f)$?\footnote{This filtered amplitude is a result of the \textit{convolution theorem}, which we will encounter in a later chapter.} \\ \vspace{4cm}
+\item (a) If the sampling rate is 10 kHz, and the analog signal frequency is 2.5 kHz, what is the sampled frequency? (b) If the sampling rate is 10 kHz, and the analog signal frequency is 5 kHz, what is the sampled frequency? (c) If the sampling rate is 10 kHz, and the analog signal frequency is 15 kHz, what is the sampled frequency? (d) If the sampling rate is 10 kHz, and the analog signal frequency is 20 kHz, what is the sampled frequency? \\ \vspace{2cm}
+\item Let a system $S$ act on a signal $s(t)$ as follows: $S[s(t)] = s(t-T/2)$.  (a) If $s(t) = 2\sin(2\pi ft)$, and $T = 1/f$, what is $S[s(t)]$? (b) Graph the input and output of $S$. (c) What is $s(t) + S[s(t)]$? \\ \vspace{4cm}
+\item Suppose a signal component is the impulse $x[n] = [000200 ...]$, with 100 total samples.  (a) If $y[n] = S(x[n]) = -x[n-1]$, what is $y[n]$? (b) If $y[n] = S(x[n]) = (x[n])^2$, what is $y[n]$?  (c) Are the systems $S$ in parts (a) and (b) linear or non-linear? \\ \vspace{2cm}
+\item Determine if the following functions are even or odd:
+\begin{itemize}
+\item $\cos(2\pi ft)$:
+\item $\exp(-(t/\sigma)^2)$:
+\item $\exp(-\alpha t)$:
+\item $at^2 + bt + c$:
+\end{itemize} \vspace{1cm}
+\item Using the properties of integrals and complex numbers, show that the Fourier transform operator is: (a) homogeneous, (b) additive, (c) and shift-invariant (up to a complex constant). \\ \vspace{5cm}
+\item The \textbf{Dirac $\delta$-function} is a distribution defined by the following property:
+\begin{equation}
+f(t_0) = \int_{-\infty}^{\infty} f(t) \delta(t-t_0) dt
+\end{equation}
+In words, the integral of a $\delta$-function times a function $f$ is the value of the function at $t_0$.(a) What is the Fourier transform of $a\delta(t-t_0)$? (b) What is the magnitude of the result? (c) What is the phase angle? \\ \vspace{4cm}
+\item (a) Suppose we have a signal in the \textit{frequency domain}: $F(f) = (a/2)(\delta(f-f_0) + a\delta(f+f_0))$.  What is this signal in the \textit{time domain}?  Take the \textbf{inverse Fourier transform} of $F(f)$. (b) Suppose we have a signal in the \textit{frequency domain}: $F(f) = (a/2j)(\delta(f-f_0) - a\delta(f+f_0))$.  What is this signal in the \textit{time domain}?  Take the \textbf{inverse Fourier transform} of $F(f)$. \\ \vspace{4cm}
+\item \textbf{Amplitude modulation.} (a) Express the following functions as complex exponentials: $A\cos(2\pi f_{\rm LO} t)$ and \\ $(m/A)\cos(2\pi f_{\rm A} t)$. The frequencies $f_{\rm LO}$ and $f_{\rm A}$ are the local oscillator (carrier) and audio frequencies, respectively.  (b) Multiply the two functions, and show that the result is a pair of sinusoids at two new frequencies.  What are the new frequencies? \\ \vspace{3cm}
+\end{enumerate}
+\clearpage
+
+\section{Code Projects}
+
+\begin{enumerate}
+\item Write an \verb+octave+ code that replicates \textit{echo} in audio signals.  Let the sampling frequency be 20 kHz.  (a) Start with an delta function, $\delta[n]$, that is 2 seconds long.  How many samples should it contain, given the sampling rate? (b) Modify the $\delta[n]$ to create an echo every 0.25 seconds. Give the locations of the non-zero samples only (instead of writing a huge list of numbers).\footnote{\textit{Hint: recall that we can break a complex response function into signal components, give them the right properties, then synthesize them into the correct response.}} (c) Further modify the response function to make each echo have half the amplitude as the instance before it. (d) Create a \textit{sine tone} in your code.  That is, the data is a sine wave at fixed frequency for a short time, followed by zeros until the last sample.  (e) Convolve your echo response with the sine tone, and play the result to hear the echo.  Modify the code to make it sound ... \textbf{cool.} \\ \vspace{5cm}
+\item \textbf{Bonus: amplitude modulation and filtering.} Write an \verb+octave+ code that creates an amplitude modulated signal plus noise.  Implement low and high pass filters that eliminate noise except near the signal frequencies.  Graph the un-filtered and filtered spectrum using code from our code labs (i.e. the \verb+fft()+ function).
+\end{enumerate}
+
+\end{document}
