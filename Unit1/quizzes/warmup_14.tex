@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Thursday Warm Up, Unit 0: Foundations and Fundamentals}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{Memory Bank}
+\small
+\begin{itemize}
+\item \textbf{Convolution}: this is an operation that characterizes the response $h[n]$ of a linear system.
+\begin{equation}
+y[i] = h[n] * x[n] = \sum_{j=0}^{M-1}h[j]x[i-j] \label{eq:conv}
+\end{equation}
+In words, the output at sample $i$ is equal to the produce of the system response $h$ and the input signal $x$, summed over the proceeding $M$ samples (from $j=0$ to $j=M-1$).
+\item \textbf{Discrete Delta Function}, $\delta[n]$: A standard impulse response that contains one non-zero sample.  It has the following property:
+\begin{equation}
+x[n] = \delta[n] * x[n] \label{eq:conv2}
+\end{equation}
+\item \textbf{Discrete Fourier Transform}, for a sampled, digitized signal $x_n$:
+\begin{equation}
+X_{\rm k} = \sum_{n=0}^{N-1} x_n e^{-2\pi j (k/N) n}
+\end{equation}
+\item In DFT analysis, we often need to know the $\Delta t$, time duration for samples, and the sampling rate, $f_{\rm s}$.  Note that $1/f_{\rm s} = \Delta t$.
+\item For a sinusoid of frequency $f$ (Hz), the period is $T = 1/f$ (seconds).
+\end{itemize}
+
+\section{Discrete Fourier Transform Properties, Pairs}
+
+\begin{enumerate}
+\item Type \verb+help fft+ in an \verb+octave+ command window.  Read about the various ways to input data into this function that computes the ``fast Fourier transform'' of the data.
+\item In the following exercise, we will test \textit{Parseval's Theorem}, which states that the integrated power in the \textit{time domain} of a signal is equal to the integrated power in the \textit{Fourier domain.} (a) Implement the following square-pulse function in \verb+octave+:
+\begin{verbatim}
+function retval = sP(x,t0,T)
+  dt = x(2)-x(1);
+  retval = zeros(size(x));
+  retval(find(and(x>t0-T/2,x<t0+T/2-dt))) = 1.0;
+endfunction
+\end{verbatim}
+Choose a sampling rate and $\Delta t$, and a total signal time.  Create a vector of time samples.  Choose values for \verb+t0+ and \verb+T+, the location and width of the square pulse.  Plot the output of the function. (b) Implement the following function in \verb+octave+:
+\begin{verbatim}
+function [f,S] = set_spectrum(t,t0,T,fs)
+  s = sP(t,t0,T);
+  S = fft(s);
+  S = S(1:end/2);
+  S = abs(S);
+  N = length(S);
+  f = linspace(0,fs/2,N);
+endfunction
+\end{verbatim}
+This function runs the square pulse function and calculates the magnitude of the Fourier spectrum.  Run the code and create a graph of \verb+f+ versus \verb+S+. (c) Run the following code to check that the integrated power in the square pulse is equal to that of the spectrum, when normalized in the right way:
+\begin{verbatim}
+sig = sP(t,t0,T);
+[f,S] = set_spectrum(t,t0,T,fs);
+N = length(S);
+parseval_theorem_check = [sum(sig.^2) sum(S.^2)/N];
+\end{verbatim}
+Compare \verb+parseval_theorem_check(1)+ to \verb+parseval_theorem_check(2)+.  These values should be equal for sample rates much larger than $1/T$.
+\item In this exercise, we will explore the Fourier spectrum of a square pulse.  This is useful to understand in applications like clipping signals, and sample and hold operations (e.g. from Ch. 3, ADC/DAC). (a) Implement the following function in \verb+octave+:
+\begin{verbatim}
+function retval = dft_sync(f,N,M)
+  kmax = length(f);
+  retval = zeros(kmax,1);
+  for i=[1:kmax]
+    retval(i) = abs(sin(pi*i*M/N)/sin(pi*i/N));
+  endfor
+endfunction
+\end{verbatim}
+In this function, $N$ is the number of time samples, and $M$ is the number of samples in the pulse. (b) Use previously defined functions to create a digital square pulse, compute the magnitude of the spectrum, and check that it follows the sync function output from \verb+dft_sync+.
+\end{enumerate}
+
+\end{document}
