@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Thursday Warm Up, Unit 1: Filter Design}
+\author{Prof. Jordan C. Hanson}
+\maketitle
+
+\section{The Moving Average Filer}
+
+\begin{enumerate}
+\item Implement the following code in \verb+octave+, to create a gaussian pulse with a width, $\sigma$, and frequency, $f$:
+\begin{verbatim}
+fs = 40e3;
+dt =1/fs;
+T = 1.0;
+t = dt:dt:T;
+f = 440.0;
+sigma = 0.5;
+t0 = 0.5;
+T = 2.0;
+A = 4.0;
+x = A*cos(2*pi*f*t).*exp(-0.5*(t-t0).^2/sigma^2);
+\end{verbatim}
+Create a player to play this data as audio:
+\begin{verbatim}
+player1 = audioplayer(x,fs,16);
+play(player1)
+\end{verbatim}
+\item Add random gaussian noise, to create a noisy signal with an SNR of 5.  Create a new player to play it as audio:
+\begin{verbatim}
+y = x+rand(size(x))*0.2;
+player2 = audioplayer(y,fs,16);
+play(player2)
+\end{verbatim}
+How does the audio sound, compared to the noiseless version?
+\item The \textbf{moving average filter} is the \textit{optimal solution} for reducing random gaussian noise, while preserving step response.  Implement the moving average filter by defining the kernel like a normalized step:
+\begin{verbatim}
+kern = ones(1,400)/400;
+z = conv(kern,y);
+player3 = audioplayer(z,fs,16);
+play(player3)
+\end{verbatim}
+\item Play \verb+player1+ and \verb+player3+ repeatedly.  Do they sound similar?  If \verb+player3+ sounds quieter, try amplifying it by increasing the signal amplitude.  That is, multiply the samples by a constant, and feed it back to the audioplayer algorithm.  At a certain point, do you notice \textit{clipping}, or distortion from overamplifying?
+\end{enumerate}
+
+\section{Graphing the Results}
+
+\begin{enumerate}
+\item \textbf{Graph} the noiseless version of the gaussian pulse, with appropriate units, below: \\ \vspace{5cm}
+\item \textbf{Graph} the noisy version of the gaussian pulse, with appropriate units, below: \\ \vspace{5cm}
+\item \textbf{Graph} the filtered version of the gaussian pulse, with appropriate units, below: \\ \vspace{5cm}
+\end{enumerate}
+
+\end{document}
