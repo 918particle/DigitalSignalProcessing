@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+\twocolumn
+
+\title{Quiz 2: Digital Signal Processing}
+\author{Prof. Jordan C. Hanson}
+
+\maketitle
+\small
+
+\begin{enumerate}
+\item (a) Derive the Fourier series of a square wave, listing which coefficients are non-zero. (b) Write an \verb+octave+ script that creates a time series corresponding to the Fourier series, with a fundamental frequency of 1.4 MHz and a maximum time $T_{\rm max}$ corresponding to about 10 periods. (c) Compute the DFT of the time series. (d) Using the \verb+octave+ routines \verb+figure()+ and \verb+subplot()+, plot the time series in one graph, and in the same figure, plot the magnitude of the DFT in another graph.
+\item Do you observe the \textbf{Gibbs effect} in your Fourier series in the previous exercise?  Why or why not?
+\item (a) Define an $N=1000$ sample $\delta[n]$ signal in an \verb+octave+ script, with the non-zero value in the first sample. (b) Compute the magnitude and phase of the DFT, and graph them versus frequency.  (c) Advance the non-zero sample in the $\delta[n]$ by 100 samples, and recompute the graphs. (d) What is happening to the phase?  Use the \verb+unwrap()+ function in \verb+octave+ to graph the linear relationship between phase and frequency. (e) Use the slope of the phase versus frequency to measure the group delay of the $\delta[n]$.  Do you obtain the right result? (f) \textbf{Bonus:} what happens to the group delay measurement if the $\delta[n]$ signal has noise?
+\item \textbf{Clipping} in DSP data.  (a) Using \verb+octave+, create a sine wave with the following properties: a sampling rate of 10 MHz, a frequency of 100 kHz, a $T_{\rm max}$ of 6 ms, and an amplitude of 1.0.  The data should have more than $10^4$ samples, so there is no need to graph it. (b) Using the \verb+find()+ function in \verb+octave+, set all samples \textit{greater} than 0.75 to 0.75.  Set all samples \textit{less} than -0.75 to -0.75.  Here is a clue as to how this works:
+\begin{verbatim}
+x(find(x>=0.75)) = 0.75
+\end{verbatim}
+The resulting signal is now \textbf{clipped}. Clipping often results when DSP data falls outside a nominal digital range. (c) Plot the magnitude of the DFT, and locate the frequency spike at 100 kHz. (d) Do you observe harmonics?  In your own words, explain the spectrum of harmonics given that the signal is clipped.
+\item Download the ``NASDAQ closing prices 2024-2025'' file from the course Moodle page.  The left column has units of days (starting with April 10th, 2024), and the right column is the value of the NASDAQ stock index in US dollars. (a) Plot the data, and in the same plot, apply a 1-week moving average filter to smooth the data.  (b) Note where the announcement of US tariffs marks a sharp drop in value. (c) Note where the value rises sharply after the US President announced a 90 day pause in tariffs during April 2025. (d) Does this moving average capture rapid shifts in economic policy?  Why or why not?  (e) \textbf{Bonus}: measure the \textit{lag} of the moving average filter.  Lag represents the time it takes the filter to respond to  the data. \\
+\item Perform each of the following in \verb+octave+.  (a) Assume our task is to isolate an AM radio station with a carrier frequency of 740 kHz.  Create a low-pass, windowed-sinc filter designed to filter noise above 745 kHz. The number of samples $M$ in the filter kernel is your choice. (b) Using \textit{spectral inversion}, create a high-pass windowed-sinc filter designed to filter noise below 735 kHz.  (c) Combine these filters to create a band-pass filter, and plot the frequency response. (d) Mix a 740 kHz carrier with a 2.5 kHz audio signal \textit{plus noise}, and plot the magnitude of the DFT.  (e) Use your band-pass filter on the data, and plot the filtered spectrum.
+\item \textbf{FFT convolution.} Perform the following with FFT convolution. (a) Show that the convolution of two square pulses is a triangle wave. (b) Show that the convolution of one period of a sawtooth wave with itself is a ``quadratic wave.''  \textbf{Bonus:} Generate code to play these signals as audio to hear the differences.
+\item (a) Create a step pulse in \verb+octave+, and run it through a recursive LP filter. (b) Plot the \textit{phase} of the output versus frequency. (c) Are the results \textit{linear} or non-linear?
+\item (a) Reverse the order of the step pulse samples in the previous exercise.  (b) Run the reversed step through the recursive LP filter, and plot the phase response.  (c) Run the step through the recursive LP filter, reverse the output, and run it through again, to show the phase response is linear (or zero).  \textit{For a clue, see Fig. 19-8 in the course textbook.}
+\item \textbf{Bonus: chirping signals}.  Suppose we have a signal with a frequency that depends on time:
+\begin{equation}
+f(t) = f_0 - \beta t
+\end{equation}
+The start frequency is $f_0$ in MHz, and the ``chirp rate'' is $\beta$, with units of MHz/$\mu$s.  The chirp signal is
+\begin{equation}
+s(t) = A\cos\left(2\pi f(t)t\right)
+\end{equation}
+If we delay the signal by a time $t_{\rm d}$, this corresponds to $s(t-t_{\rm d})$. (a) Show that mixing $s(t)$ and $s(t-t_{\rm d})$ results in two frequency components, and the lower one is $\beta t_{\rm d}$. (b) Using \verb+octave+, create a chirping signal with $\beta = 2$ MHz/$\mu$s, $f_0 = 5$ MHz, and $t_{\rm d} = 0.5$ $\mu$s. Add plenty of noise to the signal.  (c) Using the filter of your choice, isolate the low-frequency component.  Show that your code produces the correct value for the ``downconverted'' low-frequency, $\beta t_{\rm d}$.  DSP for chirping signals can arise in the analysis of radar echos for fast-moving objects.
+\end{enumerate}
+
+\end{document}
