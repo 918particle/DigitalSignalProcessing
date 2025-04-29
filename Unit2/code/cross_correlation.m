@@ -1,7 +1,6 @@
 clear;
 close;
 home;
-
 pkg load signal
 
 %Define a gaussian pulse
@@ -10,12 +9,12 @@ dt = 1/fs; %seconds
 T = 100e-6; %seconds
 t = dt:dt:T; %seconds
 mu1 = 10e-6; %seconds
-sigma1 = 1.0e-6; %seconds
-f_center = 1.0e6; %Hz
+s1 = 1.0e-6; %seconds
+f_c = 1.0e6; %Hz
 mu2 = 40e-6; %seconds
-sigma2 = sigma1;
-signal_1 = cos(2*pi*f_center*t).*exp(-0.5*(t-mu1).*(t-mu1)/sigma1/sigma1);
-signal_2 = cos(2*pi*f_center*t).*exp(-0.5*(t-mu2).*(t-mu2)/sigma2/sigma2);
+s2 = s1;
+signal_1 = cos(2*pi*f_c*t).*exp(-0.5*(t-mu1).^2./s1^2);
+signal_2 = cos(2*pi*f_c*t).*exp(-0.5*(t-mu2).^2./s2^2);
 signal_1 = signal_1/sqrt(sum(signal_1.*signal_1));
 signal_2 = signal_2/sqrt(sum(signal_2.*signal_2));
 
@@ -24,8 +23,14 @@ signal_2 = signal_2/sqrt(sum(signal_2.*signal_2));
 best_lag = lag(R_index);
 time_lag = best_lag*dt;
 
+R_fft = real(ifft(conj(fft(signal_1)).*fft(signal_2)));
+lag_fft = (0:length(R_fft)-1);
+[R_max_fft,R_index_fft] = max(R_fft);
+best_lag_fft = lag_fft(R_index_fft);
+time_lag_fft = best_lag_fft*dt;
+
 display("Comparison between cross-correlation lag and true lag (microseonds)")
-display([time_lag*1e6 (mu2-mu1)*1e6])
+display([time_lag*1e6 time_lag_fft*1e6 (mu2-mu1)*1e6])
 
 figure(1)
 subplot(2,1,1)
@@ -43,5 +48,5 @@ axis([-T*1e6 T*1e6 -1.1 1.1])
 xlabel('Time (microseconds)');
 ylabel('Amplitude (volts)');
 set(gca(),'fontsize',20);
-h = legend('cross-correlation')
+h = legend('cross-correlation');
 set(h,'location','northwest');
