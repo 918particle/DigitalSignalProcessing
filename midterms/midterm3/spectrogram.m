@@ -3,7 +3,7 @@ close;
 home;
 
 %Load the RF data
-data = load('doppler_shift.dat');
+data = load('a.dat');
 t = data(:,1);
 amplitude = data(:,2);
 dt = t(2)-t(1);
@@ -11,7 +11,7 @@ fs = 1/dt;
 T = t(end);
 
 %Structure the spectrogram
-n_window = 256;
+n_window = 2048;
 n_inc = n_window;
 [spectral_data, info] = stft(amplitude,n_window,n_inc,n_window,"hanning");
 spectral_data = spectral_data(1:end/2,:);
